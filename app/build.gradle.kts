@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "io.github.skincanorg.skincan"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 31
         versionCode = 1
         versionName = "0.1"
@@ -63,7 +63,7 @@ dependencies {
     implementation("com.github.kirich1409:viewbindingpropertydelegate:1.5.6")
 
     // --- Testing libraries ---
-    testImplementation("junit:junit:4.+")
+    testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
