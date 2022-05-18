@@ -6,6 +6,7 @@
         android:layout_height="match_parent"
         app:cardCornerRadius="18dp"
         app:cardBackgroundColor="@color/blue_600"
+        app:cardElevation="16dp"
         android:id="@+id/card_main">
 
     <io.github.skincanorg.skincan.widget.OneFourthCircleView

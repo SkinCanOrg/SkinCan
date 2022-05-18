@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SkinCan</string>
+    <string name="onboarding_image">Onboarding Image</string>
+    <string name="onboard_title1">Check a potentional cancer through camera</string>
+    <string name="onboard_subtitle1">You can use camera to check a potentional risk cancer on your skin.</string>
+    <string name="onboard_title2">Get some tips</string>
+    <string name="onboard_subtitle2">You’ll get some tips for avoiding a cancer skin  this can help you to minimalize potentional skin cancer risk</string>
 </resources>
