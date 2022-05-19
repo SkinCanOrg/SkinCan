@@ -8,6 +8,10 @@
     </style>
 
     <style name="Theme.SkinCan" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Action bar -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_600</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
