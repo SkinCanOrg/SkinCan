@@ -5,4 +5,6 @@
     <string name="onboard_subtitle1">You can use camera to check a potentional risk cancer on your skin.</string>
     <string name="onboard_title2">Get some tips</string>
     <string name="onboard_subtitle2">You’ll get some tips for avoiding a cancer skin  this can help you to minimalize potentional skin cancer risk</string>
+    <string name="onboard_continue">Start Now</string>
+    <string name="onboarding_page_indicator">Onboarding Page Indicator</string>
 </resources>

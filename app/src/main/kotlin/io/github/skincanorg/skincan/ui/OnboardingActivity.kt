@@ -1,5 +1,6 @@
 package io.github.skincanorg.skincan.ui
 
+import android.graphics.ColorFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
@@ -26,16 +27,26 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // TODO: Add page indicator
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.apply {
             onboardingContainer.apply {
                 adapter = onboardAdapter
-                setCurrentItem(0, false)
+                setCurrentItem(1, false)
                 registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                     override fun onPageSelected(position: Int) {
                         currentPosition = position
+                        when (currentPosition) {
+                            0 -> {
+                                setIndicator(onboardAdapter.itemCount - 2)
+                            }
+                            onboardAdapter.itemCount - 1 -> {
+                                setIndicator(0)
+                            }
+                            else -> {
+                                setIndicator(currentPosition - 1)
+                            }
+                        }
                     }
 
                     override fun onPageScrollStateChanged(state: Int) {
@@ -49,6 +60,15 @@ class OnboardingActivity : AppCompatActivity() {
                     }
                 })
             }
+        }
+    }
+
+    private fun setIndicator(position: Int) {
+        for ((index, indicator) in listOf(binding.indicatorPage1, binding.indicatorPage2).withIndex()) {
+            indicator.setBackgroundResource(
+                if (index == position) R.drawable.indicator_selected
+                else R.drawable.indicator
+            )
         }
     }
 }
