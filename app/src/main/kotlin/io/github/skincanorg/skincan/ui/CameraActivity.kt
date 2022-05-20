@@ -41,7 +41,7 @@ class CameraActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.captureImg.setOnClickListener {
-            imageCapture
+            TODO("add this method")
         }
 
         binding.closeCamera.setOnClickListener {
@@ -60,7 +60,7 @@ class CameraActivity : AppCompatActivity() {
         }
 
         binding.torchCamera.setOnClickListener {
-            TODO("add this shit")
+            TODO("add this method")
         }
     }
 
