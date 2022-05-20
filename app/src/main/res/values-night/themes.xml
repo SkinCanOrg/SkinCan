@@ -1,17 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.SkinCan.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/black</item>
-
-        <item name="windowSplashScreenAnimationDuration">800</item>
-
-        <item name="postSplashScreenTheme">@style/Theme.SkinCan</item>
-    </style>
-
-    <style name="Theme.SkinCan" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Action bar -->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
+    <style name="Theme.SkinCan" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_600</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
