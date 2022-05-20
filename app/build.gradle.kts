@@ -73,5 +73,6 @@ dependencies {
     implementation ("androidx.camera:camera-lifecycle:${camerax_version}")
     implementation ("androidx.camera:camera-view:${camerax_version}")
 
+    //desugaring
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:1.1.5")
 }
