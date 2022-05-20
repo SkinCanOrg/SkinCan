@@ -43,6 +43,7 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun setupOnboarding() {
+        // TODO: Auto Scroll
         binding.apply {
             onboardingContainer.apply {
                 adapter = onboardAdapter

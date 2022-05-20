@@ -10,20 +10,22 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="48dp"
-            android:layout_marginVertical="48dp"
+            android:layout_marginVertical="55dp"
             android:contentDescription="@string/onboarding_image"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tv_onboard_title"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:src="@drawable/illustration2"
             android:id="@+id/iv_onboard"/>
 
     <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="64dp"
-            android:layout_marginBottom="48dp"
+            android:layout_marginHorizontal="84dp"
+            android:layout_marginBottom="32dp"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary"
@@ -32,14 +34,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tv_onboard_subtitle"
-            tools:text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            tools:text="Check a potentional cancer through camera"
             android:id="@+id/tv_onboard_title"/>
 
     <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginHorizontal="36dp"
             android:layout_marginBottom="48dp"
             android:textSize="15sp"
             app:layout_constraintTop_toBottomOf="@id/tv_onboard_title"
