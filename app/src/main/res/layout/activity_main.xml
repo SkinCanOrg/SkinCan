@@ -75,17 +75,54 @@
         android:id="@+id/include2"
         layout="@layout/news_card"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="437dp" />
+        android:layout_height="238dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="438dp" />
 
-    <include
-        android:id="@+id/include2"
-        layout="@layout/news_card"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="718dp" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="417dp"
+        android:layout_height="87dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="82dp">
+
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/ic_home_2"
+                android:contentDescription="@string/home_nav_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.294"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/home_navigation"/>
+
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/ic_camera"
+                android:contentDescription="@string/camera_nav_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.729"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/camera_navigation"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
