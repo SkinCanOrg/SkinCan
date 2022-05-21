@@ -16,4 +16,6 @@
     <string name="greetins">Hello</string>
     <string name="user_name">user_Name</string>
     <string name="emoji_description">this is emoji</string>
+    <string name="placeholder_user_profile">placeholder user profile</string>
+    <string name="what_s_going_on">What\'s going on?</string>
 </resources>
