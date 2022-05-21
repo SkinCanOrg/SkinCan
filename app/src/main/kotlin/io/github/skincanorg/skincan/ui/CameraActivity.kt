@@ -70,6 +70,7 @@ class CameraActivity : AppCompatActivity() {
         startCamera()
     }
 
+    //for start camera
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener({
@@ -118,6 +119,7 @@ class CameraActivity : AppCompatActivity() {
 
     private fun closeCamera(){
         Intent(this@CameraActivity, MainActivity::class.java)
+
     }
 
 
@@ -133,5 +135,8 @@ class CameraActivity : AppCompatActivity() {
         }
         supportActionBar?.hide()
     }
+
+    //PS : correct this if im wrong comrades :'v
+    //here your bonus : 177013, 403509
 
 }

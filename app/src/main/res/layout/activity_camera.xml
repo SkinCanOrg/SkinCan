@@ -17,33 +17,33 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginBottom="24dp"
+        android:src = "@drawable/ic_camera"
         android:contentDescription="@string/capture_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_camera"
         android:id="@+id/capture_img"/>
 
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginBottom="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/ic_flip_camera"
         android:contentDescription="@string/flip_camera"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_flip_camera"
         android:id="@+id/flip_camera"/>
 
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginBottom="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/ic_image"
         android:contentDescription="@string/gallery"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat = "@drawable/ic_image"
         android:id="@+id/gallery"/>
 
 
@@ -51,22 +51,22 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
-        android:layout_marginLeft="24dp"
+        android:src = "@drawable/ic_close"
+        android:layout_marginStart="24dp"
         android:contentDescription="@string/close_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat = "@drawable/ic_close"
         android:id="@+id/close_camera"/>
 
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
-        android:layout_marginRight="24dp"
+        android:src="@drawable/ic_torch_camera"
+        android:layout_marginEnd="24dp"
         android:contentDescription="@string/torch_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat = "@drawable/ic_torch_camera"
         android:id="@+id/torch_camera"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
