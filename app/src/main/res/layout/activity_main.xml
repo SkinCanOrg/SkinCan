@@ -79,5 +79,13 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="437dp" />
 
+    <include
+        android:id="@+id/include2"
+        layout="@layout/news_card"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="718dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
