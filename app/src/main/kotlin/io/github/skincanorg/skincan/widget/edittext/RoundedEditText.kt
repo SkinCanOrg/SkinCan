@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import io.github.skincanorg.skincan.R
-import io.github.skincanorg.skincan.lib.Extension.px
+import io.github.skincanorg.skincan.lib.Extension.dp
 
 class RoundedEditText @JvmOverloads constructor(
     context: Context,
@@ -15,12 +15,12 @@ class RoundedEditText @JvmOverloads constructor(
 
     init {
         this.setPadding(
-            paddingLeft + 16.px(context),
-            paddingTop + 8.px(context),
-            paddingRight + 16.px(context),
-            paddingBottom + 8.px(context)
+            paddingLeft + 16.dp(context),
+            paddingTop + 8.dp(context),
+            paddingRight + 16.dp(context),
+            paddingBottom + 8.dp(context)
         )
-        compoundDrawablePadding = 16.px(context)
+        compoundDrawablePadding = 16.dp(context)
         background = ContextCompat.getDrawable(context, R.drawable.bg_rounded_clickable_focusable)
         this.setHintTextColor(ContextCompat.getColor(context, R.color.editTextColor))
         this.setTextColor(ContextCompat.getColor(context, R.color.edittext_color))

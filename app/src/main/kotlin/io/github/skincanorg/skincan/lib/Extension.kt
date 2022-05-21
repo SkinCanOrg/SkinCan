@@ -10,7 +10,13 @@ package io.github.skincanorg.skincan.lib
 
 import android.content.Context
 import android.util.DisplayMetrics
+import android.util.TypedValue
 
 object Extension {
-    fun Int.px(context: Context) = this * context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT
+    // DP to Pixel
+    fun Int.dp(context: Context) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+        this.toFloat(), context.resources.displayMetrics).toInt()
+
+    fun Int.sp(context: Context) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
+        this.toFloat(), context.resources.displayMetrics)
 }

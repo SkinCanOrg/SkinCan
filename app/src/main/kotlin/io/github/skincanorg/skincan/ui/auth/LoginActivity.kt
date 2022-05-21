@@ -9,8 +9,8 @@
 package io.github.skincanorg.skincan.ui.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +18,7 @@ import io.github.skincanorg.skincan.data.preference.PreferencesHelper
 import io.github.skincanorg.skincan.databinding.ActivityLoginBinding
 import io.github.skincanorg.skincan.ui.MainActivity
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -38,8 +39,9 @@ class LoginActivity : AppCompatActivity() {
             btnLogin.setOnClickListener {
                 // TODO: Implement an actual login function once API is created
                 prefs.setToken("placeholder")
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                finish()
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intent)
+                finishAffinity()
             }
 
             btnGotoRegisterContainer.setOnClickListener {
