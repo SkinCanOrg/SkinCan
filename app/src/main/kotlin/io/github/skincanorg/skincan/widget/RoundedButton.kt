@@ -22,7 +22,7 @@ class RoundedButton @JvmOverloads constructor(
     defStyleAttr: Int? = null,
 ) : AppCompatButton(context, attrs, defStyleAttr ?: android.R.attr.buttonStyle) {
     init {
-        background = getDrawableWithAttrTint(context, R.drawable.rounded, R.attr.colorPrimary)
+        background = getDrawableWithAttrTint(context, R.drawable.bg_rounded_ripple, R.attr.colorPrimary)
         val typedValue = TypedValue()
         context.theme.resolveAttribute(R.attr.colorOnPrimary, typedValue, true)
         this.setTextColor(typedValue.data)
@@ -32,5 +32,6 @@ class RoundedButton @JvmOverloads constructor(
             paddingRight + 16.px(context),
             paddingBottom + 8.px(context)
         )
+        textSize = 18.px(context).toFloat()
     }
 }

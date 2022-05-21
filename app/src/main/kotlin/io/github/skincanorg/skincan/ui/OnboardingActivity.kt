@@ -87,8 +87,8 @@ class OnboardingActivity : AppCompatActivity() {
     private fun setIndicator(position: Int) {
         for ((index, indicator) in listOf(binding.indicatorPage1, binding.indicatorPage2).withIndex()) {
             indicator.setBackgroundResource(
-                if (index == position) R.drawable.indicator_selected
-                else R.drawable.indicator
+                if (index == position) R.drawable.bg_indicator_selected
+                else R.drawable.bg_indicator
             )
         }
     }

@@ -14,4 +14,11 @@
     <string name="flip_camera">flip camera</string>
     <string name="capture_image">capture image</string>
     <string name="failed_open_camera">failed to open camera</string>
+    <string name="login">Log in</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="no_account">Didn\'t have account?</string>
+    <string name="register_now">Register Now</string>
 </resources>

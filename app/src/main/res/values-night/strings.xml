@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="gallery">gallery</string>
-    <string name="close_button">close button</string>
-    <string name="flip_camera">flip camera</string>
-    <string name="capture_image">capture image</string>
-    <string name="failed_open_camera">failed to open camera</string>
-</resources>
