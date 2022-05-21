@@ -5,4 +5,7 @@
     <string name="flip_camera">flip camera</string>
     <string name="capture_image">capture image</string>
     <string name="failed_open_camera">failed to open camera</string>
+    <string name="greetins">Hello</string>
+    <string name="user_name">user_Name</string>
+    <string name="emoji_description">this is emoji</string>
 </resources>
