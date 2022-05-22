@@ -35,6 +35,6 @@
     </style>
 
     <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">@color/blue_200</item>
+        <item name="android:color">@color/blue_200_50</item>
     </style>
 </resources>

@@ -14,32 +14,31 @@
         android:layout_marginTop="24dp"
         android:textSize="20sp"
         android:textColor="@color/primary"
-        android:text = "@string/greeting"
+        android:text="@string/greeting"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/greetings"
-        />
+        android:id="@+id/greetings"/>
 
     <TextView
         android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="25dp"
         android:textColor="@color/primary"
         android:textSize="24sp"
-        tools:text="User_Name"
+        android:text="@string/user_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/greetings" />
+        app:layout_constraintTop_toBottomOf="@id/greetings" />
 
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/emoji_description"
-        android:src="@drawable/ic_emoji"
-        app:layout_constraintStart_toEndOf="@+id/user_name"
-        app:layout_constraintTop_toTopOf="@id/user_name" />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="👋"
+            android:textSize="24sp"
+            android:elevation="16dp"
+            app:layout_constraintStart_toEndOf="@+id/user_name"
+            app:layout_constraintTop_toTopOf="@id/user_name"
+            tools:ignore="HardcodedText"/>
 
     <ImageView
         android:layout_width="60dp"
@@ -57,8 +56,8 @@
         layout="@layout/result_card"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="106dp" />
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/placeholder_user"/>
 
 
     <TextView
