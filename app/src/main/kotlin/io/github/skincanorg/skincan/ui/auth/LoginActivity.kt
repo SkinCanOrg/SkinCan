@@ -39,8 +39,7 @@ class LoginActivity : AppCompatActivity() {
             btnLogin.setOnClickListener {
                 // TODO: Implement an actual login function once API is created
                 prefs.setToken("placeholder")
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 finishAffinity()
             }
 

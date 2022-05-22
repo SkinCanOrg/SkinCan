@@ -14,7 +14,7 @@
         android:layout_marginTop="24dp"
         android:textSize="20sp"
         android:textColor="@color/primary"
-        android:text = "@string/greetins"
+        android:text = "@string/greeting"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/greetings"

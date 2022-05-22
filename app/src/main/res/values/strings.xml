@@ -1,5 +1,9 @@
 <resources>
+    <!-- Meta -->
     <string name="app_name">SkinCan</string>
+    <string name="app_logo">App Logo</string>
+
+    <!-- Onboarding -->
     <string name="onboarding_image">Onboarding Image</string>
     <string name="onboard_title1">Check a potentional cancer through camera</string>
     <string name="onboard_subtitle1">You can use camera to check a potentional risk cancer on your skin.</string>
@@ -7,21 +11,36 @@
     <string name="onboard_subtitle2">You’ll get some tips for avoiding a cancer skin  this can help you to minimalize potentional skin cancer risk</string>
     <string name="onboard_continue">Start Now</string>
     <string name="onboarding_page_indicator">Onboarding Page Indicator</string>
-    <string name="app_logo">App Logo</string>
+
+    <!-- Camera -->
     <string name="gallery">gallery</string>
     <string name="close_button">close button</string>
     <string name="torch_camera">torch camera</string>
     <string name="flip_camera">flip camera</string>
     <string name="capture_image">capture image</string>
     <string name="failed_open_camera">failed to open camera</string>
-    <string name="login">Log in</string>
-    <string name="welcome_back">Welcome Back</string>
+
+    <!-- Auth -->
+    <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+
+    <!-- Auth (Login) -->
+    <string name="login">Log in</string>
+    <string name="welcome_back">Welcome Back</string>
     <string name="forgot_password">Forgot password?</string>
-    <string name="no_account">Didn\'t have account?</string>
+    <string name="no_account">Didn\'t have an account?</string>
     <string name="register_now">Register Now</string>
-    <string name="greetins">Hello</string>
+
+    <!-- Auth (Register) -->
+    <string name="register">Register</string>
+    <string name="register_instruction">Fill form below to create your account</string>
+    <string name="create_account">Create Account</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="login_now">Login Now</string>
+
+    <!-- Dashboard -->
+    <string name="greeting">Hello</string>
     <string name="user_name">user_Name</string>
     <string name="emoji_description">this is emoji</string>
     <string name="placeholder_user_profile">placeholder user profile</string>

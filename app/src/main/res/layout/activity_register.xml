@@ -7,4 +7,102 @@
         android:layout_height="match_parent"
         tools:context=".ui.auth.RegisterActivity">
 
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/register"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/blue_600"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_register_instruction"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:id="@+id/tv_greeting"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:text="@string/register_instruction"
+            android:textSize="16sp"
+            android:textColor="@color/editTextColor"
+            app:layout_constraintTop_toBottomOf="@id/tv_greeting"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/et_name"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:id="@+id/tv_register_instruction"/>
+
+    <io.github.skincanorg.skincan.widget.edittext.RoundedEditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="54dp"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/name"
+            app:layout_constraintTop_toBottomOf="@id/tv_register_instruction"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/et_email"
+            android:id="@+id/et_name"/>
+
+    <io.github.skincanorg.skincan.widget.edittext.RoundedEditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="54dp"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/email"
+            app:layout_constraintTop_toBottomOf="@id/et_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/et_password"
+            android:id="@+id/et_email"/>
+
+    <io.github.skincanorg.skincan.widget.edittext.RoundedEditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="54dp"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/password"
+            app:layout_constraintTop_toBottomOf="@id/et_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_register"
+            android:id="@+id/et_password"/>
+
+    <io.github.skincanorg.skincan.widget.RoundedButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/create_account"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/et_password"
+            app:layout_constraintStart_toStartOf="@id/et_email"
+            app:layout_constraintEnd_toEndOf="@id/et_email"
+            app:layout_constraintBottom_toTopOf="@id/btn_goto_login_container"
+            android:id="@+id/btn_register"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingVertical="16dp"
+            android:clickable="true"
+            app:layout_constraintTop_toBottomOf="@id/btn_register"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/btn_goto_login_container">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/have_account"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/blue_600"
+                android:text="@string/login_now"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
