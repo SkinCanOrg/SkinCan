@@ -19,7 +19,6 @@ import io.github.skincanorg.skincan.databinding.ActivityLoginBinding
 import io.github.skincanorg.skincan.ui.MainActivity
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private val binding: ActivityLoginBinding by viewBinding(CreateMethod.INFLATE)
