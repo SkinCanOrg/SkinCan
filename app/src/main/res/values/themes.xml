@@ -13,7 +13,7 @@
         <item name="postSplashScreenTheme">@style/Theme.SkinCan</item>
     </style>
 
-    <style name="Theme.SkinCan" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.SkinCan" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_600</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -26,5 +26,15 @@
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemActiveIndicatorStyle">@style/App.Custom.Indicator</item>
+    </style>
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/blue_200</item>
     </style>
 </resources>

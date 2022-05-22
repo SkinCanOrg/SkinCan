@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.SkinCan" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.SkinCan" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_600</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,5 +12,7 @@
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
     </style>
 </resources>
