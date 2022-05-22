@@ -31,7 +31,11 @@ class RoundedEditText @JvmOverloads constructor(
         )
         compoundDrawablePadding = 16.dp(context)
         background = ContextCompat.getDrawable(context, R.drawable.bg_rounded_clickable_focusable)
-        this.setHintTextColor(ContextCompat.getColor(context, R.color.editTextColor))
-        this.setTextColor(ContextCompat.getColor(context, R.color.edittext_color))
+        setOnFocusChangeListener { _, hasFocus ->
+            val color = if (hasFocus) R.color.editTextFocusedColor else R.color.editTextColor
+
+            this.setHintTextColor(ContextCompat.getColor(context, color))
+            this.setTextColor(ContextCompat.getColor(context, color))
+        }
     }
 }
