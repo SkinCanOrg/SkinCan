@@ -60,8 +60,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community moderators responsible for enforcement at
-<!-- TODO: Add contact? -->
-[Contact not available yet.](https://github.com/SkinCanOrg/SkinCan).
+[Contact not available yet](https://github.com/SkinCanOrg/SkinCan). <!-- TODO: Add contact? -->
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community moderators are obligated to respect the privacy and security of the
