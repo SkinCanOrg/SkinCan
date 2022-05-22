@@ -24,9 +24,9 @@
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="login">Log in</string>
 
     <!-- Auth (Login) -->
-    <string name="login">Log in</string>
     <string name="welcome_back">Welcome Back</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="no_account">Didn\'t have an account?</string>
@@ -48,4 +48,7 @@
     <string name="place_holder_for_pict_news">place holder for pict news</string>
     <string name="home_nav_description">this is home navigation</string>
     <string name="camera_nav_description">camera nav description</string>
+
+    <!-- Unsorted -->
+    <string name="dialog_illustration">Dialog Illustration</string>
 </resources>
