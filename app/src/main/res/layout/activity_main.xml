@@ -33,11 +33,12 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="6dp"
             android:text="👋"
-            android:textSize="24sp"
+            android:textSize="28sp"
             android:elevation="16dp"
             app:layout_constraintStart_toEndOf="@+id/user_name"
-            app:layout_constraintTop_toTopOf="@id/user_name"
+            app:layout_constraintBottom_toBottomOf="@id/user_name"
             tools:ignore="HardcodedText"/>
 
     <ImageView
@@ -71,12 +72,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
+    <!-- TODO: Replace with RecyclerView -->
     <include
         android:id="@+id/include2"
         layout="@layout/news_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -91,5 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_nav"
+        app:itemPaddingBottom="18dp"
+        app:itemRippleColor="@color/transparent"
         android:id="@+id/bottom_navigation"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
