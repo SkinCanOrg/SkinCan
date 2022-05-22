@@ -21,4 +21,12 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="no_account">Didn\'t have account?</string>
     <string name="register_now">Register Now</string>
+    <string name="greetins">Hello</string>
+    <string name="user_name">user_Name</string>
+    <string name="emoji_description">this is emoji</string>
+    <string name="placeholder_user_profile">placeholder user profile</string>
+    <string name="what_s_going_on">What\'s going on?</string>
+    <string name="place_holder_for_pict_news">place holder for pict news</string>
+    <string name="home_nav_description">this is home navigation</string>
+    <string name="camera_nav_description">camera nav description</string>
 </resources>
