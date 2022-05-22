@@ -3,10 +3,10 @@ A skin cancer detection app
 
 ## MVP (Minimum Viable Product)
 - ~~Onboarding~~
-- Auth (Waiting for backend)
-- Camera
-- Detection Result
-- Result List
+- ~~Auth~~ (Waiting for API)
+- ~~Camera~~
+- Detection Result (Waiting for API)
+- Result List (Waiting for API)
 
 ## Mobile Team
 - Ahmad Ansori Palembani (a2191f1821 - [@null2264](https://github.com/null2264))
