@@ -21,23 +21,21 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import by.kirich1409.viewbindingdelegate.CreateMethod
+import by.kirich1409.viewbindingdelegate.viewBinding
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.databinding.ActivityCameraBinding
 import io.github.skincanorg.skincan.lib.Util
 import java.io.File
 
 class CameraActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityCameraBinding
+    private val binding: ActivityCameraBinding by viewBinding(CreateMethod.INFLATE)
     private var imageCapture: ImageCapture? = null
     private var getFile: File? = null
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityCameraBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
         binding.captureImg.setOnClickListener {

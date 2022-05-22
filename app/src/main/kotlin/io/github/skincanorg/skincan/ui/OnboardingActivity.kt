@@ -8,7 +8,7 @@
 
 package io.github.skincanorg.skincan.ui
 
-import android.graphics.ColorFilter
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
@@ -19,6 +19,7 @@ import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.data.onboarding.OnboardAdapter
 import io.github.skincanorg.skincan.data.onboarding.OnboardScreen
 import io.github.skincanorg.skincan.databinding.ActivityOnboardingBinding
+import io.github.skincanorg.skincan.ui.auth.LoginActivity
 
 @AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
@@ -37,6 +38,12 @@ class OnboardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupOnboarding()
+        setupCoreFunctions()
+    }
+
+    private fun setupOnboarding() {
+        // TODO: Auto Scroll
         binding.apply {
             onboardingContainer.apply {
                 adapter = onboardAdapter
@@ -71,11 +78,17 @@ class OnboardingActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupCoreFunctions() {
+        binding.btnContinue.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+    }
+
     private fun setIndicator(position: Int) {
         for ((index, indicator) in listOf(binding.indicatorPage1, binding.indicatorPage2).withIndex()) {
             indicator.setBackgroundResource(
-                if (index == position) R.drawable.indicator_selected
-                else R.drawable.indicator
+                if (index == position) R.drawable.bg_indicator_selected
+                else R.drawable.bg_indicator
             )
         }
     }

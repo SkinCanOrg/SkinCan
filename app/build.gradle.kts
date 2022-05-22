@@ -45,18 +45,24 @@ dependencies {
     // --- Google libraries (prepare for pain when using them!) ---
     // AndroidX libraries
     implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.core:core-splashscreen:1.0.0-rc01")
     implementation("androidx.appcompat:appcompat:1.4.1")
+
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+
     implementation("androidx.preference:preference-ktx:1.2.0")
+
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
-    implementation("androidx.core:core-splashscreen:1.0.0-beta02")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
+
+    val navigationVersion = "2.4.2"
+    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
 
     // com.google.* libraries
     implementation("com.google.android.material:material:1.6.0")
-    implementation("com.google.dagger:hilt-android:2.41")
-    kapt("com.google.dagger:hilt-compiler:2.41")
+    val hiltVersion = "2.42"
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
 
     // --- third parties ---
     // view binding QOL

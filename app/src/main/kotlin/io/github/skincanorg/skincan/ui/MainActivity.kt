@@ -31,9 +31,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // TODO: Check if logged in
         if (prefs.getToken() == null) {
             startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
+            finish()
         } else {
             // Logged in
         }
