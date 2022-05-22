@@ -9,8 +9,9 @@
 package io.github.skincanorg.skincan.lib
 
 import android.content.Context
-import android.util.DisplayMetrics
+import android.content.res.AssetManager
 import android.util.TypedValue
+import org.json.JSONObject
 
 object Extension {
     // DP to Pixel
@@ -19,4 +20,10 @@ object Extension {
 
     fun Int.sp(context: Context) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
         this.toFloat(), context.resources.displayMetrics)
+
+    fun AssetManager.readFile(fileName: String) = open(fileName)
+        .bufferedReader()
+        .use { it.readText() }
+
+    fun AssetManager.readJson(fileName: String) = JSONObject(this.readFile(fileName))
 }

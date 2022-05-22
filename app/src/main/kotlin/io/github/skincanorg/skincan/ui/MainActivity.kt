@@ -17,6 +17,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.data.preference.PreferencesHelper
 import io.github.skincanorg.skincan.databinding.ActivityMainBinding
+import io.github.skincanorg.skincan.lib.Extension.readJson
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,7 +36,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
             finish()
         } else {
-            // Logged in
+            setupNews()
+        }
+    }
+
+    private fun setupNews() {
+        val news = applicationContext.assets.readJson("news.json").getJSONArray("news")
+        binding.apply {
+            // TODO: Show news in recyclerView
         }
     }
 }

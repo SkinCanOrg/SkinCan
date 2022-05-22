@@ -23,6 +23,8 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import io.github.skincanorg.skincan.R
+import io.github.skincanorg.skincan.lib.Extension.readFile
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -114,5 +116,4 @@ object Util {
         FILENAME_FORMAT,
         Locale.US
     ).format(System.currentTimeMillis())
-
 }
