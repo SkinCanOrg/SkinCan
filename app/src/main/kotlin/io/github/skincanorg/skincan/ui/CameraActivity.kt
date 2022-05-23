@@ -11,28 +11,42 @@ package io.github.skincanorg.skincan.ui
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.MediaScannerConnection
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.webkit.MimeTypeMap
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toFile
+import androidx.core.view.isGone
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.databinding.ActivityCameraBinding
 import io.github.skincanorg.skincan.lib.Util
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 class CameraActivity : AppCompatActivity() {
     private val binding: ActivityCameraBinding by viewBinding(CreateMethod.INFLATE)
     private var imageCapture: ImageCapture? = null
     private var file: File? = null
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+    private var state = STATE_CAMERA
+    private lateinit var cameraProvider: ProcessCameraProvider
+    private lateinit var cameraExecutor: ExecutorService
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
@@ -57,9 +71,67 @@ class CameraActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
 
+        cameraExecutor = Executors.newSingleThreadExecutor()
+
         binding.apply {
             captureImg.setOnClickListener {
-                TODO("add this method")
+                val photoFile = Util.createFile(this@CameraActivity.application)
+
+                val metadata = ImageCapture.Metadata().apply {
+                    // Mirror image when using the front camera
+                    isReversedHorizontal = cameraSelector == CameraSelector.DEFAULT_FRONT_CAMERA
+                }
+
+                val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile)
+                    .setMetadata(metadata)
+                    .build()
+
+                imageCapture?.takePicture(
+                    outputOptions, cameraExecutor, object : ImageCapture.OnImageSavedCallback {
+                        private val TAG = "ziCameraX"
+
+                        override fun onError(exc: ImageCaptureException) {
+                            Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+                        }
+
+                        override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                            val savedUri = output.savedUri ?: Uri.fromFile(photoFile)
+                            Log.d(TAG, "Photo capture succeeded: $savedUri")
+
+                            lifecycleScope.launch(Dispatchers.Main) {
+                                Glide.with(binding.ivImagePreview)
+                                    .load(savedUri)
+                                    .into(binding.ivImagePreview)
+                            }
+
+                            // Implicit broadcasts will be ignored for devices running API level >= 24
+                            // so if you only target API level 24+ you can remove this statement
+                            @Suppress("DEPRECATION")
+                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                                this@CameraActivity.sendBroadcast(
+                                    Intent(android.hardware.Camera.ACTION_NEW_PICTURE, savedUri)
+                                )
+                            }
+
+                            // If the folder selected is an external media directory, this is
+                            // unnecessary but otherwise other apps will not be able to access our
+                            // images unless we scan them using [MediaScannerConnection]
+                            val mimeType = MimeTypeMap.getSingleton()
+                                .getMimeTypeFromExtension(savedUri.toFile().extension)
+                            MediaScannerConnection.scanFile(
+                                applicationContext,
+                                arrayOf(savedUri.toFile().absolutePath),
+                                arrayOf(mimeType)
+                            ) { _, uri ->
+                                Log.d(TAG, "Image capture scanned into media store: $uri")
+                            }
+
+                            lifecycleScope.launch(Dispatchers.Main) {
+                                cameraProvider.unbindAll()
+                                binding.root.transitionToState(R.id.cam_scene_snapped)
+                            }
+                        }
+                    })
             }
 
             closeCamera.setOnClickListener {
@@ -80,6 +152,29 @@ class CameraActivity : AppCompatActivity() {
             torchCamera.setOnClickListener {
                 TODO("add this method")
             }
+
+            root.setTransitionListener(object : MotionLayout.TransitionListener {
+                override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
+
+                override fun onTransitionChange(
+                    motionLayout: MotionLayout?,
+                    startId: Int,
+                    endId: Int,
+                    progress: Float,
+                ) {}
+
+                override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
+                    state = currentId
+                }
+
+                override fun onTransitionTrigger(
+                    motionLayout: MotionLayout?,
+                    triggerId: Int,
+                    positive: Boolean,
+                    progress: Float,
+                ) {}
+
+            })
         }
     }
 
@@ -92,7 +187,7 @@ class CameraActivity : AppCompatActivity() {
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener({
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+            cameraProvider = cameraProviderFuture.get()
             val preview = Preview.Builder()
                 .build()
                 .also {
@@ -101,8 +196,9 @@ class CameraActivity : AppCompatActivity() {
 
             imageCapture = ImageCapture.Builder().build()
 
+            cameraProvider.unbindAll()
+
             try {
-                cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
                     this,
                     cameraSelector,
@@ -141,5 +237,8 @@ class CameraActivity : AppCompatActivity() {
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
+        private val STATE_CAMERA = R.id.cam_scene_start
+        private val STATE_GALERY = 0 // R.id.cam_scene_gallery
+        private val STATE_IMAGE_CAPTURED = R.id.cam_scene_snapped
     }
 }

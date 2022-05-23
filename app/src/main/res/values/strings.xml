@@ -19,6 +19,7 @@
     <string name="flip_camera">flip camera</string>
     <string name="capture_image">capture image</string>
     <string name="failed_open_camera">failed to open camera</string>
+    <string name="captured_image_preview">captured image preview</string>
 
     <!-- Auth -->
     <string name="name">Name</string>

@@ -68,16 +68,20 @@ dependencies {
     // view binding QOL
     implementation("com.github.kirich1409:viewbindingpropertydelegate:1.5.6")
 
+    val glideVersion = "4.13.2"
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
+    kapt("com.github.bumptech.glide:compiler:$glideVersion")
+
+    //camera X
+    val cameraxVersion = "1.1.0-rc01"
+    implementation ("androidx.camera:camera-camera2:${cameraxVersion}")
+    implementation ("androidx.camera:camera-lifecycle:${cameraxVersion}")
+    implementation ("androidx.camera:camera-view:${cameraxVersion}")
+
     // --- Testing libraries ---
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-
-    //camera X
-    val camerax_version = "1.1.0-beta02"
-    implementation ("androidx.camera:camera-camera2:${camerax_version}")
-    implementation ("androidx.camera:camera-lifecycle:${camerax_version}")
-    implementation ("androidx.camera:camera-view:${camerax_version}")
 
     //desugaring
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:1.1.5")

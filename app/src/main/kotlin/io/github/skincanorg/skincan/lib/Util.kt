@@ -112,6 +112,7 @@ object Util {
 
         return File(outputDirectory, "$timeStamp.jpg")
     }
+
     private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
     private val timeStamp: String = SimpleDateFormat(

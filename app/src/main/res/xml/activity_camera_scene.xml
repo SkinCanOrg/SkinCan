@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ConstraintSet android:id="@+id/cam_scene_start">
+        <Constraint android:id="@id/iv_image_preview">
+            <PropertySet
+                    motion:applyMotionScene="false"/>
+        </Constraint>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/cam_scene_end" motion:deriveConstraintsFrom="@id/cam_scene_start">
+    </ConstraintSet>
+    <Transition
+            motion:constraintSetStart="@+id/cam_scene_start"
+            motion:constraintSetEnd="@+id/cam_scene_end"/>
+
+    <ConstraintSet android:id="@+id/cam_scene_snapped">
+        <Constraint
+                android:layout_height="70dp"
+                android:layout_marginBottom="24dp"
+                android:layout_width="70dp"
+                motion:layout_constraintTop_toBottomOf="parent"
+                android:id="@+id/capture_img"/>
+        <Constraint
+                android:layout_height="0dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="24dp"
+                android:layout_width="40dp"
+                motion:layout_constraintDimensionRatio="1:1"
+                motion:layout_constraintTop_toBottomOf="parent"
+                android:id="@+id/gallery"/>
+        <Constraint
+                android:layout_marginEnd="24dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="24dp"
+                android:layout_width="40dp"
+                motion:layout_constraintDimensionRatio="1:1"
+                motion:layout_constraintTop_toBottomOf="parent"
+                android:id="@+id/flip_camera"/>
+        <Constraint
+                android:layout_width="40dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                motion:layout_constraintDimensionRatio="1:1"
+                motion:layout_constraintBottom_toTopOf="parent"
+                android:id="@+id/torch_camera"/>
+        <Constraint android:id="@id/view_finder"
+                android:visibility="gone">
+            <PropertySet
+                    motion:applyMotionScene="false"/>
+        </Constraint>
+        <Constraint android:id="@id/iv_image_preview">
+            <PropertySet
+                    motion:applyMotionScene="false"/>
+        </Constraint>
+    </ConstraintSet>
+    <Transition
+            motion:motionInterpolator="easeIn"
+            motion:constraintSetStart="@+id/cam_scene_start"
+            motion:constraintSetEnd="@+id/cam_scene_snapped">
+<!--        <OnClick motion:targetId="@+id/capture_img"/>-->
+    </Transition>
+</MotionScene>
