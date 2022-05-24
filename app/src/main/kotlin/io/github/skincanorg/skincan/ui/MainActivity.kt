@@ -9,7 +9,6 @@
 package io.github.skincanorg.skincan.ui
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +20,7 @@ import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.data.preference.PreferencesHelper
 import io.github.skincanorg.skincan.databinding.ActivityMainBinding
 import io.github.skincanorg.skincan.lib.Extension.readJson
-import io.github.skincanorg.skincan.lib.Util
+import io.github.skincanorg.skincan.ui.camera.CameraActivity
 import java.io.File
 import javax.inject.Inject
 

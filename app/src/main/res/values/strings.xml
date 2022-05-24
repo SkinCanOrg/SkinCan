@@ -52,4 +52,5 @@
 
     <!-- Unsorted -->
     <string name="dialog_illustration">Dialog Illustration</string>
+    <string name="scan">Scan</string>
 </resources>

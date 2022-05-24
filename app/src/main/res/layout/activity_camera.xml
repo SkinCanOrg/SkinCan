@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        tools:context=".ui.CameraActivity"
-        app:layoutDescription="@xml/activity_camera_scene">
+        tools:context=".ui.camera.CameraActivity">
 
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -93,4 +92,4 @@
             app:layout_constraintDimensionRatio="1:1"
             android:id="@+id/torch_camera"/>
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

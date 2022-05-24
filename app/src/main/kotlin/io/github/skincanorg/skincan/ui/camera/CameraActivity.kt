@@ -6,44 +6,37 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package io.github.skincanorg.skincan.ui
+package io.github.skincanorg.skincan.ui.camera
 
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.bumptech.glide.Glide
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.databinding.ActivityCameraBinding
+import io.github.skincanorg.skincan.lib.Extension.toFile
 import io.github.skincanorg.skincan.lib.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import kotlin.math.abs
 
 class CameraActivity : AppCompatActivity() {
     private val binding: ActivityCameraBinding by viewBinding(CreateMethod.INFLATE)
     private var imageCapture: ImageCapture? = null
-    private var file: File? = null
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-    private var state = STATE_CAMERA
     private lateinit var cameraProvider: ProcessCameraProvider
     private lateinit var cameraExecutor: ExecutorService
 
@@ -56,6 +49,18 @@ class CameraActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (!allPermissionsGranted())
                 finish()
+        }
+    }
+
+    private fun goToScanner(file: File, isBackCamera: Boolean? = null) {
+        val intent = Intent(this@CameraActivity, ScannerActivity::class.java)
+        intent.putExtra("IMG_FILE", file)
+        if (isBackCamera != null)
+            intent.putExtra("IS_BACK_CAMERA", isBackCamera)
+
+        startActivity(intent)
+        lifecycleScope.launch(Dispatchers.Main) {
+            cameraProvider.unbindAll()
         }
     }
 
@@ -95,35 +100,7 @@ class CameraActivity : AppCompatActivity() {
                         }
 
                         override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                            val savedUri = Uri.fromFile(photoFile)
-
-                            lifecycleScope.launch(Dispatchers.Main) {
-                                val img = Util.rotateCapturedImage(
-                                    BitmapFactory.decodeFile(photoFile.path),
-                                    cameraSelector != CameraSelector.DEFAULT_FRONT_CAMERA
-                                )
-
-                                Glide.with(binding.ivImagePreview)
-                                    .load(img)
-                                    .into(binding.ivImagePreview)
-                            }
-
-                            // Implicit broadcasts will be ignored for devices running API level >= 24
-                            // so if you only target API level 24+ you can remove this statement
-                            @Suppress("DEPRECATION")
-                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                                this@CameraActivity.sendBroadcast(
-                                    Intent(android.hardware.Camera.ACTION_NEW_PICTURE, savedUri)
-                                )
-                            }
-
-                            lifecycleScope.launch(Dispatchers.Main) {
-                                captureImg.isEnabled = false
-                                flipCamera.isEnabled = false
-                                gallery.isEnabled = false
-                                root.transitionToState(R.id.cam_scene_snapped)
-                                cameraProvider.unbindAll()
-                            }
+                            goToScanner(photoFile, cameraSelector != CameraSelector.DEFAULT_FRONT_CAMERA)
                         }
                     })
             }
@@ -146,29 +123,6 @@ class CameraActivity : AppCompatActivity() {
             torchCamera.setOnClickListener {
                 TODO("add this method")
             }
-
-            root.setTransitionListener(object : MotionLayout.TransitionListener {
-                override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
-
-                override fun onTransitionChange(
-                    motionLayout: MotionLayout?,
-                    startId: Int,
-                    endId: Int,
-                    progress: Float,
-                ) {}
-
-                override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
-                    state = currentId
-                }
-
-                override fun onTransitionTrigger(
-                    motionLayout: MotionLayout?,
-                    triggerId: Int,
-                    positive: Boolean,
-                    progress: Float,
-                ) {}
-
-            })
         }
     }
 
@@ -225,9 +179,8 @@ class CameraActivity : AppCompatActivity() {
     ) {
         if (it.resultCode == RESULT_OK) {
             val selectedImg: Uri = it.data?.data as Uri
-            val myFile = Util.uriToFile(selectedImg, this@CameraActivity)
-            file = myFile
-            //binding.viewFinder.setImageUri(selectedImg)
+            val file = selectedImg.toFile(applicationContext)
+            goToScanner(file)
         }
     }
 
@@ -237,8 +190,5 @@ class CameraActivity : AppCompatActivity() {
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
-        private val STATE_CAMERA = R.id.cam_scene_start
-        private val STATE_GALERY = 0 // R.id.cam_scene_gallery
-        private val STATE_IMAGE_CAPTURED = R.id.cam_scene_snapped
     }
 }
