@@ -48,7 +48,7 @@
                 tools:text="now you can login to your new account and start exploring the app"
                 android:id="@+id/tv_dialog_description"/>
 
-        <io.github.skincanorg.skincan.widget.RoundedButton
+        <io.github.skincanorg.skincan.widget.button.RoundedButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/login"

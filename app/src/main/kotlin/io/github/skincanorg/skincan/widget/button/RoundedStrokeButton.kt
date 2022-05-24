@@ -6,26 +6,28 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package io.github.skincanorg.skincan.widget
+package io.github.skincanorg.skincan.widget.button
 
 import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.lib.Extension.dp
 import io.github.skincanorg.skincan.lib.Extension.sp
 import io.github.skincanorg.skincan.lib.Util.getDrawableWithAttrTint
+import io.github.skincanorg.skincan.lib.Util.getDrawableWithTint
 
-class RoundedButton @JvmOverloads constructor(
+class RoundedStrokeButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int? = null,
 ) : AppCompatButton(context, attrs, defStyleAttr ?: android.R.attr.buttonStyle) {
     init {
-        background = getDrawableWithAttrTint(context, R.drawable.bg_rounded_ripple, R.attr.colorPrimary)
+        background = ContextCompat.getDrawable(context, R.drawable.bg_rounded_ripple_stroke)
         val typedValue = TypedValue()
-        context.theme.resolveAttribute(R.attr.colorOnPrimary, typedValue, true)
+        context.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
         this.setTextColor(typedValue.data)
         this.setPadding(
             paddingLeft + 16.dp(context),

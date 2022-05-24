@@ -72,7 +72,7 @@
             app:layout_constraintBottom_toTopOf="@id/btn_register"
             android:id="@+id/et_password"/>
 
-    <io.github.skincanorg.skincan.widget.RoundedButton
+    <io.github.skincanorg.skincan.widget.button.RoundedButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/create_account"
