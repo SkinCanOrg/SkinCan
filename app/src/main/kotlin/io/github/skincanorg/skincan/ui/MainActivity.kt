@@ -76,11 +76,11 @@ class MainActivity : AppCompatActivity() {
             val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
 
             file = myFile
-
-            val result = Util.rotateCapturedImage(
-                BitmapFactory.decodeFile(myFile.path),
-                isBackCamera
-            )
+//
+//            val result = Util.rotateCapturedImage(
+//                BitmapFactory.decodeFile(myFile.path),
+//                isBackCamera
+//            )
 
             // binding.ivPreview.setImageBitmap(result)
         }

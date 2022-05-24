@@ -5,29 +5,42 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         tools:context=".ui.CameraActivity"
         app:layoutDescription="@xml/activity_camera_scene">
 
-    <ImageView
+    <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/captured_image_preview"
-            android:id="@+id/iv_image_preview"/>
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="9:16"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            android:id="@+id/view_finder_wrapper">
 
-    <androidx.camera.view.PreviewView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/view_finder"/>
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/captured_image_preview"
+                android:id="@+id/iv_image_preview"/>
+
+        <androidx.camera.view.PreviewView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/view_finder"/>
+
+    </androidx.cardview.widget.CardView>
 
     <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginBottom="24dp"
-            android:src="@drawable/ic_camera"
+            android:src="@drawable/ic_camera_snap"
             android:contentDescription="@string/capture_image"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/view_finder_wrapper"
             android:id="@+id/capture_img"/>
 
     <ImageView
@@ -37,9 +50,9 @@
             android:layout_marginEnd="24dp"
             android:src="@drawable/ic_flip_camera"
             android:contentDescription="@string/flip_camera"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/view_finder_wrapper"
+            app:layout_constraintDimensionRatio="1:1"
             android:id="@+id/flip_camera"/>
 
     <ImageView
@@ -49,11 +62,10 @@
             android:layout_marginStart="24dp"
             android:src="@drawable/ic_image"
             android:contentDescription="@string/gallery"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/view_finder_wrapper"
+            app:layout_constraintDimensionRatio="1:1"
             android:id="@+id/gallery"/>
-
 
     <ImageView
             android:layout_width="40dp"
@@ -62,21 +74,23 @@
             android:src="@drawable/ic_close"
             android:layout_marginStart="24dp"
             android:contentDescription="@string/close_button"
-            app:layout_constraintDimensionRatio="1:1"
+            android:elevation="16dp"
+            app:layout_constraintTop_toTopOf="@id/view_finder_wrapper"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
             android:id="@+id/close_camera"/>
 
     <ImageView
             android:layout_width="40dp"
             android:layout_height="0dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/ic_torch_camera"
+            android:src="@drawable/ic_flash"
             android:layout_marginEnd="24dp"
             android:contentDescription="@string/torch_camera"
-            app:layout_constraintDimensionRatio="1:1"
+            android:elevation="16dp"
+            app:layout_constraintTop_toTopOf="@id/view_finder_wrapper"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
             android:id="@+id/torch_camera"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

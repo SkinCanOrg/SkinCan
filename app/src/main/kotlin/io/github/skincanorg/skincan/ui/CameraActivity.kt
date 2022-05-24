@@ -11,21 +11,19 @@ package io.github.skincanorg.skincan.ui
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.MediaScannerConnection
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
-import android.webkit.MimeTypeMap
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toFile
-import androidx.core.view.isGone
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -38,6 +36,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.math.abs
 
 class CameraActivity : AppCompatActivity() {
     private val binding: ActivityCameraBinding by viewBinding(CreateMethod.INFLATE)
@@ -75,6 +74,7 @@ class CameraActivity : AppCompatActivity() {
 
         binding.apply {
             captureImg.setOnClickListener {
+                // TODO: Handle this on separate activity maybe? to make it easier to maintain
                 val photoFile = Util.createFile(this@CameraActivity.application)
 
                 val metadata = ImageCapture.Metadata().apply {
@@ -95,12 +95,16 @@ class CameraActivity : AppCompatActivity() {
                         }
 
                         override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                            val savedUri = output.savedUri ?: Uri.fromFile(photoFile)
-                            Log.d(TAG, "Photo capture succeeded: $savedUri")
+                            val savedUri = Uri.fromFile(photoFile)
 
                             lifecycleScope.launch(Dispatchers.Main) {
+                                val img = Util.rotateCapturedImage(
+                                    BitmapFactory.decodeFile(photoFile.path),
+                                    cameraSelector != CameraSelector.DEFAULT_FRONT_CAMERA
+                                )
+
                                 Glide.with(binding.ivImagePreview)
-                                    .load(savedUri)
+                                    .load(img)
                                     .into(binding.ivImagePreview)
                             }
 
@@ -113,22 +117,12 @@ class CameraActivity : AppCompatActivity() {
                                 )
                             }
 
-                            // If the folder selected is an external media directory, this is
-                            // unnecessary but otherwise other apps will not be able to access our
-                            // images unless we scan them using [MediaScannerConnection]
-                            val mimeType = MimeTypeMap.getSingleton()
-                                .getMimeTypeFromExtension(savedUri.toFile().extension)
-                            MediaScannerConnection.scanFile(
-                                applicationContext,
-                                arrayOf(savedUri.toFile().absolutePath),
-                                arrayOf(mimeType)
-                            ) { _, uri ->
-                                Log.d(TAG, "Image capture scanned into media store: $uri")
-                            }
-
                             lifecycleScope.launch(Dispatchers.Main) {
+                                captureImg.isEnabled = false
+                                flipCamera.isEnabled = false
+                                gallery.isEnabled = false
+                                root.transitionToState(R.id.cam_scene_snapped)
                                 cameraProvider.unbindAll()
-                                binding.root.transitionToState(R.id.cam_scene_snapped)
                             }
                         }
                     })
@@ -188,13 +182,19 @@ class CameraActivity : AppCompatActivity() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener({
             cameraProvider = cameraProviderFuture.get()
+
+            val screenAspectRatio = AspectRatio.RATIO_16_9
+
             val preview = Preview.Builder()
+                .setTargetAspectRatio(screenAspectRatio)
                 .build()
                 .also {
                     it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
                 }
 
-            imageCapture = ImageCapture.Builder().build()
+            imageCapture = ImageCapture.Builder()
+                .setTargetAspectRatio(screenAspectRatio)
+                .build()
 
             cameraProvider.unbindAll()
 

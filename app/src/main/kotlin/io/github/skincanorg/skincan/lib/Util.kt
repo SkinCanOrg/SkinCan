@@ -18,7 +18,9 @@ import android.graphics.Matrix
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Environment
+import android.util.Log
 import android.util.TypedValue
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorRes
@@ -125,7 +127,7 @@ object Util {
         val matrix = Matrix()
 
         return if (isBackCamera) {
-            // matrix.postRotate(90f)
+            matrix.postRotate(90f)
             Bitmap.createBitmap(
                 bitmap, 0, 0,
                 bitmap.width,
@@ -134,7 +136,7 @@ object Util {
                 true
             )
         } else {
-            // matrix.postRotate(-90f)
+            matrix.postRotate(-90f)
             matrix.postScale(-1f, 1f, bitmap.width / 2f, bitmap.height / 2f)
             Bitmap.createBitmap(
                 bitmap, 0, 0,
@@ -144,5 +146,11 @@ object Util {
                 true
             )
         }
+    }
+
+    fun gcd(a: Int, b: Int): Int {
+        if (b == 0)
+            return a
+        return gcd(b, a%b)
     }
 }

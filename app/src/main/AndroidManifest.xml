@@ -15,7 +15,8 @@
         android:theme="@style/Theme.SkinCan">
         <activity
             android:name=".ui.CameraActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.SkinCan.Camera" />
         <activity
             android:name=".ui.OnboardingActivity"
             android:exported="true" />
@@ -24,9 +25,6 @@
             android:exported="true" />
         <activity
             android:name=".ui.auth.LoginActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.OnboardingActivity"
             android:exported="true" />
         <activity
             android:name=".ui.MainActivity"
