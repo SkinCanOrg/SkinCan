@@ -1,17 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.SkinCan" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.SkinCan" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorSurface">@color/black</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="android:colorBackground">@color/black</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorSurfaceInverse">@color/white</item>
+        <item name="colorOnSurfaceInverse">@color/black</item>
+
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_600</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/blue_800</item>
+        <item name="colorPrimaryContainer">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondaryContainer">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?android:attr/colorBackground</item>
+        <item name="android:navigationBarColor">?android:attr/colorBackground</item>
 
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
     </style>
