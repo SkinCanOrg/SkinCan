@@ -1,8 +1,8 @@
 package io.github.skincanorg.skincan.ui.camera
 
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
@@ -31,7 +31,7 @@ class ScannerActivity : AppCompatActivity() {
             } else {
                 finish()
             }
-            
+
             btnCancel.setOnClickListener {
                 finish()
             }

@@ -17,5 +17,5 @@ data class OnboardScreen(
     @StringRes
     val title: Int,
     @StringRes
-    val subtitle: Int
+    val subtitle: Int,
 )

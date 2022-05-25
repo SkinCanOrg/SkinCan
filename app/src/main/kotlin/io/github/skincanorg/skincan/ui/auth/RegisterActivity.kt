@@ -1,8 +1,8 @@
 package io.github.skincanorg.skincan.ui.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import io.github.skincanorg.skincan.databinding.ActivityRegisterBinding

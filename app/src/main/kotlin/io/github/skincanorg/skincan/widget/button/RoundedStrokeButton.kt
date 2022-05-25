@@ -16,8 +16,6 @@ import androidx.core.content.ContextCompat
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.lib.Extension.dp
 import io.github.skincanorg.skincan.lib.Extension.sp
-import io.github.skincanorg.skincan.lib.Util.getDrawableWithAttrTint
-import io.github.skincanorg.skincan.lib.Util.getDrawableWithTint
 
 class RoundedStrokeButton @JvmOverloads constructor(
     context: Context,

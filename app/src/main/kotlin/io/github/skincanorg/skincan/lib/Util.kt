@@ -13,10 +13,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Bitmap
-import android.graphics.Matrix
 import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.os.Build
 import android.os.Environment
 import android.util.Log
 import android.util.TypedValue
@@ -25,13 +22,11 @@ import androidx.annotation.AttrRes
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.net.toUri
 import androidx.exifinterface.media.ExifInterface
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.lib.Extension.rotate
 import java.io.File
 import java.io.FileInputStream
-import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -86,7 +81,7 @@ object Util {
         return File.createTempFile(timeStamp, ".jpg", storageDir)
     }
 
-    fun createFile (application: Application): File{
+    fun createFile(application: Application): File {
         val mediaDir = application.externalMediaDirs.firstOrNull()?.let {
             File(it, application.resources.getString(R.string.app_name)).apply { mkdirs() }
         }
@@ -108,7 +103,8 @@ object Util {
     fun processBitmap(bitmap: Bitmap, file: File): Bitmap {
         val exif = FileInputStream(file).use { ExifInterface(it) }
 
-        return when (val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)) {
+        return when (val orientation =
+            exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)) {
             ExifInterface.ORIENTATION_FLIP_HORIZONTAL -> bitmap.rotate(0f, true)
             ExifInterface.ORIENTATION_ROTATE_180 -> bitmap.rotate(180f)
             ExifInterface.ORIENTATION_FLIP_VERTICAL -> bitmap.rotate(90f, true)

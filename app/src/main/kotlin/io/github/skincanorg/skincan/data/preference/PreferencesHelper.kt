@@ -11,10 +11,10 @@ package io.github.skincanorg.skincan.data.preference
 import android.content.Context
 import android.content.SharedPreferences
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.github.skincanorg.skincan.data.preference.PreferenceKeys as Keys
 import io.github.skincanorg.skincan.R
 import javax.inject.Inject
 import javax.inject.Singleton
+import io.github.skincanorg.skincan.data.preference.PreferenceKeys as Keys
 
 @Singleton
 class PreferencesHelper @Inject constructor(@ApplicationContext context: Context) {
