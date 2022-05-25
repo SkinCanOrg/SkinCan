@@ -11,6 +11,8 @@ package io.github.skincanorg.skincan.lib
 import android.content.ContentResolver
 import android.content.Context
 import android.content.res.AssetManager
+import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.net.Uri
 import android.util.TypedValue
 import org.json.JSONObject
@@ -47,5 +49,21 @@ object Extension {
         inputStream.close()
 
         return myFile
+    }
+
+    fun Bitmap.rotate(rotation: Float, flip: Boolean = false): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(rotation)
+        if (flip)
+            matrix.postScale(-1f, 1f)
+        val rotatedBitmap = Bitmap.createBitmap(
+            this, 0, 0,
+            this.width,
+            this.height,
+            matrix,
+            true
+        )
+        this.recycle()
+        return rotatedBitmap
     }
 }

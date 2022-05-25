@@ -19,11 +19,10 @@ class ScannerActivity : AppCompatActivity() {
 
         binding.apply {
             val photoFile = intent.extras?.get("IMG_FILE") as File?
-            val isBackCamera = intent.extras?.get("IS_BACK_CAMERA") as Boolean?
             if (photoFile != null) {
                 val img = Util.processBitmap(
                     BitmapFactory.decodeFile(photoFile.path),
-                    isBackCamera
+                    photoFile,
                 )
 
                 Glide.with(ivImagePreview)

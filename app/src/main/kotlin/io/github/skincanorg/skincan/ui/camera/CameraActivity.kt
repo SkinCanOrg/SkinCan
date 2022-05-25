@@ -138,9 +138,11 @@ class CameraActivity : AppCompatActivity() {
             cameraProvider = cameraProviderFuture.get()
 
             val screenAspectRatio = AspectRatio.RATIO_16_9
+            val rotation = binding.viewFinder.display.rotation
 
             val preview = Preview.Builder()
                 .setTargetAspectRatio(screenAspectRatio)
+                .setTargetRotation(rotation)
                 .build()
                 .also {
                     it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
@@ -148,6 +150,7 @@ class CameraActivity : AppCompatActivity() {
 
             imageCapture = ImageCapture.Builder()
                 .setTargetAspectRatio(screenAspectRatio)
+                .setTargetRotation(rotation)
                 .build()
 
             cameraProvider.unbindAll()

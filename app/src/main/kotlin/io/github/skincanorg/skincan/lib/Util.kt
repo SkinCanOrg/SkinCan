@@ -15,15 +15,23 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.os.Build
 import android.os.Environment
+import android.util.Log
 import android.util.TypedValue
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.net.toUri
+import androidx.exifinterface.media.ExifInterface
 import io.github.skincanorg.skincan.R
+import io.github.skincanorg.skincan.lib.Extension.rotate
 import java.io.File
+import java.io.FileInputStream
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -97,32 +105,21 @@ object Util {
         Locale.US
     ).format(System.currentTimeMillis())
 
+    fun processBitmap(bitmap: Bitmap, file: File): Bitmap {
+        val exif = FileInputStream(file).use { ExifInterface(it) }
 
-    fun processBitmap(bitmap: Bitmap, isBackCamera: Boolean? = false): Bitmap {
-        if (isBackCamera == null)
-            return bitmap
-
-        val matrix = Matrix()
-
-        return if (isBackCamera) {
-            matrix.postRotate(90f)
-            Bitmap.createBitmap(
-                bitmap, 0, 0,
-                bitmap.width,
-                bitmap.height,
-                matrix,
-                true
-            )
-        } else {
-            matrix.postRotate(-90f)
-            matrix.postScale(-1f, 1f, bitmap.width / 2f, bitmap.height / 2f)
-            Bitmap.createBitmap(
-                bitmap, 0, 0,
-                bitmap.width,
-                bitmap.height,
-                matrix,
-                true
-            )
+        return when (val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)) {
+            ExifInterface.ORIENTATION_FLIP_HORIZONTAL -> bitmap.rotate(0f, true)
+            ExifInterface.ORIENTATION_ROTATE_180 -> bitmap.rotate(180f)
+            ExifInterface.ORIENTATION_FLIP_VERTICAL -> bitmap.rotate(90f, true)
+            ExifInterface.ORIENTATION_TRANSPOSE -> bitmap.rotate(90f, true)
+            ExifInterface.ORIENTATION_ROTATE_90 -> bitmap.rotate(90f)
+            ExifInterface.ORIENTATION_TRANSVERSE -> bitmap.rotate(-90f, true)
+            ExifInterface.ORIENTATION_ROTATE_270 -> bitmap.rotate(270f)
+            else -> {
+                Log.d("orientation", orientation.toString())
+                bitmap
+            }
         }
     }
 }
