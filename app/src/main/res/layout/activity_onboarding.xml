@@ -42,7 +42,7 @@
             app:layout_constraintBottom_toBottomOf="@id/indicator_page1"
             android:id="@+id/indicator_page2"/>
 
-    <io.github.skincanorg.skincan.widget.RoundedButton
+    <io.github.skincanorg.skincan.widget.button.RoundedButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"

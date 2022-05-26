@@ -15,9 +15,12 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import io.github.skincanorg.skincan.databinding.OnboardingItemBinding
 
-class OnboardAdapter(private val context: Context, data: List<OnboardScreen>) : RecyclerView.Adapter<OnboardAdapter.ViewHolder>() {
+class OnboardAdapter(private val context: Context, data: List<OnboardScreen>) :
+    RecyclerView.Adapter<OnboardAdapter.ViewHolder>() {
     private val fakeData = listOf(data.last()) + data + listOf(data.first())
-    class ViewHolder(private val context: Context, private val binding: OnboardingItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    class ViewHolder(private val context: Context, private val binding: OnboardingItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(screen: OnboardScreen) {
             screen.apply {
                 binding.ivOnboard.setImageDrawable(AppCompatResources.getDrawable(context, image))
@@ -28,7 +31,10 @@ class OnboardAdapter(private val context: Context, data: List<OnboardScreen>) : 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(context, OnboardingItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(
+            context,
+            OnboardingItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

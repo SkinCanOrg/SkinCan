@@ -9,24 +9,24 @@
 package io.github.skincanorg.skincan.lib
 
 import android.app.Application
-import android.content.ContentResolver
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Environment
+import android.util.Log
 import android.util.TypedValue
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.exifinterface.media.ExifInterface
 import io.github.skincanorg.skincan.R
+import io.github.skincanorg.skincan.lib.Extension.rotate
 import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.io.OutputStream
+import java.io.FileInputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -76,28 +76,12 @@ object Util {
         ).show()
     }
 
-    fun uriToFile(selectedImg: Uri, context: Context): File {
-        val contentResolver: ContentResolver = context.contentResolver
-        val myFile = createTempFile(context)
-
-        val inputStream = contentResolver.openInputStream(selectedImg) as InputStream
-        val outputStream: OutputStream = FileOutputStream(myFile)
-        val buf = ByteArray(1024)
-        var len: Int
-
-        while (inputStream.read(buf).also { len = it } > 0) outputStream.write(buf, 0, len)
-        outputStream.close()
-        inputStream.close()
-
-        return myFile
-    }
-
-    private fun createTempFile(context: Context): File {
+    fun createTempFile(context: Context): File {
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(timeStamp, ".jpg", storageDir)
     }
 
-    fun createFile (application: Application): File{
+    fun createFile(application: Application): File {
         val mediaDir = application.externalMediaDirs.firstOrNull()?.let {
             File(it, application.resources.getString(R.string.app_name)).apply { mkdirs() }
         }
@@ -108,6 +92,7 @@ object Util {
 
         return File(outputDirectory, "$timeStamp.jpg")
     }
+
     private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
     private val timeStamp: String = SimpleDateFormat(
@@ -115,4 +100,22 @@ object Util {
         Locale.US
     ).format(System.currentTimeMillis())
 
+    fun processBitmap(bitmap: Bitmap, file: File): Bitmap {
+        val exif = FileInputStream(file).use { ExifInterface(it) }
+
+        return when (val orientation =
+            exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)) {
+            ExifInterface.ORIENTATION_FLIP_HORIZONTAL -> bitmap.rotate(0f, true)
+            ExifInterface.ORIENTATION_ROTATE_180 -> bitmap.rotate(180f)
+            ExifInterface.ORIENTATION_FLIP_VERTICAL -> bitmap.rotate(90f, true)
+            ExifInterface.ORIENTATION_TRANSPOSE -> bitmap.rotate(90f, true)
+            ExifInterface.ORIENTATION_ROTATE_90 -> bitmap.rotate(90f)
+            ExifInterface.ORIENTATION_TRANSVERSE -> bitmap.rotate(-90f, true)
+            ExifInterface.ORIENTATION_ROTATE_270 -> bitmap.rotate(270f)
+            else -> {
+                Log.d("orientation", orientation.toString())
+                bitmap
+            }
+        }
+    }
 }

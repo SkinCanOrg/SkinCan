@@ -6,7 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package io.github.skincanorg.skincan.widget
+package io.github.skincanorg.skincan.widget.button
 
 import android.content.Context
 import android.util.AttributeSet

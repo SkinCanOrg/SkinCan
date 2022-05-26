@@ -15,7 +15,7 @@
             android:text="@string/app_name"
             android:textSize="50sp"
             android:textStyle="bold"
-            android:textColor="@color/blue_600"
+            android:textColor="@color/blue_800"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
             android:text="@string/welcome_back"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/blue_600"
+            android:textColor="@color/blue_800"
             app:layout_constraintTop_toBottomOf="@id/iv_logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +86,7 @@
             app:layout_constraintBottom_toTopOf="@id/btn_login"
             android:id="@+id/tv_forgot_password"/>
 
-    <io.github.skincanorg.skincan.widget.RoundedButton
+    <io.github.skincanorg.skincan.widget.button.RoundedButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/login"
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textColor="@color/blue_600"
+                android:textColor="@color/blue_800"
                 android:text="@string/register_now"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

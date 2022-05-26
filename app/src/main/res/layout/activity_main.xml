@@ -7,126 +7,108 @@
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:textSize="20sp"
-        android:textColor="@color/primary"
-        android:text = "@string/greeting"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/greetings"
-        />
-
-    <TextView
-        android:id="@+id/user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="25dp"
-        android:textColor="@color/primary"
-        android:textSize="24sp"
-        tools:text="User_Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/greetings" />
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/emoji_description"
-        android:src="@drawable/ic_emoji"
-        app:layout_constraintStart_toEndOf="@+id/user_name"
-        app:layout_constraintTop_toTopOf="@id/user_name" />
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/ic_pfp_user_placeholder"
-        android:layout_marginEnd="24dp"
-        android:contentDescription="@string/placeholder_user_profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/placeholder_user"/>
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/result_card"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="106dp" />
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/what_s_going_on"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
-
-    <include
-        android:id="@+id/include2"
-        layout="@layout/news_card"
-        android:layout_width="match_parent"
-        android:layout_height="238dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="417dp"
-        android:layout_height="87dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2"
-        app:layout_constraintVertical_bias="1.0">
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+            android:id="@+id/content_wrapper">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="395dp"
-            android:layout_height="82dp">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:descendantFocusability="blocksDescendants">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="24dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/primary"
+                    android:text="@string/greeting"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/greetings"/>
+
+            <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/primary"
+                    android:textSize="24sp"
+                    android:text="@string/user_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/greetings" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="6dp"
+                    android:text="👋"
+                    android:textSize="28sp"
+                    android:elevation="16dp"
+                    app:layout_constraintStart_toEndOf="@+id/user_name"
+                    app:layout_constraintBottom_toBottomOf="@id/user_name"
+                    tools:ignore="HardcodedText"/>
 
             <ImageView
-                android:id="@+id/home_navigation"
-                android:layout_width="44dp"
-                android:layout_height="51dp"
-                android:layout_marginTop="12dp"
-                android:contentDescription="@string/home_nav_description"
-                android:src="@drawable/ic_home_2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.294"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/ic_pfp_user_placeholder"
+                    android:layout_marginEnd="24dp"
+                    android:contentDescription="@string/placeholder_user_profile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/placeholder_user"/>
 
-            <ImageView
-                android:id="@+id/camera_navigation"
-                android:layout_width="44dp"
-                android:layout_height="51dp"
-                android:layout_marginTop="12dp"
-                android:contentDescription="@string/camera_nav_description"
-                android:src="@drawable/ic_camera_circle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.729"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <include
+                    android:id="@+id/include"
+                    layout="@layout/result_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="196dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginHorizontal="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/placeholder_user"/>
 
+            <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/what_s_going_on"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.068"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/include" />
 
+            <!-- TODO: Replace with RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView"
+                    android:id="@+id/rv_news"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
-
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="18dp"
+            app:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bottom_nav"
+            app:itemPaddingBottom="18dp"
+            app:itemRippleColor="@color/transparent"
+            android:id="@+id/bottom_navigation"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
