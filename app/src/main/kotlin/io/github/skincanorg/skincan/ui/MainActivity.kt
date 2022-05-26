@@ -13,10 +13,12 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.R
+import io.github.skincanorg.skincan.data.main.NewsAdapter
 import io.github.skincanorg.skincan.data.preference.PreferencesHelper
 import io.github.skincanorg.skincan.databinding.ActivityMainBinding
 import io.github.skincanorg.skincan.lib.Extension.readJson
@@ -28,6 +30,9 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by viewBinding(CreateMethod.INFLATE)
     private var file: File? = null
+    private val newsAdapter: NewsAdapter by lazy {
+        NewsAdapter(applicationContext.assets.readJson("news.json").getJSONArray("news"))
+    }
 
     @Inject
     lateinit var prefs: PreferencesHelper
@@ -47,9 +52,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNews() {
-        val news = applicationContext.assets.readJson("news.json").getJSONArray("news")
-        binding.apply {
-            // TODO: Show news in recyclerView
+        binding.rvNews.apply {
+            setHasFixedSize(true)
+            adapter = newsAdapter
+            layoutManager = LinearLayoutManager(applicationContext)
         }
     }
 

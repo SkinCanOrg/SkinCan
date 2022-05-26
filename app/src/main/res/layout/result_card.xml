@@ -11,15 +11,15 @@
 
     <io.github.skincanorg.skincan.widget.OneFourthCircleView
             android:layout_gravity="end"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             app:circleColor="#80FFFFFF"
             android:rotation="90"/>
 
     <io.github.skincanorg.skincan.widget.OneFourthCircleView
             android:layout_gravity="bottom"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             app:circleColor="#80FFFFFF"
             android:rotation="270"/>
 </androidx.cardview.widget.CardView>
