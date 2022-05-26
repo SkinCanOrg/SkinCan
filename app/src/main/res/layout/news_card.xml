@@ -22,11 +22,13 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/ic_picture"
                 android:contentDescription="@string/place_holder_for_pict_news"
-                android:scaleType="centerCrop"
+                android:padding="8dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
+                tools:src="@drawable/illustration"
+                tools:scaleType="centerCrop"
                 android:id="@+id/iv_news_thumbnail"/>
 
         <TextView

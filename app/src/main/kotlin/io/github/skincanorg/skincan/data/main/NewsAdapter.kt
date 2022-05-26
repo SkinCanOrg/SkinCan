@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import io.github.skincanorg.skincan.databinding.NewsCardBinding
 import org.json.JSONArray
 import org.json.JSONObject
@@ -15,6 +17,7 @@ class NewsAdapter(private val data: JSONArray) :
             binding.apply {
                 Glide.with(ivNewsThumbnail)
                     .load(data.getString("img"))
+                    .transform(CenterCrop(), RoundedCorners(24))
                     .into(ivNewsThumbnail)
                 tvNewsTitle.text = data.getString("title")
                 tvNewsSummary.text = data.getString("content")
