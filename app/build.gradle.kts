@@ -7,12 +7,12 @@ plugins {
 
 @Suppress("UnstableApiUsage")
 android {
-    compileSdk = 31
+    compileSdk = 32
 
     defaultConfig {
         applicationId = "io.github.skincanorg.skincan"
         minSdk = 23
-        targetSdk = 31
+        targetSdk = 32
         versionCode = 1
         versionName = "0.1"
 
@@ -72,11 +72,11 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:$glideVersion")
     kapt("com.github.bumptech.glide:compiler:$glideVersion")
 
-    //camera X
+    // cameraX
     val cameraxVersion = "1.1.0-rc01"
-    implementation("androidx.camera:camera-camera2:${cameraxVersion}")
-    implementation("androidx.camera:camera-lifecycle:${cameraxVersion}")
-    implementation("androidx.camera:camera-view:${cameraxVersion}")
+    implementation("androidx.camera:camera-camera2:$cameraxVersion")
+    implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
+    implementation("androidx.camera:camera-view:$cameraxVersion")
 
     // --- Testing libraries ---
     testImplementation("junit:junit:4.13.2")
