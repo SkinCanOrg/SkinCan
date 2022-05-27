@@ -10,6 +10,7 @@ package io.github.skincanorg.skincan.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.Touch
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -62,7 +63,10 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.home -> true
+                R.id.home -> {
+                    binding.contentWrapper.smoothScrollTo(0, 0)
+                    true
+                }
                 R.id.camera -> {
                     launcherIntentCameraX.launch(Intent(this@MainActivity, CameraActivity::class.java))
                     false // Do not highlight
