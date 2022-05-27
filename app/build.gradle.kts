@@ -7,14 +7,14 @@ plugins {
 
 @Suppress("UnstableApiUsage")
 android {
-    compileSdk = 32
+    compileSdk = Android.compileSdk
 
     defaultConfig {
-        applicationId = "io.github.skincanorg.skincan"
-        minSdk = 23
-        targetSdk = 32
-        versionCode = 1
-        versionName = "0.1"
+        applicationId = Android.applicationId
+        minSdk = Android.minSdk
+        targetSdk = Android.targetSdk
+        versionCode = Android.versionCode
+        versionName = Android.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -44,45 +44,35 @@ android {
 dependencies {
     // --- Google libraries (prepare for pain when using them!) ---
     // AndroidX libraries
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.core:core-splashscreen:1.0.0-rc01")
-    implementation("androidx.appcompat:appcompat:1.4.1")
-
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-
-    implementation("androidx.preference:preference-ktx:1.2.0")
-
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
-
-    val navigationVersion = "2.4.2"
-    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
+    implementation(Library.App.AndroidX.core)
+    implementation(Library.App.AndroidX.splashScreen)
+    implementation(Library.App.AndroidX.appCompat)
+    implementation(Library.App.AndroidX.constraintLayout)
+    implementation(Library.App.AndroidX.preference)
+    implementation(Library.App.AndroidX.liveData)
+    implementation(Library.App.AndroidX.navigationFragment)
+    implementation(Library.App.AndroidX.navigationUI)
 
     // com.google.* libraries
-    implementation("com.google.android.material:material:1.6.0")
-    val hiltVersion = "2.42"
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
+    implementation(Library.App.material)
+    implementation(Library.App.hilt)
+    kapt(Library.App.hiltCompiler)
 
     // --- third parties ---
-    // view binding QOL
-    implementation("com.github.kirich1409:viewbindingpropertydelegate:1.5.6")
-
-    val glideVersion = "4.13.2"
-    implementation("com.github.bumptech.glide:glide:$glideVersion")
-    kapt("com.github.bumptech.glide:compiler:$glideVersion")
+    implementation(Library.App.viewBindingQOL)
+    implementation(Library.App.glide)
+    kapt(Library.App.glideCompiler)
 
     // cameraX
-    val cameraxVersion = "1.1.0-rc01"
-    implementation("androidx.camera:camera-camera2:$cameraxVersion")
-    implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
-    implementation("androidx.camera:camera-view:$cameraxVersion")
+    implementation(Library.App.AndroidX.camera)
+    implementation(Library.App.AndroidX.cameraLifecycle)
+    implementation(Library.App.AndroidX.cameraView)
 
     // --- Testing libraries ---
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation(Library.App.Testing.junit)
+    androidTestImplementation(Library.App.Testing.junitAndroid)
+    androidTestImplementation(Library.App.Testing.espresso)
 
-    //desugaring
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+    // --- desugaring ---
+    coreLibraryDesugaring(Library.App.desugar)
 }
