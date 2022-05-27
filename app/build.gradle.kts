@@ -48,7 +48,7 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.0-rc01")
     implementation("androidx.appcompat:appcompat:1.4.1")
 
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     implementation("androidx.preference:preference-ktx:1.2.0")
 
@@ -74,9 +74,9 @@ dependencies {
 
     //camera X
     val cameraxVersion = "1.1.0-rc01"
-    implementation ("androidx.camera:camera-camera2:${cameraxVersion}")
-    implementation ("androidx.camera:camera-lifecycle:${cameraxVersion}")
-    implementation ("androidx.camera:camera-view:${cameraxVersion}")
+    implementation("androidx.camera:camera-camera2:${cameraxVersion}")
+    implementation("androidx.camera:camera-lifecycle:${cameraxVersion}")
+    implementation("androidx.camera:camera-view:${cameraxVersion}")
 
     // --- Testing libraries ---
     testImplementation("junit:junit:4.13.2")
@@ -84,5 +84,5 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
     //desugaring
-    coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:1.1.5")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 }
