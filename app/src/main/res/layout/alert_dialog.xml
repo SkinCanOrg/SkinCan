@@ -29,11 +29,12 @@
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
+                android:textSize="16sp"
+                android:text="@string/account_created"
                 app:layout_constraintTop_toBottomOf="@id/iv_illustration"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/tv_dialog_description"
-                tools:text="Account has been created"
                 android:id="@+id/tv_dialog_title"/>
 
         <TextView
@@ -41,11 +42,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="26dp"
                 android:gravity="center"
+                android:text="@string/login_instruction"
                 app:layout_constraintTop_toBottomOf="@id/tv_dialog_title"
                 app:layout_constraintStart_toStartOf="@id/tv_dialog_title"
                 app:layout_constraintEnd_toEndOf="@id/tv_dialog_title"
                 app:layout_constraintBottom_toTopOf="@id/btn_login"
-                tools:text="now you can login to your new account and start exploring the app"
                 android:id="@+id/tv_dialog_description"/>
 
         <io.github.skincanorg.skincan.widget.button.RoundedButton
