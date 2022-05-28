@@ -103,9 +103,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:elevation="18dp"
-            app:backgroundTint="@color/white"
+            android:elevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/bottom_nav"
             app:itemPaddingBottom="18dp"

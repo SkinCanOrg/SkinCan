@@ -51,6 +51,8 @@
 
     <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
         <item name="itemActiveIndicatorStyle">@style/App.Custom.Indicator</item>
+        <item name="elevationOverlayEnabled">false</item>
+        <item name="elevation">0dp</item>
     </style>
 
     <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
