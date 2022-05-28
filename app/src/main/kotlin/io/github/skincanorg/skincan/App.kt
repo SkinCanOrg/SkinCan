@@ -28,12 +28,7 @@ class App : Application(), DefaultLifecycleObserver {
         super<Application>.onCreate()
 
         prefs.isDarkMode(applicationContext).asFlow().onEach {
-            AppCompatDelegate.setDefaultNightMode(
-                when (it) {
-                    true -> AppCompatDelegate.MODE_NIGHT_YES
-                    false -> AppCompatDelegate.MODE_NIGHT_NO
-                }
-            )
+            AppCompatDelegate.setDefaultNightMode(it)
         }.launchIn(ProcessLifecycleOwner.get().lifecycleScope)
     }
 }

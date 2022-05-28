@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -74,4 +76,12 @@ dependencies {
 
     // --- desugaring ---
     coreLibraryDesugaring(Library.App.desugar)
+}
+
+tasks {
+    withType<KotlinCompile> {
+        kotlinOptions.freeCompilerArgs += listOf(
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+        )
+    }
 }
