@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="@color/pure_black"
         tools:context=".ui.camera.CameraActivity">
 
     <androidx.cardview.widget.CardView
@@ -14,7 +14,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="9:16"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             android:id="@+id/view_finder_wrapper">
 

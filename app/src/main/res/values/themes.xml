@@ -17,9 +17,11 @@
         <!-- Background colours -->
         <item name="colorSurface">@color/white</item>
         <item name="colorOnSurface">@color/black</item>
+        <item name="colorSurfaceVariant">@color/gray_100</item>
+        <item name="colorOnSurfaceVariant">@color/black</item>
         <item name="android:colorBackground">@color/white</item>
         <item name="colorOnBackground">@color/black</item>
-        <item name="colorSurfaceInverse">@color/dark</item>
+        <item name="colorSurfaceInverse">@color/black</item>
         <item name="colorOnSurfaceInverse">@color/white</item>
 
         <!-- Primary brand color. -->
@@ -43,9 +45,9 @@
     </style>
 
     <style name="Theme.SkinCan.Camera" parent="Theme.SkinCan">
-        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:statusBarColor">@color/pure_black</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/pure_black</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="O_MR1">false</item>
     </style>
 
