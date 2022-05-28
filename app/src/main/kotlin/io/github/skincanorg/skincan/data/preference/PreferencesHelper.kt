@@ -10,8 +10,8 @@ package io.github.skincanorg.skincan.data.preference
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.github.skincanorg.skincan.R
 import javax.inject.Inject
 import javax.inject.Singleton
 import io.github.skincanorg.skincan.data.preference.PreferenceKeys as Keys
@@ -19,7 +19,7 @@ import io.github.skincanorg.skincan.data.preference.PreferenceKeys as Keys
 @Singleton
 class PreferencesHelper @Inject constructor(@ApplicationContext context: Context) {
     private val prefs: SharedPreferences =
-        context.getSharedPreferences("prefs_${context.getString(R.string.app_name)}", Context.MODE_PRIVATE)
+        PreferenceManager.getDefaultSharedPreferences(context)
 
     fun getToken() = prefs.getString(Keys.TOKEN, null)
 
