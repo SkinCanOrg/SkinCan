@@ -1,4 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="editTextBackgroundColor">#E2E2E2</color>
+    <color name="editTextFocusedBackgroundColor">@color/blue_600</color>
+    <color name="editTextColor">@color/black</color>
+    <color name="editTextFocusedColor">@color/white</color>
+
     <style name="Theme.SkinCan" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Background colours -->
         <item name="colorSurface">@color/dark</item>

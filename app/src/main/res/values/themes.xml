@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <color name="editTextBackgroundColor">#E2E2E2</color>
-    <color name="editTextFocusedBackgroundColor">@color/blue_800_50</color>
+    <color name="editTextFocusedBackgroundColor">@color/blue_600</color>
     <color name="editTextColor">#888888</color>
     <color name="editTextFocusedColor">@color/white</color>
 

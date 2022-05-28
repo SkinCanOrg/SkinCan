@@ -35,6 +35,7 @@ object Library {
         const val viewBindingQOL = "com.github.kirich1409:viewbindingpropertydelegate:1.5.6"
         const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
         const val glideCompiler = "com.github.bumptech.glide:compiler:${Version.glide}"
+        const val flowPreferences = "com.fredporciuncula:flow-preferences:1.7.0"
 
         object Testing {
             const val junit = "junit:junit:4.13.2"

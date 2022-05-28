@@ -52,6 +52,9 @@ dependencies {
     implementation(Library.App.AndroidX.liveData)
     implementation(Library.App.AndroidX.navigationFragment)
     implementation(Library.App.AndroidX.navigationUI)
+    implementation(Library.App.AndroidX.camera)
+    implementation(Library.App.AndroidX.cameraLifecycle)
+    implementation(Library.App.AndroidX.cameraView)
 
     // com.google.* libraries
     implementation(Library.App.material)
@@ -62,11 +65,7 @@ dependencies {
     implementation(Library.App.viewBindingQOL)
     implementation(Library.App.glide)
     kapt(Library.App.glideCompiler)
-
-    // cameraX
-    implementation(Library.App.AndroidX.camera)
-    implementation(Library.App.AndroidX.cameraLifecycle)
-    implementation(Library.App.AndroidX.cameraView)
+    implementation(Library.App.flowPreferences)
 
     // --- Testing libraries ---
     testImplementation(Library.App.Testing.junit)
