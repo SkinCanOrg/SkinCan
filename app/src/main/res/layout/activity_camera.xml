@@ -7,6 +7,29 @@
     android:layout_width="match_parent"
     tools:context=".ui.camera.CameraActivity">
 
+    <androidx.cardview.widget.CardView
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="9:16"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/view_finder_wrapper">
+
+        <ImageView
+            android:contentDescription="@string/captured_image_preview"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/iv_image_preview" />
+
+        <androidx.camera.view.PreviewView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/view_finder" />
+
+    </androidx.cardview.widget.CardView>
+
     <ImageView
         android:contentDescription="@string/capture_image"
         android:layout_height="70dp"
@@ -67,28 +90,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/view_finder_wrapper"
         android:id="@+id/torch_camera" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="9:16"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/view_finder_wrapper">
-
-        <ImageView
-            android:contentDescription="@string/captured_image_preview"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:id="@+id/iv_image_preview" />
-
-        <androidx.camera.view.PreviewView
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:id="@+id/view_finder" />
-
-    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
