@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="18dp"
-        app:cardBackgroundColor="@color/blue_800"
-        app:cardElevation="16dp"
-        android:id="@+id/card_main">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    app:cardBackgroundColor="@color/blue_800"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="16dp"
+    android:id="@+id/card_main">
 
     <io.github.skincanorg.skincan.widget.OneFourthCircleView
-            android:layout_gravity="end"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            app:circleColor="#80FFFFFF"
-            android:rotation="90"/>
+        android:layout_gravity="end"
+        android:layout_height="60dp"
+        android:layout_width="60dp"
+        android:rotation="90"
+        app:circleColor="#80FFFFFF" />
 
     <io.github.skincanorg.skincan.widget.OneFourthCircleView
-            android:layout_gravity="bottom"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            app:circleColor="#80FFFFFF"
-            android:rotation="270"/>
+        android:layout_gravity="bottom"
+        android:layout_height="60dp"
+        android:layout_width="60dp"
+        android:rotation="270"
+        app:circleColor="#80FFFFFF" />
 </androidx.cardview.widget.CardView>
