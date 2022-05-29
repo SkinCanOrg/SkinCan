@@ -64,7 +64,7 @@ object Util {
         Toast.makeText(
             context,
             text,
-            Toast.LENGTH_SHORT
+            Toast.LENGTH_SHORT,
         ).show()
     }
 
@@ -72,7 +72,7 @@ object Util {
         Toast.makeText(
             context,
             text,
-            Toast.LENGTH_LONG
+            Toast.LENGTH_LONG,
         ).show()
     }
 
@@ -97,7 +97,7 @@ object Util {
 
     private val timeStamp: String = SimpleDateFormat(
         FILENAME_FORMAT,
-        Locale.US
+        Locale.US,
     ).format(System.currentTimeMillis())
 
     fun processBitmap(bitmap: Bitmap, file: File): Bitmap {

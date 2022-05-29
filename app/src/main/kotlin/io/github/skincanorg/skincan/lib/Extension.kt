@@ -25,12 +25,12 @@ object Extension {
     // DP to Pixel
     fun Int.dp(context: Context) = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
-        this.toFloat(), context.resources.displayMetrics
+        this.toFloat(), context.resources.displayMetrics,
     ).toInt()
 
     fun Int.sp(context: Context) = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_PX,
-        this.toFloat(), context.resources.displayMetrics
+        this.toFloat(), context.resources.displayMetrics,
     )
 
     fun AssetManager.readFile(fileName: String) = open(fileName)
@@ -65,7 +65,7 @@ object Extension {
             this.width,
             this.height,
             matrix,
-            true
+            true,
         )
         this.recycle()
         return rotatedBitmap

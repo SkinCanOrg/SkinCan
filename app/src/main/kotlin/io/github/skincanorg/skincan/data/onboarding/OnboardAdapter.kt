@@ -33,7 +33,7 @@ class OnboardAdapter(private val context: Context, data: List<OnboardScreen>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             context,
-            OnboardingItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            OnboardingItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
         )
     }
 

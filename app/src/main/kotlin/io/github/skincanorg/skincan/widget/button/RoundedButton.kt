@@ -31,7 +31,7 @@ class RoundedButton @JvmOverloads constructor(
             paddingLeft + 16.dp(context),
             paddingTop + 8.dp(context),
             paddingRight + 16.dp(context),
-            paddingBottom + 8.dp(context)
+            paddingBottom + 8.dp(context),
         )
         textSize = 18.sp(context)
     }

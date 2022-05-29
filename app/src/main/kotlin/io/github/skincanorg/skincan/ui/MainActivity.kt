@@ -10,7 +10,6 @@ package io.github.skincanorg.skincan.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.method.Touch
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -77,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val launcherIntentCameraX = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
+        ActivityResultContracts.StartActivityForResult(),
     ) {
         // TODO: I don't know if this is needed just yet.
         if (it.resultCode == RESULT_SUCCESS) {
