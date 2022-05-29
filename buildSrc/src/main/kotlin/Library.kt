@@ -7,7 +7,7 @@ object Library {
     }
 
     object Root {
-        // Gradle Plugin 7.1+ doesn't work on IDEA 2022.1.1 for some reason.
+        // Gradle Plugin 7.1+ doesn't work on IDEA yet.
         // This will probably fixed on IDEA 2022.2.1 EAP 3.
         const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.4"
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"

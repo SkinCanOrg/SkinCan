@@ -40,6 +40,9 @@ android {
 
     kotlinOptions {
         jvmTarget = "11"
+        freeCompilerArgs += listOf(
+            "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+        )
     }
 }
 
@@ -76,12 +79,4 @@ dependencies {
 
     // --- desugaring ---
     coreLibraryDesugaring(Library.App.desugar)
-}
-
-tasks {
-    withType<KotlinCompile> {
-        kotlinOptions.freeCompilerArgs += listOf(
-            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-        )
-    }
 }
