@@ -4,6 +4,8 @@ object Library {
         const val navigation = "2.4.2"
         const val glide = "4.13.2"
         const val cameraX = "1.1.0-rc01"
+        const val retrofit = "2.9.0"
+        const val okhttp = "4.9.3"
     }
 
     object Root {
@@ -36,9 +38,11 @@ object Library {
         const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
         const val glideCompiler = "com.github.bumptech.glide:compiler:${Version.glide}"
         const val flowPreferences = "com.fredporciuncula:flow-preferences:1.7.0"
-        const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
-        const val retrofitScalars = "com.squareup.retrofit2:converter-scalars:2.9.0"
-        const val retrofitGson = "com.squareup.retrofit2:converter-gson:2.9.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
+        const val retrofitScalars = "com.squareup.retrofit2:converter-scalars:${Version.retrofit}"
+        const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
+        const val okhttp = "com.squareup.okhttp3:okhttp:${Version.okhttp}"
+        const val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Version.okhttp}"
 
         object Testing {
             const val junit = "junit:junit:4.13.2"

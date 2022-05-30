@@ -9,5 +9,5 @@ data class User(
     val username: String,
     val email: String,
     val password: String,
-    val date: Int,  // TODO: timestamp?
+    val date: String,  // Zulu time
 )

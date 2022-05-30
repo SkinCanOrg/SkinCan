@@ -18,13 +18,12 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import io.github.skincanorg.skincan.data.preference.PreferenceKeys as Keys
 
-@Singleton
 class PreferencesHelper @Inject constructor(@ApplicationContext context: Context) {
     private val prefs: SharedPreferences =
         PreferenceManager.getDefaultSharedPreferences(context)
     private val flowPrefs: FlowSharedPreferences = FlowSharedPreferences(prefs)
 
-    fun isDarkMode(context: Context) = flowPrefs.getInt(Keys.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+    fun isDarkMode() = flowPrefs.getInt(Keys.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
     fun getToken() = prefs.getString(Keys.TOKEN, null)
 

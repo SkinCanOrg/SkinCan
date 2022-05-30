@@ -74,6 +74,8 @@ dependencies {
     implementation(Library.App.retrofit)
     implementation(Library.App.retrofitScalars)
     implementation(Library.App.retrofitGson)
+    implementation(Library.App.okhttp)
+    implementation(Library.App.okhttpLoggingInterceptor)
 
     // --- Testing libraries ---
     testImplementation(Library.App.Testing.junit)
