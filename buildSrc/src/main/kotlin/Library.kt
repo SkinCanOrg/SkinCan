@@ -36,6 +36,9 @@ object Library {
         const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
         const val glideCompiler = "com.github.bumptech.glide:compiler:${Version.glide}"
         const val flowPreferences = "com.fredporciuncula:flow-preferences:1.7.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
+        const val retrofitScalars = "com.squareup.retrofit2:converter-scalars:2.9.0"
+        const val retrofitGson = "com.squareup.retrofit2:converter-gson:2.9.0"
 
         object Testing {
             const val junit = "junit:junit:4.13.2"

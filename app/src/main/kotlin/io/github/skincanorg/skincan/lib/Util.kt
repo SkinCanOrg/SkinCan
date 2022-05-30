@@ -31,6 +31,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object Util {
+    const val API_URL = "http://127.0.0.1/"
+
     fun getDrawableWithAttrTint(ctx: Context, resId: Int, @AttrRes colorId: Int): Drawable? {
         val typedValue = TypedValue()
         ctx.theme.resolveAttribute(colorId, typedValue, true)

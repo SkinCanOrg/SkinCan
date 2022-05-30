@@ -10,16 +10,19 @@
     <androidx.cardview.widget.CardView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:minHeight="250dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="?attr/colorSurface"
         android:id="@+id/image_preview_wrapper">
 
         <ImageView
             android:contentDescription="@string/captured_image_preview"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_gravity="center"
             tools:src="@drawable/ic_picture"
             android:id="@+id/iv_image_preview" />
 

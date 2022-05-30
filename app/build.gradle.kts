@@ -71,6 +71,9 @@ dependencies {
     implementation(Library.App.glide)
     kapt(Library.App.glideCompiler)
     implementation(Library.App.flowPreferences)
+    implementation(Library.App.retrofit)
+    implementation(Library.App.retrofitScalars)
+    implementation(Library.App.retrofitGson)
 
     // --- Testing libraries ---
     testImplementation(Library.App.Testing.junit)

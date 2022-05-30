@@ -17,12 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/view_finder_wrapper">
 
-        <ImageView
-            android:contentDescription="@string/captured_image_preview"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:id="@+id/iv_image_preview" />
-
         <androidx.camera.view.PreviewView
             android:layout_height="match_parent"
             android:layout_width="match_parent"
