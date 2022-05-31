@@ -26,6 +26,7 @@ import io.github.skincanorg.skincan.lib.Extension.readJson
 import io.github.skincanorg.skincan.ui.OnboardingActivity
 import io.github.skincanorg.skincan.ui.camera.CameraActivity
 import io.github.skincanorg.skincan.ui.common.AuthViewModel
+import io.github.skincanorg.skincan.ui.preference.ProfileActivity
 import java.io.File
 import javax.inject.Inject
 
@@ -51,8 +52,17 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
                 finish()
             } else {
+                setupCoreFunctions()
                 setupNews()
                 setupBottomNavigation()
+            }
+        }
+    }
+
+    private fun setupCoreFunctions() {
+        binding.apply {
+            btnProfile.setOnClickListener {
+                startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
             }
         }
     }

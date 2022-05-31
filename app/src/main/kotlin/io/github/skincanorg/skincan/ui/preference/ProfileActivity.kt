@@ -10,15 +10,29 @@ package io.github.skincanorg.skincan.ui.preference
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.databinding.ActivityProfileBinding
 
-class ProfileActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class ProfileActivity : AppCompatActivity(),
+    PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
     private val binding: ActivityProfileBinding by viewBinding(CreateMethod.INFLATE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setSupportActionBar(binding.appbar)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.preferenceContainer.id, ProfileAndCategoryFragment())
+            .commit()
+    }
+
+    override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat, pref: Preference): Boolean {
+        return true
     }
 }

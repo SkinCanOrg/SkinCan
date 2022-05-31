@@ -21,11 +21,17 @@
     <string name="failed_open_camera">failed to open camera</string>
     <string name="captured_image_preview">captured image preview</string>
 
+    <!-- Camera (Scanner) -->
+    <string name="scanner_corner">scanner corner</string>
+    <string name="scanner_line">scanner line</string>
+    <string name="scan">Scan</string>
+
     <!-- Auth -->
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Log in</string>
+    <string name="continue_with_google">Continue with Google</string>
 
     <!-- Auth (Login) -->
     <string name="welcome_back">Welcome Back</string>
@@ -40,6 +46,11 @@
     <string name="have_account">Already have an account?</string>
     <string name="login_now">Login Now</string>
 
+    <!-- Auth (Dialog) -->
+    <string name="dialog_illustration">Dialog Illustration</string>
+    <string name="login_instruction">Now you can login to your new account and start exploring the app</string>
+    <string name="account_created">Account has been created</string>
+
     <!-- Dashboard -->
     <string name="greeting">Hello</string>
     <string name="user_name">user_Name</string>
@@ -50,12 +61,8 @@
     <string name="home_nav_description">this is home navigation</string>
     <string name="camera_nav_description">camera nav description</string>
 
+    <!-- Settings -->
+    <string name="dark_mode">Dark Mode</string>
+
     <!-- Unsorted -->
-    <string name="dialog_illustration">Dialog Illustration</string>
-    <string name="scan">Scan</string>
-    <string name="account_created">Account has been created</string>
-    <string name="login_instruction">Now you can login to your new account and start exploring the app</string>
-    <string name="scanner_corner">scanner corner</string>
-    <string name="scanner_line">scanner line</string>
-    <string name="continue_with_google">Continue with Google</string>
 </resources>
