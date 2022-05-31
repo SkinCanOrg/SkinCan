@@ -46,6 +46,7 @@ class RegisterActivity : AppCompatActivity() {
                     btnRegister.isEnabled = true
                     btnGotoLoginContainer.isEnabled = true
                     if (task.isSuccessful) {
+                        viewModel.logout() // Our user-flow is to redirect them to login page after register
                         val alert = LoginAlertDialog(this@RegisterActivity)
                         alert.setOnLoginListener {
                             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
