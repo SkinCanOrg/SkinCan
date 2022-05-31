@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.authState.observe(this) {
             if (!it) {
                 startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
-                finish()
+                finishAffinity()
             } else {
                 setupCoreFunctions()
                 setupNews()

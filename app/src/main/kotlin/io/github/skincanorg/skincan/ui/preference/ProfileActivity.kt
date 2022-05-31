@@ -8,6 +8,7 @@
 
 package io.github.skincanorg.skincan.ui.preference
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.databinding.ActivityProfileBinding
+import io.github.skincanorg.skincan.ui.OnboardingActivity
 import io.github.skincanorg.skincan.ui.common.AuthViewModel
 
 @AndroidEntryPoint
@@ -38,6 +40,12 @@ class ProfileActivity : AppCompatActivity() {
                 .commit()
 
             tvUsername.text = viewModel.getUser().email
+            btnLogout.setOnClickListener {
+                val intent = Intent(this@ProfileActivity, OnboardingActivity::class.java)
+                startActivity(intent)
+                viewModel.logout()
+                finishAffinity()
+            }
         }
     }
 }
