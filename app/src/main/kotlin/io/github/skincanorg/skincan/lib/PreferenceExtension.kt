@@ -15,6 +15,10 @@ object PreferenceExtension {
         return initThenAdd(SwitchPreference(context), block)
     }
 
+    inline fun PreferenceGroup.preferenceCategory(block: PreferenceCategory.() -> Unit): PreferenceCategory {
+        return initThenAdd(PreferenceCategory(context), block)
+    }
+
     inline fun <P: Preference> PreferenceGroup.initThenAdd(preference: P, block: P.() -> Unit): P {
         return preference.apply {
             block()

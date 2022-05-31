@@ -15,8 +15,10 @@
         android:theme="@style/Theme.SkinCan">
         <activity
             android:exported="true"
-            android:name=".ui.preference.ProfileActivity" />
-        <!-- TODO: Landscape support? -->
+            android:name=".ui.preference.PreferenceActivity" />
+        <activity
+            android:exported="true"
+            android:name=".ui.preference.ProfileActivity" /> <!-- TODO: Landscape support? -->
         <activity
             android:configChanges="orientation"
             android:exported="true"

@@ -10,6 +10,7 @@ package io.github.skincanorg.skincan.data.repository
 
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import io.github.skincanorg.skincan.data.auth.AuthLiveData
 
 class UserRepository {
@@ -20,4 +21,6 @@ class UserRepository {
     fun login(email: String, password: String) = auth.signInWithEmailAndPassword(email, password)
 
     fun logout() = auth.signOut()
+
+    fun getUser() = auth.currentUser as FirebaseUser
 }

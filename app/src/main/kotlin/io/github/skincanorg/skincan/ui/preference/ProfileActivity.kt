@@ -8,31 +8,36 @@
 
 package io.github.skincanorg.skincan.ui.preference
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.databinding.ActivityProfileBinding
+import io.github.skincanorg.skincan.ui.common.AuthViewModel
 
 @AndroidEntryPoint
-class ProfileActivity : AppCompatActivity(),
-    PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+class ProfileActivity : AppCompatActivity() {
     private val binding: ActivityProfileBinding by viewBinding(CreateMethod.INFLATE)
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setSupportActionBar(binding.appbar)
-        supportFragmentManager
-            .beginTransaction()
-            .replace(binding.preferenceContainer.id, ProfileAndCategoryFragment())
-            .commit()
-    }
+        binding.apply {
+            setSupportActionBar(appbar)
+            supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(true)
+                setHomeButtonEnabled(true)
+            }
+            appbar.setNavigationOnClickListener { finish() }
+            supportFragmentManager
+                .beginTransaction()
+                .replace(preferenceContainer.id, ProfileFragment())
+                .commit()
 
-    override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat, pref: Preference): Boolean {
-        return true
+            tvUsername.text = viewModel.getUser().email
+        }
     }
 }

@@ -21,4 +21,6 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
     fun login(email: String, password: String) = repo.login(email, password)
 
     fun logout() = repo.logout()
+
+    fun getUser() = repo.getUser()
 }
