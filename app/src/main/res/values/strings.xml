@@ -57,4 +57,5 @@
     <string name="login_instruction">Now you can login to your new account and start exploring the app</string>
     <string name="scanner_corner">scanner corner</string>
     <string name="scanner_line">scanner line</string>
+    <string name="continue_with_google">Continue with Google</string>
 </resources>

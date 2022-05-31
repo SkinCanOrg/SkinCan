@@ -8,6 +8,7 @@
 
 package io.github.skincanorg.skincan.data.repository
 
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import io.github.skincanorg.skincan.data.auth.AuthLiveData
 
@@ -17,4 +18,6 @@ class UserRepository {
     fun getFirebaseAuthState(): AuthLiveData = AuthLiveData(auth)
 
     fun login(email: String, password: String) = auth.signInWithEmailAndPassword(email, password)
+
+    fun logout() = auth.signOut()
 }
