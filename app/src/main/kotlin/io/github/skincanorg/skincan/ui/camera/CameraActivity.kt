@@ -53,15 +53,16 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun goToScanner(file: File, isBackCamera: Boolean? = null) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            // Making sure camera is unloaded
+            cameraProvider.unbindAll()
+        }
+
         val intent = Intent(this@CameraActivity, ScannerActivity::class.java)
         intent.putExtra("IMG_FILE", file)
         if (isBackCamera != null)
             intent.putExtra("IS_BACK_CAMERA", isBackCamera)
-
         startActivity(intent)
-        lifecycleScope.launch(Dispatchers.Main) {
-            cameraProvider.unbindAll()
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
