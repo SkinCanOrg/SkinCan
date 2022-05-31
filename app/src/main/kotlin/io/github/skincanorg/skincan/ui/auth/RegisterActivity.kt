@@ -38,6 +38,7 @@ class RegisterActivity : AppCompatActivity() {
                 btnGotoLoginContainer.isEnabled = false
 
                 // TODO: Validate input
+                // TODO: Username or Display name input
                 viewModel.register(
                     etEmail.text.toString(),
                     etPassword.text.toString(),
