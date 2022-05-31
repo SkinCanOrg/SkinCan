@@ -53,15 +53,16 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun goToScanner(file: File, isBackCamera: Boolean? = null) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            // Making sure camera is unloaded
+            cameraProvider.unbindAll()
+        }
+
         val intent = Intent(this@CameraActivity, ScannerActivity::class.java)
         intent.putExtra("IMG_FILE", file)
         if (isBackCamera != null)
             intent.putExtra("IS_BACK_CAMERA", isBackCamera)
-
         startActivity(intent)
-        lifecycleScope.launch(Dispatchers.Main) {
-            cameraProvider.unbindAll()
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +73,7 @@ class CameraActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(
                 this,
                 REQUIRED_PERMISSIONS,
-                REQUEST_CODE_PERMISSIONS
+                REQUEST_CODE_PERMISSIONS,
             )
 
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -92,7 +93,8 @@ class CameraActivity : AppCompatActivity() {
                     .build()
 
                 imageCapture?.takePicture(
-                    outputOptions, cameraExecutor, object : ImageCapture.OnImageSavedCallback {
+                    outputOptions, cameraExecutor,
+                    object : ImageCapture.OnImageSavedCallback {
                         private val TAG = "ziCameraX"
 
                         override fun onError(exc: ImageCaptureException) {
@@ -102,7 +104,8 @@ class CameraActivity : AppCompatActivity() {
                         override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                             goToScanner(photoFile, cameraSelector != CameraSelector.DEFAULT_FRONT_CAMERA)
                         }
-                    })
+                    },
+                )
             }
 
             closeCamera.setOnClickListener {
@@ -134,35 +137,38 @@ class CameraActivity : AppCompatActivity() {
     //for start camera
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-        cameraProviderFuture.addListener({
-            cameraProvider = cameraProviderFuture.get()
+        cameraProviderFuture.addListener(
+            {
+                cameraProvider = cameraProviderFuture.get()
 
-            val screenAspectRatio = AspectRatio.RATIO_16_9
+                val screenAspectRatio = AspectRatio.RATIO_16_9
 
-            val preview = Preview.Builder()
-                .setTargetAspectRatio(screenAspectRatio)
-                .build()
-                .also {
-                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+                val preview = Preview.Builder()
+                    .setTargetAspectRatio(screenAspectRatio)
+                    .build()
+                    .also {
+                        it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+                    }
+
+                imageCapture = ImageCapture.Builder()
+                    .setTargetAspectRatio(screenAspectRatio)
+                    .build()
+
+                cameraProvider.unbindAll()
+
+                try {
+                    cameraProvider.bindToLifecycle(
+                        this,
+                        cameraSelector,
+                        preview,
+                        imageCapture,
+                    )
+                } catch (exc: Exception) {
+                    Util.makeToastShort(this, getString(R.string.failed_open_camera))
                 }
-
-            imageCapture = ImageCapture.Builder()
-                .setTargetAspectRatio(screenAspectRatio)
-                .build()
-
-            cameraProvider.unbindAll()
-
-            try {
-                cameraProvider.bindToLifecycle(
-                    this,
-                    cameraSelector,
-                    preview,
-                    imageCapture
-                )
-            } catch (exc: Exception) {
-                Util.makeToastShort(this, getString(R.string.failed_open_camera))
-            }
-        }, ContextCompat.getMainExecutor(this))
+            },
+            ContextCompat.getMainExecutor(this),
+        )
     }
 
     // for open gallery
@@ -175,7 +181,7 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private val launcherIntentGallery = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
+        ActivityResultContracts.StartActivityForResult(),
     ) {
         if (it.resultCode == RESULT_OK) {
             val selectedImg: Uri = it.data?.data as Uri

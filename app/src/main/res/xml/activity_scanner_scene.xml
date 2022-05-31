@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start" />
+    <ConstraintSet android:id="@+id/end" />
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+        <KeyFrameSet />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/loop_start">
+        <Constraint
+            android:layout_height="4dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_width="0dp"
+            motion:layout_constraintBottom_toBottomOf="@id/bottom_start_corner"
+            motion:layout_constraintEnd_toEndOf="@id/bottom_end_corner"
+            motion:layout_constraintStart_toStartOf="@id/bottom_start_corner"
+            android:id="@+id/scanner_line" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:visibility="visible"
+            motion:layout_constraintEnd_toEndOf="@id/image_preview_wrapper"
+            motion:layout_constraintTop_toTopOf="@id/image_preview_wrapper"
+            android:id="@+id/top_end_corner" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="wrap_content"
+            android:rotationX="180"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="@id/image_preview_wrapper"
+            motion:layout_constraintEnd_toEndOf="@id/image_preview_wrapper"
+            android:id="@+id/bottom_end_corner" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="wrap_content"
+            android:rotationX="180"
+            android:rotationY="180"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="@id/image_preview_wrapper"
+            motion:layout_constraintStart_toStartOf="@id/image_preview_wrapper"
+            android:id="@+id/bottom_start_corner" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:rotationY="180"
+            android:visibility="visible"
+            motion:layout_constraintStart_toStartOf="@id/image_preview_wrapper"
+            motion:layout_constraintTop_toTopOf="@id/image_preview_wrapper"
+            android:id="@+id/top_start_corner" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_width="0dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="parent"
+            android:id="@+id/btn_scan" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="38dp"
+            android:layout_width="0dp"
+            motion:layout_constraintEnd_toEndOf="@id/btn_scan"
+            motion:layout_constraintStart_toStartOf="@id/btn_scan"
+            motion:layout_constraintTop_toBottomOf="parent"
+            android:id="@+id/btn_cancel" />
+    </ConstraintSet>
+    <ConstraintSet
+        motion:deriveConstraintsFrom="@id/loop_start"
+        android:id="@+id/loop_end">
+        <Constraint
+            android:layout_height="4dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_width="0dp"
+            motion:layout_constraintEnd_toEndOf="@id/top_end_corner"
+            motion:layout_constraintStart_toStartOf="@id/top_start_corner"
+            motion:layout_constraintTop_toTopOf="@id/top_start_corner"
+            android:id="@+id/scanner_line" />
+    </ConstraintSet>
+    <Transition
+        motion:constraintSetEnd="@+id/loop_end"
+        motion:constraintSetStart="@+id/loop_start"
+        motion:motionInterpolator="easeInOut" />
+</MotionScene>

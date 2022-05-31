@@ -53,4 +53,8 @@
     <!-- Unsorted -->
     <string name="dialog_illustration">Dialog Illustration</string>
     <string name="scan">Scan</string>
+    <string name="account_created">Account has been created</string>
+    <string name="login_instruction">Now you can login to your new account and start exploring the app</string>
+    <string name="scanner_corner">scanner corner</string>
+    <string name="scanner_line">scanner line</string>
 </resources>

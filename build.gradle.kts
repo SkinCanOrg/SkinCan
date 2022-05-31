@@ -4,9 +4,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.0.4")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.41")
+        classpath(Library.Root.androidGradlePlugin)
+        classpath(Library.Root.kotlinGradlePlugin)
+        classpath(Library.Root.hiltGradlePlugin)
+        classpath(Library.Root.googleServices)
     }
 }
 

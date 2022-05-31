@@ -27,7 +27,7 @@ class NewsAdapter(private val data: JSONArray) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            NewsCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            NewsCardBinding.inflate(LayoutInflater.from(parent.context), parent, false),
         )
     }
 

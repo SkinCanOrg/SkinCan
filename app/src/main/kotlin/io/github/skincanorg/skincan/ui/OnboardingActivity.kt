@@ -30,8 +30,8 @@ class OnboardingActivity : AppCompatActivity() {
             applicationContext,
             listOf(
                 OnboardScreen(R.drawable.illustration, R.string.onboard_title1, R.string.onboard_subtitle1),
-                OnboardScreen(R.drawable.illustration2, R.string.onboard_title2, R.string.onboard_subtitle2)
-            )
+                OnboardScreen(R.drawable.illustration2, R.string.onboard_title2, R.string.onboard_subtitle2),
+            ),
         )
     }
 
@@ -48,32 +48,34 @@ class OnboardingActivity : AppCompatActivity() {
             onboardingContainer.apply {
                 adapter = onboardAdapter
                 setCurrentItem(1, false)
-                registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                    override fun onPageSelected(position: Int) {
-                        currentPosition = position
-                        when (currentPosition) {
-                            0 -> {
-                                setIndicator(onboardAdapter.itemCount - 2)
-                            }
-                            onboardAdapter.itemCount - 1 -> {
-                                setIndicator(0)
-                            }
-                            else -> {
-                                setIndicator(currentPosition - 1)
+                registerOnPageChangeCallback(
+                    object : ViewPager2.OnPageChangeCallback() {
+                        override fun onPageSelected(position: Int) {
+                            currentPosition = position
+                            when (currentPosition) {
+                                0 -> {
+                                    setIndicator(onboardAdapter.itemCount - 2)
+                                }
+                                onboardAdapter.itemCount - 1 -> {
+                                    setIndicator(0)
+                                }
+                                else -> {
+                                    setIndicator(currentPosition - 1)
+                                }
                             }
                         }
-                    }
 
-                    override fun onPageScrollStateChanged(state: Int) {
-                        if (state == ViewPager2.SCROLL_STATE_IDLE) {
-                            if (currentPosition == 0) {
-                                setCurrentItem(onboardAdapter.itemCount - 2, false)
-                            } else if (currentPosition == onboardAdapter.itemCount - 1) {
-                                setCurrentItem(1, false)
+                        override fun onPageScrollStateChanged(state: Int) {
+                            if (state == ViewPager2.SCROLL_STATE_IDLE) {
+                                if (currentPosition == 0) {
+                                    setCurrentItem(onboardAdapter.itemCount - 2, false)
+                                } else if (currentPosition == onboardAdapter.itemCount - 1) {
+                                    setCurrentItem(1, false)
+                                }
                             }
                         }
-                    }
-                })
+                    },
+                )
             }
         }
     }
@@ -88,7 +90,7 @@ class OnboardingActivity : AppCompatActivity() {
         for ((index, indicator) in listOf(binding.indicatorPage1, binding.indicatorPage2).withIndex()) {
             indicator.setBackgroundResource(
                 if (index == position) R.drawable.bg_indicator_selected
-                else R.drawable.bg_indicator
+                else R.drawable.bg_indicator,
             )
         }
     }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
+import io.github.null2264.dicodingstories.widget.dialog.LoginAlertDialog
 import io.github.skincanorg.skincan.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
@@ -20,9 +21,11 @@ class RegisterActivity : AppCompatActivity() {
     private fun setupCoreFunctions() {
         binding.apply {
             btnRegister.setOnClickListener {
-                // TODO: Dialog to tell user account has been created
-                startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-                finish()
+                val alert = LoginAlertDialog(this@RegisterActivity)
+                alert.setOnLoginListener {
+                    startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                    finish()
+                }.show()
             }
 
             btnGotoLoginContainer.setOnClickListener {

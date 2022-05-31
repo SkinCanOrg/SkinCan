@@ -62,7 +62,10 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.home -> true
+                R.id.home -> {
+                    binding.contentWrapper.smoothScrollTo(0, 0)
+                    true
+                }
                 R.id.camera -> {
                     launcherIntentCameraX.launch(Intent(this@MainActivity, CameraActivity::class.java))
                     false // Do not highlight
@@ -73,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val launcherIntentCameraX = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
+        ActivityResultContracts.StartActivityForResult(),
     ) {
         // TODO: I don't know if this is needed just yet.
         if (it.resultCode == RESULT_SUCCESS) {

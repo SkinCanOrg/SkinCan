@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1003433789444",
+    "firebase_url": "https://bangkitcapstoneproject-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "bangkitcapstoneproject",
+    "storage_bucket": "bangkitcapstoneproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003433789444:android:525339ea76a251074c4d51",
+        "android_client_info": {
+          "package_name": "io.github.skincanorg.skincan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003433789444-lppap7l9a429kbtd7rm4ado38bl1mfq4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD77jJbYFAfp7ODh9f16gLhjjoZR6msHR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003433789444-lppap7l9a429kbtd7rm4ado38bl1mfq4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

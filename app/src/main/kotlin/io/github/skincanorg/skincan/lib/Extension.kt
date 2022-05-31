@@ -20,17 +20,19 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Extension {
     // DP to Pixel
     fun Int.dp(context: Context) = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
-        this.toFloat(), context.resources.displayMetrics
+        this.toFloat(), context.resources.displayMetrics,
     ).toInt()
 
     fun Int.sp(context: Context) = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_PX,
-        this.toFloat(), context.resources.displayMetrics
+        this.toFloat(), context.resources.displayMetrics,
     )
 
     fun AssetManager.readFile(fileName: String) = open(fileName)
@@ -65,9 +67,22 @@ object Extension {
             this.width,
             this.height,
             matrix,
-            true
+            true,
         )
         this.recycle()
         return rotatedBitmap
     }
+
+    fun String.toDate(dateFormat: String = "yyyy-MM-ddTHH:mm:ssZ", timeZone: TimeZone = TimeZone.getTimeZone("UTC")): Date {
+        val parser = SimpleDateFormat(dateFormat, Locale.getDefault())
+        parser.timeZone = timeZone
+        return parser.parse(this) as Date
+    }
+
+    fun Date.formatTo(dateFormat: String, timeZone: TimeZone = TimeZone.getDefault()): String {
+        val formatter = SimpleDateFormat(dateFormat, Locale.getDefault())
+        formatter.timeZone = timeZone
+        return formatter.format(this)
+    }
+
 }
