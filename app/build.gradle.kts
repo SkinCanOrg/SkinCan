@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
@@ -65,8 +66,14 @@ dependencies {
     implementation(Library.App.material)
     implementation(Library.App.hilt)
     kapt(Library.App.hiltCompiler)
+    implementation(platform(Library.App.Firebase.bom))
+    implementation(Library.App.Firebase.auth)
+    implementation(Library.App.Firebase.firestore)
+    implementation(Library.App.Firebase.analytics)
+    implementation(Library.App.Firebase.machineLearning)
 
     // --- third parties ---
+    implementation(Library.App.tensorflowLite)
     implementation(Library.App.viewBindingQOL)
     implementation(Library.App.glide)
     kapt(Library.App.glideCompiler)

@@ -7,6 +7,7 @@ buildscript {
         classpath(Library.Root.androidGradlePlugin)
         classpath(Library.Root.kotlinGradlePlugin)
         classpath(Library.Root.hiltGradlePlugin)
+        classpath(Library.Root.googleServices)
     }
 }
 

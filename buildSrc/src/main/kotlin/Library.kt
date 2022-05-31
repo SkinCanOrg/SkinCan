@@ -14,6 +14,7 @@ object Library {
         const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.4"
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"
         const val hiltGradlePlugin= "com.google.dagger:hilt-android-gradle-plugin:${Version.hilt}"
+        const val googleServices = "com.google.gms:google-services:4.3.10"
     }
 
     object App {
@@ -34,6 +35,17 @@ object Library {
         const val material = "com.google.android.material:material:1.6.0"
         const val hilt = "com.google.dagger:hilt-android:${Version.hilt}"
         const val hiltCompiler = "com.google.dagger:hilt-compiler:${Version.hilt}"
+
+        object Firebase {
+            const val bom = "com.google.firebase:firebase-bom:30.1.0"
+            const val analytics = "com.google.firebase:firebase-analytics-ktx:21.0.0"
+            const val auth = "com.google.firebase:firebase-auth-ktx:21.0.5"
+            const val firestore = "com.google.firebase:firebase-firestore-ktx:24.1.2"
+            const val storage = "com.google.firebase:firebase-storage-kts:20.0.1"
+            const val machineLearning = "com.google.firebase:firebase-ml-modeldownloader-ktx:24.0.3"
+        }
+
+        const val tensorflowLite = "org.tensorflow:tensorflow-lite:2.3.0"
         const val viewBindingQOL = "com.github.kirich1409:viewbindingpropertydelegate:1.5.6"
         const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
         const val glideCompiler = "com.github.bumptech.glide:compiler:${Version.glide}"
