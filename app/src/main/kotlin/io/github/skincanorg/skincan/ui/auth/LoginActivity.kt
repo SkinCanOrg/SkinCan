@@ -39,11 +39,16 @@ class LoginActivity : AppCompatActivity() {
     private fun setupCoreFunctions() {
         binding.apply {
             btnLogin.setOnClickListener {
+                btnLogin.isEnabled = false
+                btnGotoRegisterContainer.isEnabled = false
+
                 // TODO: validate input
                 viewModel.login(
                     etEmail.text.toString(),
                     etPassword.text.toString(),
                 ).addOnCompleteListener { task ->
+                    btnLogin.isEnabled = true
+                    btnGotoRegisterContainer.isEnabled = true
                     if (task.isSuccessful) {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finishAffinity()

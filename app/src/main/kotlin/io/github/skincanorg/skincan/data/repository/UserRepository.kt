@@ -8,19 +8,21 @@
 
 package io.github.skincanorg.skincan.data.repository
 
-import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import io.github.skincanorg.skincan.data.auth.AuthLiveData
 
 class UserRepository {
-    private val auth = FirebaseAuth.getInstance()
+    private val auth = Firebase.auth
 
     fun getFirebaseAuthState(): AuthLiveData = AuthLiveData(auth)
+
+    fun getUser() = auth.currentUser as FirebaseUser
 
     fun login(email: String, password: String) = auth.signInWithEmailAndPassword(email, password)
 
     fun logout() = auth.signOut()
 
-    fun getUser() = auth.currentUser as FirebaseUser
+    fun register(email: String, password: String) = auth.createUserWithEmailAndPassword(email, password)
 }
