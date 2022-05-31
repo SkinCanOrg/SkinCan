@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) 2022 SkinCan Project
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
 package io.github.skincanorg.skincan.ui.camera
 
 import android.graphics.BitmapFactory
@@ -37,34 +45,38 @@ class ScannerActivity : AppCompatActivity() {
                 finish()
             }
 
-            root.setTransitionListener(object : TransitionListener {
-                override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
-                    if (shouldLoop) {
-                        if (!looped)
-                            motionLayout.transitionToState(R.id.loop_start)
-                        else
-                            motionLayout.transitionToState(R.id.loop_end)
-                        looped = !looped
+            root.setTransitionListener(
+                object : TransitionListener {
+                    override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
+                        if (shouldLoop) {
+                            if (!looped)
+                                motionLayout.transitionToState(R.id.loop_start)
+                            else
+                                motionLayout.transitionToState(R.id.loop_end)
+                            looped = !looped
+                        }
                     }
-                }
 
-                override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
+                    override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
 
-                override fun onTransitionChange(
-                    motionLayout: MotionLayout?,
-                    startId: Int,
-                    endId: Int,
-                    progress: Float,
-                ) {}
+                    override fun onTransitionChange(
+                        motionLayout: MotionLayout?,
+                        startId: Int,
+                        endId: Int,
+                        progress: Float,
+                    ) {
+                    }
 
-                override fun onTransitionTrigger(
-                    motionLayout: MotionLayout?,
-                    triggerId: Int,
-                    positive: Boolean,
-                    progress: Float,
-                ) {}
+                    override fun onTransitionTrigger(
+                        motionLayout: MotionLayout?,
+                        triggerId: Int,
+                        positive: Boolean,
+                        progress: Float,
+                    ) {
+                    }
 
-            })
+                },
+            )
 
             btnScan.setOnClickListener {
                 shouldLoop = true

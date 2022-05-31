@@ -6,11 +6,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package io.github.skincanorg.skincan.ui
+package io.github.skincanorg.skincan.ui.main
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,12 +23,15 @@ import io.github.skincanorg.skincan.data.main.NewsAdapter
 import io.github.skincanorg.skincan.data.preference.PreferencesHelper
 import io.github.skincanorg.skincan.databinding.ActivityMainBinding
 import io.github.skincanorg.skincan.lib.Extension.readJson
+import io.github.skincanorg.skincan.ui.OnboardingActivity
 import io.github.skincanorg.skincan.ui.camera.CameraActivity
+import io.github.skincanorg.skincan.ui.common.AuthViewModel
 import java.io.File
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private val viewModel: AuthViewModel by viewModels()
     private val binding: ActivityMainBinding by viewBinding(CreateMethod.INFLATE)
     private var file: File? = null
     private val newsAdapter: NewsAdapter by lazy {
@@ -42,12 +46,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        if (prefs.getToken() == null) {
-            startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
-            finish()
-        } else {
-            setupNews()
-            setupBottomNavigation()
+        viewModel.authState.observe(this) {
+            if (!it) {
+                startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
+                finish()
+            } else {
+                setupNews()
+                setupBottomNavigation()
+            }
         }
     }
 

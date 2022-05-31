@@ -44,7 +44,7 @@
         <activity
             android:configChanges="orientation"
             android:exported="true"
-            android:name=".ui.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.SkinCan.Starting">
             <intent-filter>

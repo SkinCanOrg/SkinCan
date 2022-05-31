@@ -15,7 +15,6 @@ import androidx.preference.PreferenceManager
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
-import javax.inject.Singleton
 import io.github.skincanorg.skincan.data.preference.PreferenceKeys as Keys
 
 class PreferencesHelper @Inject constructor(@ApplicationContext context: Context) {
@@ -24,10 +23,4 @@ class PreferencesHelper @Inject constructor(@ApplicationContext context: Context
     private val flowPrefs: FlowSharedPreferences = FlowSharedPreferences(prefs)
 
     fun isDarkMode() = flowPrefs.getInt(Keys.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-
-    fun getToken() = prefs.getString(Keys.TOKEN, null)
-
-    fun setToken(token: String) = prefs.edit().putString(Keys.TOKEN, token).commit()
-
-    fun clearToken() = prefs.edit().remove(Keys.TOKEN).commit()
 }
