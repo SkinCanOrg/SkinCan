@@ -1,44 +1,34 @@
 {
-  "comments": [
-    "This is temporary firebase for testing, will be replaced once CC team done setting up their firebase"
-  ],
   "project_info": {
-    "project_number": "905981905905",
-    "project_id": "skincantesting",
-    "storage_bucket": "skincantesting.appspot.com"
+    "project_number": "1003433789444",
+    "firebase_url": "https://bangkitcapstoneproject-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "bangkitcapstoneproject",
+    "storage_bucket": "bangkitcapstoneproject.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:905981905905:android:b3f8085833d2b2ab7d1250",
+        "mobilesdk_app_id": "1:1003433789444:android:525339ea76a251074c4d51",
         "android_client_info": {
           "package_name": "io.github.skincanorg.skincan"
         }
       },
       "oauth_client": [
         {
-          "client_id": "905981905905-k6qbmtd7ibiefgus1sgkn323teme1042.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "io.github.skincanorg.skincan",
-            "certificate_hash": "44570d5258beb67e81cd00c661f3a93d4456f89d"
-          }
-        },
-        {
-          "client_id": "905981905905-oi96ralle7b95r4j0v1elb9ae9cg3k29.apps.googleusercontent.com",
+          "client_id": "1003433789444-lppap7l9a429kbtd7rm4ado38bl1mfq4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCBANZ421J1BSgBNCWCmvYdKmOoXRrq6d0"
+          "current_key": "AIzaSyD77jJbYFAfp7ODh9f16gLhjjoZR6msHR0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "905981905905-oi96ralle7b95r4j0v1elb9ae9cg3k29.apps.googleusercontent.com",
+              "client_id": "1003433789444-lppap7l9a429kbtd7rm4ado38bl1mfq4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
