@@ -16,7 +16,6 @@ import io.github.skincanorg.skincan.lib.PreferenceExtension.preference
 
 class ProfileFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        val context = preferenceManager.context
         preferenceScreen = preferenceManager.newScreen {
             // TODO: Add icon
             preference {

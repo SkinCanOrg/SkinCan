@@ -19,7 +19,6 @@ import io.github.skincanorg.skincan.lib.Util
 
 class PreferenceFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        val context = preferenceManager.context
         preferenceScreen = preferenceManager.newScreen {
             switchPreference {
                 key = PreferenceKeys.NIGHT_MODE
