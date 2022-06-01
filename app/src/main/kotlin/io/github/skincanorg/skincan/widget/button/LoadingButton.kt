@@ -39,9 +39,9 @@ class LoadingButton @JvmOverloads constructor(
         progressBar = findViewById(R.id.loading)
 
         val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.LoadingButton, 0, 0)
-        text = attr.getString(R.styleable.LoadingButton_buttonText)
+        text = attr.getString(R.styleable.LoadingButton_android_text)
         buttonColor = attr.getColor(R.styleable.LoadingButton_buttonColor, 0)
-        textColor = attr.getColor(R.styleable.LoadingButton_textColor, 0)
+        textColor = attr.getColor(R.styleable.LoadingButton_android_textColor, 0)
         drawButton()
     }
 
@@ -79,7 +79,7 @@ class LoadingButton @JvmOverloads constructor(
         progressBar.visibility = View.GONE
     }
 
-    fun setOnButtonClickListener(onClickListener: OnClickListener?) {
+    override fun setOnClickListener(onClickListener: OnClickListener?) {
         button.setOnClickListener {
             if (!isLoading)
                 onClickListener?.onClick(it)
