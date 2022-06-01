@@ -17,7 +17,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.data.model.AppResult
 import io.github.skincanorg.skincan.databinding.ActivityRegisterBinding
-import io.github.skincanorg.skincan.ui.auth.AuthViewModel
 import io.github.skincanorg.skincan.widget.dialog.LoginAlertDialog
 
 @AndroidEntryPoint
@@ -60,9 +59,11 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             btnGotoLoginContainer.setOnClickListener {
-                startActivity(Intent(this@RegisterActivity, LoginActivity::class.java).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-                })
+                startActivity(
+                    Intent(this@RegisterActivity, LoginActivity::class.java).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                    },
+                )
             }
         }
     }

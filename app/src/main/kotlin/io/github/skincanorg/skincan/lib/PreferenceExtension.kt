@@ -19,7 +19,7 @@ object PreferenceExtension {
         return initThenAdd(PreferenceCategory(context), block)
     }
 
-    inline fun <P: Preference> PreferenceGroup.initThenAdd(preference: P, block: P.() -> Unit): P {
+    inline fun <P : Preference> PreferenceGroup.initThenAdd(preference: P, block: P.() -> Unit): P {
         return preference.apply {
             block()
             addPreference(this)
@@ -28,5 +28,7 @@ object PreferenceExtension {
 
     var Preference.titleRes: Int
         get() = 0
-        set(newValue) { this.title = context.getString(newValue) }
+        set(newValue) {
+            this.title = context.getString(newValue)
+        }
 }

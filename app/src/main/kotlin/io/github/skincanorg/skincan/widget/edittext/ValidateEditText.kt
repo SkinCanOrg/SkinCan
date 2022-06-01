@@ -14,7 +14,6 @@ import android.graphics.Typeface
 import android.text.Editable
 import android.util.AttributeSet
 import android.view.inputmethod.EditorInfo
-import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
@@ -22,6 +21,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.lib.Extension.dp
+import io.github.skincanorg.skincan.lib.Extension.setCursorDrawableColor
+
 
 class ValidateEditText @JvmOverloads constructor(
     context: Context,
@@ -51,23 +52,28 @@ class ValidateEditText @JvmOverloads constructor(
                 paddingLeft + 16.dp(context),
                 paddingTop + 6.dp(context),
                 paddingRight + 16.dp(context),
-                paddingBottom + 6.dp(context)
+                paddingBottom + 6.dp(context),
             )
             compoundDrawablePadding = 16.dp(context)
             background = ContextCompat.getDrawable(context, R.drawable.bg_rounded_clickable_focusable)
+            setCursorDrawableColor(ContextCompat.getColor(context, R.color.editTextFocusedColor))
+
             val initColor = R.color.editTextColor
             setHintTextColor(ContextCompat.getColor(context, initColor))
             setTextColor(ContextCompat.getColor(context, initColor))
             this@ValidateEditText.setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, initColor)))
+
             setOnFocusChangeListener { _, hasFocus ->
                 val color = if (hasFocus) R.color.editTextFocusedColor else R.color.editTextColor
-
                 setHintTextColor(ContextCompat.getColor(context, color))
                 setTextColor(ContextCompat.getColor(context, color))
                 this@ValidateEditText.setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, color)))
             }
+
             addTextChangedListener { if (error != null || isErrorEnabled) clearError() }
-            inputType = attr.getInt(R.styleable.ValidateEditText_android_inputType, EditorInfo.TYPE_TEXT_VARIATION_NORMAL)
+
+            inputType =
+                attr.getInt(R.styleable.ValidateEditText_android_inputType, EditorInfo.TYPE_TEXT_VARIATION_NORMAL)
             typeface = Typeface.SANS_SERIF
         }
         this.addView(_editText)

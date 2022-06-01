@@ -10,7 +10,6 @@ package io.github.skincanorg.skincan.ui.camera
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.util.Size
@@ -38,9 +37,6 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
-import java.util.*
 
 
 class ScannerActivity : AppCompatActivity() {
@@ -151,9 +147,9 @@ class ScannerActivity : AppCompatActivity() {
 
         val labels = TensorLabel(
             BufferedReader(
-                InputStreamReader(assets.open("model_labels.txt"))
+                InputStreamReader(assets.open("model_labels.txt")),
             ).readLines(),
-            probProcessor.process(modelOutput)
+            probProcessor.process(modelOutput),
         )
 
         val resultMap = labels.mapWithFloatValue
@@ -172,7 +168,7 @@ class ScannerActivity : AppCompatActivity() {
                 StringBuilder().apply {
                     append("$it ")
                     append(String.format("%.2f", value))
-                }.toString()
+                }.toString(),
             )
         }
         Log.d("ziML", result)

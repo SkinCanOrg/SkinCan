@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.lib.Extension.dp
 
-// TODO: Validate-able EditText
 class RoundedEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

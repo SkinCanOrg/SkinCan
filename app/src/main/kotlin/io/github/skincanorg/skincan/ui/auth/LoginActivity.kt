@@ -19,7 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.data.model.AppResult
 import io.github.skincanorg.skincan.data.preference.PreferencesHelper
 import io.github.skincanorg.skincan.databinding.ActivityLoginBinding
-import io.github.skincanorg.skincan.ui.auth.AuthViewModel
 import io.github.skincanorg.skincan.ui.main.MainActivity
 import javax.inject.Inject
 
@@ -59,9 +58,11 @@ class LoginActivity : AppCompatActivity() {
             btnLogin.setOnClickListener { viewModel.login(etEmail.text.toString(), etPassword.text.toString()) }
 
             btnGotoRegisterContainer.setOnClickListener {
-                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-                })
+                startActivity(
+                    Intent(this@LoginActivity, RegisterActivity::class.java).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                    },
+                )
             }
         }
     }
