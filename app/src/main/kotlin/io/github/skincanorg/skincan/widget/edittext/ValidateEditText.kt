@@ -1,0 +1,85 @@
+/*
+ * Copyright (C) 2022 SkinCan Project
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+package io.github.skincanorg.skincan.widget.edittext
+
+import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Typeface
+import android.text.Editable
+import android.util.AttributeSet
+import android.view.inputmethod.EditorInfo
+import androidx.annotation.ColorInt
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
+import io.github.skincanorg.skincan.R
+import io.github.skincanorg.skincan.lib.Extension.dp
+
+class ValidateEditText @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int? = null,
+) : TextInputLayout(context, attrs, defStyleAttr ?: com.google.android.material.R.attr.textInputStyle) {
+    private val _editText: AppCompatEditText
+    val editText get() = _editText
+
+    var text: Editable?
+        get() = _editText.text
+        set(newValue) {
+            _editText.text = newValue
+        }
+
+    init {
+        errorIconDrawable = null // overlapping other icon
+        boxStrokeWidth = 0
+        boxStrokeWidthFocused = 0
+        val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.ValidateEditText, 0, 0)
+
+        this.setWillNotDraw(false)
+        _editText = TextInputEditText(context)
+        _editText.apply {
+            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+            setPadding(
+                paddingLeft + 16.dp(context),
+                paddingTop + 6.dp(context),
+                paddingRight + 16.dp(context),
+                paddingBottom + 6.dp(context)
+            )
+            compoundDrawablePadding = 16.dp(context)
+            background = ContextCompat.getDrawable(context, R.drawable.bg_rounded_clickable_focusable)
+            val initColor = R.color.editTextColor
+            setHintTextColor(ContextCompat.getColor(context, initColor))
+            setTextColor(ContextCompat.getColor(context, initColor))
+            this@ValidateEditText.setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, initColor)))
+            setOnFocusChangeListener { _, hasFocus ->
+                val color = if (hasFocus) R.color.editTextFocusedColor else R.color.editTextColor
+
+                setHintTextColor(ContextCompat.getColor(context, color))
+                setTextColor(ContextCompat.getColor(context, color))
+                this@ValidateEditText.setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context, color)))
+            }
+            addTextChangedListener { if (error != null || isErrorEnabled) clearError() }
+            inputType = attr.getInt(R.styleable.ValidateEditText_android_inputType, EditorInfo.TYPE_TEXT_VARIATION_NORMAL)
+            typeface = Typeface.SANS_SERIF
+        }
+        this.addView(_editText)
+        this.isHintEnabled = false
+    }
+
+    private fun clearError() {
+        error = null
+        isErrorEnabled = false
+    }
+
+    fun validateInput(): Boolean {
+        return true
+    }
+}

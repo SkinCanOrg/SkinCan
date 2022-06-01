@@ -8,4 +8,7 @@
         <attr name="buttonColor" format="color" />
         <attr name="android:textColor" format="color" />
     </declare-styleable>
+    <declare-styleable name="ValidateEditText">
+        <attr name="android:inputType" format="enum"/>
+    </declare-styleable>
 </resources>
