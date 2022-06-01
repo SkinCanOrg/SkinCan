@@ -12,19 +12,18 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.FrameLayout
-import android.widget.ProgressBar
 import androidx.annotation.ColorInt
+import androidx.core.view.isVisible
 import io.github.skincanorg.skincan.R
+import io.github.skincanorg.skincan.databinding.LoadingButtonBinding
 
 class LoadingButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
-    private var button: RoundedButton
-    private var progressBar: ProgressBar
+    private val binding: LoadingButtonBinding
     var text: String? = null
 
     @ColorInt
@@ -34,9 +33,7 @@ class LoadingButton @JvmOverloads constructor(
     var textColor: Int = 0
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.loading_button, this, true)
-        button = findViewById(R.id.button)
-        progressBar = findViewById(R.id.loading)
+        binding = LoadingButtonBinding.inflate(LayoutInflater.from(context), this, true)
 
         val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.LoadingButton, 0, 0)
         text = attr.getString(R.styleable.LoadingButton_android_text)
@@ -46,16 +43,18 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     private fun drawButton() {
-        button.text = text
+        binding.apply {
+            button.text = text
 
-        if (textColor != 0) {
-            button.setTextColor(textColor)
-            progressBar.indeterminateTintList = ColorStateList.valueOf(textColor)
+            if (textColor != 0) {
+                button.setTextColor(textColor)
+                loading.indeterminateTintList = ColorStateList.valueOf(textColor)
+            }
         }
     }
 
     var isLoading: Boolean
-        get() = progressBar.visibility == View.VISIBLE
+        get() = binding.loading.isVisible
         set(newValue) {
             if (newValue)
                 onStartLoading()
@@ -64,23 +63,27 @@ class LoadingButton @JvmOverloads constructor(
         }
 
     private fun onStartLoading() {
-        button.apply {
-            text = ""
-            isClickable = false
+        binding.apply {
+            button.apply {
+                text = ""
+                isClickable = false
+            }
+            loading.isVisible = true
         }
-        progressBar.visibility = View.VISIBLE
     }
 
     private fun onStopLoading() {
-        button.apply {
-            text = this@LoadingButton.text
-            isClickable = true
+        binding.apply {
+            button.apply {
+                text = this@LoadingButton.text
+                isClickable = true
+            }
+            loading.isVisible = false
         }
-        progressBar.visibility = View.GONE
     }
 
     override fun setOnClickListener(onClickListener: OnClickListener?) {
-        button.setOnClickListener {
+        binding.button.setOnClickListener {
             if (!isLoading)
                 onClickListener?.onClick(it)
         }
