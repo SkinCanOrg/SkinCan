@@ -60,8 +60,9 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             btnGotoLoginContainer.setOnClickListener {
-                startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-                finish()
+                startActivity(Intent(this@RegisterActivity, LoginActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                })
             }
         }
     }

@@ -59,8 +59,9 @@ class LoginActivity : AppCompatActivity() {
             btnLogin.setOnClickListener { viewModel.login(etEmail.text.toString(), etPassword.text.toString()) }
 
             btnGotoRegisterContainer.setOnClickListener {
-                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
-                finish()
+                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                })
             }
         }
     }
