@@ -6,7 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package io.github.skincanorg.skincan.ui.common
+package io.github.skincanorg.skincan.ui.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

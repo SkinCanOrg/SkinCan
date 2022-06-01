@@ -25,7 +25,7 @@ import io.github.skincanorg.skincan.databinding.ActivityMainBinding
 import io.github.skincanorg.skincan.lib.Extension.readJson
 import io.github.skincanorg.skincan.ui.OnboardingActivity
 import io.github.skincanorg.skincan.ui.camera.CameraActivity
-import io.github.skincanorg.skincan.ui.common.AuthViewModel
+import io.github.skincanorg.skincan.ui.auth.AuthViewModel
 import io.github.skincanorg.skincan.ui.preference.ProfileActivity
 import java.io.File
 import javax.inject.Inject

@@ -17,7 +17,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.data.preference.PreferencesHelper
 import io.github.skincanorg.skincan.databinding.ActivityLoginBinding
-import io.github.skincanorg.skincan.ui.common.AuthViewModel
+import io.github.skincanorg.skincan.ui.auth.AuthViewModel
 import io.github.skincanorg.skincan.ui.main.MainActivity
 import javax.inject.Inject
 

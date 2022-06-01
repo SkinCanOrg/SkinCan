@@ -16,7 +16,7 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.databinding.ActivityRegisterBinding
-import io.github.skincanorg.skincan.ui.common.AuthViewModel
+import io.github.skincanorg.skincan.ui.auth.AuthViewModel
 import io.github.skincanorg.skincan.widget.dialog.LoginAlertDialog
 
 @AndroidEntryPoint
