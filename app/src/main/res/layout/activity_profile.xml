@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_username"
         android:id="@+id/preference_container" />
 
-    <io.github.skincanorg.skincan.widget.button.RoundedButton
+    <io.github.skincanorg.skincan.widget.button.RoundedStrokeButton
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:layout_width="match_parent"
