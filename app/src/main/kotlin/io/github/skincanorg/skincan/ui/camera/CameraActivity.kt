@@ -37,8 +37,10 @@ class CameraActivity : AppCompatActivity() {
     private val binding: ActivityCameraBinding by viewBinding(CreateMethod.INFLATE)
     private var imageCapture: ImageCapture? = null
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+    private var isTorchOn = false
     private lateinit var cameraProvider: ProcessCameraProvider
     private lateinit var cameraExecutor: ExecutorService
+    private lateinit var camera: Camera
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
@@ -80,7 +82,6 @@ class CameraActivity : AppCompatActivity() {
 
         binding.apply {
             captureImg.setOnClickListener {
-                // TODO: Handle this on separate activity maybe? to make it easier to maintain
                 val photoFile = Util.createFile(this@CameraActivity.application)
 
                 val metadata = ImageCapture.Metadata().apply {
@@ -124,7 +125,19 @@ class CameraActivity : AppCompatActivity() {
             }
 
             torchCamera.setOnClickListener {
-                TODO("add this method")
+                // TODO: untested
+                isTorchOn = !isTorchOn
+                invalidateTorchState()
+                camera.cameraControl.enableTorch(isTorchOn)
+            }
+        }
+    }
+
+    private fun invalidateTorchState() {
+        binding.torchCamera.apply {
+            when (isTorchOn) {
+                true -> setImageResource(R.drawable.ic_flash)
+                false -> setImageResource(R.drawable.ic_flash_off)
             }
         }
     }
@@ -157,12 +170,13 @@ class CameraActivity : AppCompatActivity() {
                 cameraProvider.unbindAll()
 
                 try {
-                    cameraProvider.bindToLifecycle(
+                    camera = cameraProvider.bindToLifecycle(
                         this,
                         cameraSelector,
                         preview,
                         imageCapture,
                     )
+                    camera.cameraControl.enableTorch(isTorchOn)
                 } catch (exc: Exception) {
                     Util.makeToastShort(this, getString(R.string.failed_open_camera))
                 }
