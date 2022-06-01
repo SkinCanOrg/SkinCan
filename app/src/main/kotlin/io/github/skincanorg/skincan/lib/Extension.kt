@@ -73,7 +73,10 @@ object Extension {
         return rotatedBitmap
     }
 
-    fun String.toDate(dateFormat: String = "yyyy-MM-ddTHH:mm:ssZ", timeZone: TimeZone = TimeZone.getTimeZone("UTC")): Date {
+    fun String.toDate(
+        dateFormat: String = "yyyy-MM-ddTHH:mm:ssZ",
+        timeZone: TimeZone = TimeZone.getTimeZone("UTC"),
+    ): Date {
         val parser = SimpleDateFormat(dateFormat, Locale.getDefault())
         parser.timeZone = timeZone
         return parser.parse(this) as Date

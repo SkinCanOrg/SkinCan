@@ -45,7 +45,8 @@ object Library {
             const val machineLearning = "com.google.firebase:firebase-ml-modeldownloader-ktx:24.0.3"
         }
 
-        const val tensorflowLite = "org.tensorflow:tensorflow-lite:2.3.0"
+        const val tensorflowLite = "org.tensorflow:tensorflow-lite:2.8.0"
+        const val tensorflowLiteSupport = "org.tensorflow:tensorflow-lite-support:0.4.0"
         const val viewBindingQOL = "com.github.kirich1409:viewbindingpropertydelegate:1.5.6"
         const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
         const val glideCompiler = "com.github.bumptech.glide:compiler:${Version.glide}"

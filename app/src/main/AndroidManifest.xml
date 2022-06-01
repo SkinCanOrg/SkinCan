@@ -13,7 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SkinCan">
-        <!-- TODO: Landscape support? -->
+        <activity
+            android:exported="true"
+            android:name=".ui.preference.PreferenceActivity" />
+        <activity
+            android:exported="true"
+            android:name=".ui.preference.ProfileActivity" /> <!-- TODO: Landscape support? -->
         <activity
             android:configChanges="orientation"
             android:exported="true"
@@ -44,7 +49,7 @@
         <activity
             android:configChanges="orientation"
             android:exported="true"
-            android:name=".ui.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.SkinCan.Starting">
             <intent-filter>

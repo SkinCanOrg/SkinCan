@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_height="0dp"
@@ -63,7 +63,7 @@
                 android:layout_width="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/placeholder_user" />
+                android:id="@+id/btn_profile" />
 
             <include
                 layout="@layout/result_card"
@@ -71,7 +71,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_width="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/placeholder_user"
+                app:layout_constraintTop_toBottomOf="@id/btn_profile"
                 android:id="@+id/include" />
 
             <TextView

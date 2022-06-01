@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) 2022 SkinCan Project
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
 package io.github.skincanorg.skincan
 
 import android.content.Context
@@ -6,38 +14,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import io.github.skincanorg.skincan.data.api.AuthService
 import io.github.skincanorg.skincan.data.preference.PreferencesHelper
-import io.github.skincanorg.skincan.lib.Util
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
-import javax.inject.Qualifier
+import io.github.skincanorg.skincan.data.repository.UserRepository
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
     // --- [ Start of qualifier defines ]
-
-    @Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class LoggedInRetrofitClient
-
-    @Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class LoggedInOkHttpClient
-
-    // AuthRetrofitClient only used for login and register
-    @Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class AuthRetrofitClient
-
-    @Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class AuthOkHttpClient
 
     // --- [ End of qualifier defines ]
 
@@ -47,27 +31,5 @@ object AppModule {
 
     @Singleton
     @Provides
-    @AuthOkHttpClient
-    fun providesAuthOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
-        OkHttpClient
-            .Builder()
-            .addInterceptor(httpLoggingInterceptor)
-            .build()
-
-    @Singleton
-    @Provides
-    @AuthRetrofitClient
-    fun providesAuthRetroFit(@AuthOkHttpClient okHttpClient: OkHttpClient): Retrofit =
-        Retrofit
-            .Builder()
-            .baseUrl(Util.API_URL)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
-
-    @Singleton
-    @Provides
-    fun providesAuthApiService(@AuthRetrofitClient retrofit: Retrofit): AuthService =
-        retrofit.create(AuthService::class.java)
+    fun providesRepository(): UserRepository = UserRepository()
 }

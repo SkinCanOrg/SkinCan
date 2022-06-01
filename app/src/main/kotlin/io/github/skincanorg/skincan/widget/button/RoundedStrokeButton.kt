@@ -29,9 +29,9 @@ class RoundedStrokeButton @JvmOverloads constructor(
         this.setTextColor(typedValue.data)
         this.setPadding(
             paddingLeft + 16.dp(context),
-            paddingTop + 8.dp(context),
+            paddingTop + 6.dp(context),
             paddingRight + 16.dp(context),
-            paddingBottom + 8.dp(context),
+            paddingBottom + 6.dp(context),
         )
         textSize = 18.sp(context)
     }

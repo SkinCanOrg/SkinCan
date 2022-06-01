@@ -15,7 +15,7 @@
 
 ### MVP (Minimum Viable Product)
 - Onboarding **✓**
-- Auth **✓** (Waiting for API to be functional)
+- Auth **✓**
 - Camera **✓**
 - Detection Result (Waiting for API)
 - Result List (Waiting for API)

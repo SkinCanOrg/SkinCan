@@ -25,9 +25,9 @@ class RoundedEditText @JvmOverloads constructor(
     init {
         this.setPadding(
             paddingLeft + 16.dp(context),
-            paddingTop + 8.dp(context),
+            paddingTop + 6.dp(context),
             paddingRight + 16.dp(context),
-            paddingBottom + 8.dp(context),
+            paddingBottom + 6.dp(context),
         )
         compoundDrawablePadding = 16.dp(context)
         background = ContextCompat.getDrawable(context, R.drawable.bg_rounded_clickable_focusable)
