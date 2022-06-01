@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.lib.Extension.dp
+import io.github.skincanorg.skincan.lib.Extension.setCursorDrawableColor
 
 class RoundedEditText @JvmOverloads constructor(
     context: Context,
@@ -30,6 +31,7 @@ class RoundedEditText @JvmOverloads constructor(
         )
         compoundDrawablePadding = 16.dp(context)
         background = ContextCompat.getDrawable(context, R.drawable.bg_rounded_clickable_focusable)
+        this.setCursorDrawableColor(ContextCompat.getColor(context, R.color.editTextFocusedColor))
         this.setHintTextColor(ContextCompat.getColor(context, R.color.editTextColor))
         this.setTextColor(ContextCompat.getColor(context, R.color.editTextColor))
         setOnFocusChangeListener { _, hasFocus ->
