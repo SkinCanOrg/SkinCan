@@ -14,11 +14,18 @@
 **SkinCan** is a **libre** skin cancer detection android app, created for Bangkit Product-based Capstone Project.
 
 ### MVP (Minimum Viable Product)
-- Onboarding **✓**
-- Auth **✓**
-- Camera **✓**
-- Detection Result (Waiting for API)
-- Result List (Waiting for API)
+- [x] Onboarding
+- [x] Auth
+- [x] Camera
+- [ ] Detection Result (Waiting for API)
+- [ ] Result List (Waiting for API)
+
+### TODO
+- [ ] Fix ML
+- [ ] Polishing Auth
+  - [ ] Add alert for registration fail
+  - [ ] Add input validation
+  - [ ] Add loading into button
 
 ### Mobile Team
 - Ahmad Ansori Palembani (a2191f1821 - [@null2264](https://github.com/null2264))
