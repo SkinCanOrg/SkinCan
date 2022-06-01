@@ -74,6 +74,7 @@ dependencies {
 
     // --- third parties ---
     implementation(Library.App.tensorflowLite)
+    implementation(Library.App.tensorflowLiteSupport)
     implementation(Library.App.viewBindingQOL)
     implementation(Library.App.glide)
     kapt(Library.App.glideCompiler)

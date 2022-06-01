@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.util.Size
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
@@ -25,17 +26,29 @@ import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.databinding.ActivityScannerBinding
 import io.github.skincanorg.skincan.lib.Util
+import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
+import org.tensorflow.lite.support.common.TensorProcessor
+import org.tensorflow.lite.support.common.ops.NormalizeOp
+import org.tensorflow.lite.support.image.ImageProcessor
+import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.image.ops.ResizeOp
+import org.tensorflow.lite.support.label.TensorLabel
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+import java.io.BufferedReader
 import java.io.File
+import java.io.InputStreamReader
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
+import java.util.*
+
 
 class ScannerActivity : AppCompatActivity() {
     private val binding: ActivityScannerBinding by viewBinding(CreateMethod.INFLATE)
     private var shouldLoop = false
     private var looped = true
     private val imageSize = 28
-    private var interpreter: Interpreter? = null
+    private lateinit var interpreter: Interpreter
     private lateinit var image: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,8 +118,7 @@ class ScannerActivity : AppCompatActivity() {
                 shouldLoop = true
                 root.transitionToState(R.id.loop_start, 1)
 
-                val resizedImg = Bitmap.createScaledBitmap(image, imageSize, imageSize, false)
-                classifyImage(resizedImg)
+                doPrediction(image)
             }
 
             btnCancel.setOnClickListener {
@@ -115,38 +127,55 @@ class ScannerActivity : AppCompatActivity() {
         }
     }
 
-    private fun classifyImage(bitmap: Bitmap) {
-        // TODO - Keeps giving me 6 (label: df)
-        val numBytesPerChannel = 4 // float
-        val input =
-            ByteBuffer.allocateDirect(1 * imageSize * imageSize * 3 * numBytesPerChannel).order(ByteOrder.nativeOrder())
-        for (y in 0 until imageSize) {
-            for (x in 0 until imageSize) {
-                val px = bitmap.getPixel(x, y)
+    private fun doPrediction(bitmap: Bitmap) {
+        val inputShape = interpreter.getInputTensor(0).shape()
+        val inputSize = Size(inputShape[2], inputShape[1])
 
-                // Get channel values from the pixel value.
-                val r = Color.red(px)
-                val g = Color.green(px)
-                val b = Color.blue(px)
+        val imgProcessor = ImageProcessor.Builder()
+            .add(
+                ResizeOp(
+                    inputSize.height, inputSize.width, ResizeOp.ResizeMethod.BILINEAR,
+                ),
+            )
+            .add(NormalizeOp(0f, 1f))
+            .build()
+        val tensorImage = imgProcessor.process(TensorImage(DataType.FLOAT32).apply { load(bitmap) })
 
-                // Not sure, but this should be [0.0, 0.1]?
-                val rf = r / 255f
-                val gf = g / 255f
-                val bf = b / 255f
+        val modelOutput = TensorBuffer.createFixedSize(interpreter.getOutputTensor(0).shape(), DataType.FLOAT32)
 
-                input.putFloat(rf)
-                input.putFloat(gf)
-                input.putFloat(bf)
+        interpreter.run(tensorImage.buffer, modelOutput.buffer.rewind())
+
+        val probProcessor = TensorProcessor.Builder()
+            .add(NormalizeOp(0f, 1f))
+            .build()
+
+        val labels = TensorLabel(
+            BufferedReader(
+                InputStreamReader(assets.open("model_labels.txt"))
+            ).readLines(),
+            probProcessor.process(modelOutput)
+        )
+
+        val resultMap = labels.mapWithFloatValue
+
+        var result = "huh?"
+        resultMap.keys.forEach {
+            val value = resultMap[it] as Float
+            if (value >= .50f) {
+                result = StringBuilder().apply {
+                    append("$it ")
+                    append(String.format("%.2f", value))
+                }.toString()
             }
+            Log.d(
+                "ziML",
+                StringBuilder().apply {
+                    append("$it ")
+                    append(String.format("%.2f", value))
+                }.toString()
+            )
         }
-        val bufferSize = 1 * 7 * numBytesPerChannel
-        val modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder())
-        interpreter?.run(input, modelOutput)
-        modelOutput.rewind()
-        val probabilities = modelOutput.asFloatBuffer()
-        for (i in 0 until probabilities.capacity()) {
-            Log.d("ziML", i.toString())
-        }
+        Log.d("ziML", result)
         shouldLoop = false
     }
 }
