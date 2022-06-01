@@ -13,6 +13,7 @@ import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.text.Editable
 import android.util.AttributeSet
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
@@ -37,6 +38,16 @@ class ValidateEditText @JvmOverloads constructor(
         set(newValue) {
             _editText.text = newValue
         }
+
+    fun interface OnValidateListener {
+        fun onValidate(v: View): Boolean
+    }
+
+    private var onValidateListener: OnValidateListener? = null
+
+    fun setOnValidateListener(onValidateListener: OnValidateListener?) {
+        this.onValidateListener = onValidateListener
+    }
 
     init {
         errorIconDrawable = null // overlapping other icon
@@ -86,6 +97,6 @@ class ValidateEditText @JvmOverloads constructor(
     }
 
     fun validateInput(): Boolean {
-        return true
+        return onValidateListener?.onValidate(this) ?: false
     }
 }
