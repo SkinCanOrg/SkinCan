@@ -3,4 +3,9 @@
     <declare-styleable name="OneFourthCircleView">
         <attr name="circleColor" format="color" />
     </declare-styleable>
+    <declare-styleable name="LoadingButton">
+        <attr name="buttonText" format="string" />
+        <attr name="buttonColor" format="color" />
+        <attr name="textColor" format="color" />
+    </declare-styleable>
 </resources>
