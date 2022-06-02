@@ -21,7 +21,6 @@ import io.github.skincanorg.skincan.lib.PreferenceExtension.preference
 class ProfileFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         preferenceScreen = preferenceManager.newScreen {
-            // TODO: Add icon
             preference {
                 key = "account"
                 title = "Account Settings"
