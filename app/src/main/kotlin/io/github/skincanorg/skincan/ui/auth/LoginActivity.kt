@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.data.model.AppResult
 import io.github.skincanorg.skincan.data.preference.PreferencesHelper
 import io.github.skincanorg.skincan.databinding.ActivityLoginBinding
@@ -43,18 +44,33 @@ class LoginActivity : AppCompatActivity() {
             val validateList = listOf(etEmail, etPassword)
             etEmail.setOnValidateListener {
                 if (it.text.isNullOrEmpty())
-                    ValidateEditText.ValidationResult("Can't be empty", false)
+                    ValidateEditText.ValidationResult(
+                        applicationContext,
+                        R.string.input_cant_be_empty,
+                        listOf(it.hint ?: "Email"),
+                        false,
+                    )
                 else
                     ValidateEditText.ValidationResult(
-                        "Not a valid email address",
+                        applicationContext,
+                        R.string.invalid_email,
                         android.util.Patterns.EMAIL_ADDRESS.matcher(it.text.toString()).matches(),
                     )
             }
             etPassword.setOnValidateListener {
                 if (it.text.isNullOrEmpty())
-                    ValidateEditText.ValidationResult("Can't be empty", false)
+                    ValidateEditText.ValidationResult(
+                        applicationContext,
+                        R.string.input_cant_be_empty,
+                        listOf(it.hint ?: "Password"),
+                        false,
+                    )
                 else
-                    ValidateEditText.ValidationResult("Must be longer than 8 characters", it.text!!.length >= 8)
+                    ValidateEditText.ValidationResult(
+                        applicationContext,
+                        R.string.password_length,
+                        it.text!!.length >= 8,
+                    )
             }
 
             viewModel.loginState.observe(this@LoginActivity) { state ->

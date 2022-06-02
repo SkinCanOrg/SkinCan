@@ -5,10 +5,10 @@
 
     <!-- Onboarding -->
     <string name="onboarding_image">Onboarding Image</string>
-    <string name="onboard_title1">Check a potentional cancer through camera</string>
-    <string name="onboard_subtitle1">You can use camera to check a potentional risk cancer on your skin.</string>
+    <string name="onboard_title1">Check a potential cancer through camera</string>
+    <string name="onboard_subtitle1">You can use camera to check a potential risk cancer on your skin.</string>
     <string name="onboard_title2">Get some tips</string>
-    <string name="onboard_subtitle2">You’ll get some tips for avoiding a cancer skin  this can help you to minimalize potentional skin cancer risk</string>
+    <string name="onboard_subtitle2">You’ll get some tips for avoiding a cancer skin  this can help you to minimize potential skin cancer risk</string>
     <string name="onboard_continue">Start Now</string>
     <string name="onboarding_page_indicator">Onboarding Page Indicator</string>
 
@@ -32,6 +32,9 @@
     <string name="password">Password</string>
     <string name="login">Log in</string>
     <string name="continue_with_google">Continue with Google</string>
+    <string name="invalid_email">The email address you\'ve entered is invalid!</string>
+    <string name="password_length">Password must be longer than 8 characters!</string>
+    <string name="input_cant_be_empty">%s can\'t be empty!</string>
 
     <!-- Auth (Login) -->
     <string name="welcome_back">Welcome Back</string>
@@ -48,7 +51,7 @@
 
     <!-- Auth (Dialog) -->
     <string name="dialog_illustration">Dialog Illustration</string>
-    <string name="login_instruction">Now you can login to your new account and start exploring the app</string>
+    <string name="login_instruction">Now you can log in to your new account and start exploring the app</string>
     <string name="account_created">Account has been created</string>
 
     <!-- Dashboard -->

@@ -51,6 +51,11 @@ class ValidateEditText @JvmOverloads constructor(
             context.getString(errorRes),
             isValid,
         )
+
+        constructor(context: Context, @StringRes errorRes: Int, format: List<Any>, isValid: Boolean) : this(
+            context.getString(errorRes, *format.toTypedArray()),
+            isValid,
+        )
     }
 
     private var onValidateListener: OnValidateListener? = null
