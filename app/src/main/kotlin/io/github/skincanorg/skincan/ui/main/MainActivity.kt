@@ -13,7 +13,6 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -42,9 +41,10 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var prefs: PreferencesHelper
 
+    // FIXME: Theme reverted to default after login
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_SkinCan)
         setContentView(binding.root)
 
         viewModel.authState.observe(this) {

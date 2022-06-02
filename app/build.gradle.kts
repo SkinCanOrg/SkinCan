@@ -1,11 +1,10 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("com.mikepenz.aboutlibraries.plugin") version Library.Version.aboutLibraries
 }
 
 @Suppress("UnstableApiUsage")
@@ -84,6 +83,8 @@ dependencies {
     implementation(Library.App.retrofitGson)
     implementation(Library.App.okhttp)
     implementation(Library.App.okhttpLoggingInterceptor)
+    implementation(Library.App.aboutLibrariesCore)
+    implementation(Library.App.aboutLibrariesUI)
 
     // --- Testing libraries ---
     testImplementation(Library.App.Testing.junit)

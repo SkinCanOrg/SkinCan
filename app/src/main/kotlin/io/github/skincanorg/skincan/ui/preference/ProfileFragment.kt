@@ -10,7 +10,9 @@ package io.github.skincanorg.skincan.ui.preference
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.mikepenz.aboutlibraries.LibsBuilder
 import io.github.skincanorg.skincan.lib.PreferenceExtension.newScreen
 import io.github.skincanorg.skincan.lib.PreferenceExtension.preference
 
@@ -30,6 +32,11 @@ class ProfileFragment : PreferenceFragmentCompat() {
             preference {
                 key = "about"
                 title = "About"
+                onPreferenceClickListener = Preference.OnPreferenceClickListener {
+                    LibsBuilder()
+                        .start(requireContext())
+                    true
+                }
             }
         }
     }

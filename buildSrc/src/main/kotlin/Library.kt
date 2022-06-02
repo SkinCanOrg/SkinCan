@@ -6,6 +6,7 @@ object Library {
         const val cameraX = "1.1.0-rc01"
         const val retrofit = "2.9.0"
         const val okhttp = "4.9.3"
+        const val aboutLibraries = "10.3.0"
     }
 
     object Root {
@@ -19,9 +20,9 @@ object Library {
 
     object App {
         object AndroidX {
-            const val core = "androidx.core:core-ktx:1.7.0"
+            const val core = "androidx.core:core-ktx:1.8.0"
             const val splashScreen = "androidx.core:core-splashscreen:1.0.0-rc01"
-            const val appCompat = "androidx.appcompat:appcompat:1.4.1"
+            const val appCompat = "androidx.appcompat:appcompat:1.4.2"
             const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
             const val preference = "androidx.preference:preference-ktx:1.2.0"
             const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
@@ -56,6 +57,8 @@ object Library {
         const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
         const val okhttp = "com.squareup.okhttp3:okhttp:${Version.okhttp}"
         const val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Version.okhttp}"
+        const val aboutLibrariesCore = "com.mikepenz:aboutlibraries-core:${Version.aboutLibraries}"
+        const val aboutLibrariesUI = "com.mikepenz:aboutlibraries:${Version.aboutLibraries}"
 
         object Testing {
             const val junit = "junit:junit:4.13.2"
