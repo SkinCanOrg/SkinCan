@@ -11,6 +11,7 @@ package io.github.skincanorg.skincan.ui.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.UserProfileChangeRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.skincanorg.skincan.data.model.AppResult
 import io.github.skincanorg.skincan.data.repository.UserRepository
@@ -41,11 +42,18 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
     private var _registerState = MutableLiveData<AppResult<Boolean>>()
     val registerState: LiveData<AppResult<Boolean>> = _registerState
 
-    fun register(email: String, password: String) {
+    fun register(name: String, email: String, password: String) {
         _registerState.postValue(AppResult.Loading)
         repo.register(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                _registerState.postValue(AppResult.Success(true))
+                getUser().updateProfile(
+                    UserProfileChangeRequest.Builder()
+                        .setDisplayName(name)
+                        .build(),
+                ).addOnSuccessListener {
+                    logout() // Our user-flow is to redirect them to login page after register
+                    _registerState.postValue(AppResult.Success(true))
+                }
             } else {
                 _registerState.postValue(AppResult.Error("RIP", null))
             }

@@ -57,7 +57,6 @@ class RegisterActivity : AppCompatActivity() {
                         // TODO: Tell user that registration failed
                     }
                     is AppResult.Success -> {
-                        viewModel.logout() // Our user-flow is to redirect them to login page after register
                         val alert = LoginAlertDialog(this@RegisterActivity)
                         alert.setOnLoginListener {
                             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
@@ -82,7 +81,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
                 if (isValid)
-                    viewModel.register(etEmail.text.toString(), etPassword.text.toString())
+                    viewModel.register(etName.text.toString(), etEmail.text.toString(), etPassword.text.toString())
             }
 
             btnGotoLoginContainer.setOnClickListener {

@@ -39,7 +39,8 @@ class ProfileActivity : AppCompatActivity() {
                 .replace(preferenceContainer.id, ProfileFragment())
                 .commit()
 
-            tvUsername.text = viewModel.getUser().email
+            tvName.text = viewModel.getUser().displayName
+            tvEmail.text = viewModel.getUser().email
             btnLogout.setOnClickListener {
                 val intent = Intent(this@ProfileActivity, OnboardingActivity::class.java)
                 startActivity(intent)
