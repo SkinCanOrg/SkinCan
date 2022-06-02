@@ -41,11 +41,9 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var prefs: PreferencesHelper
 
-    // FIXME: Theme reverted to default after login
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_SkinCan)
-        setContentView(binding.root)
 
         viewModel.authState.observe(this) {
             if (!it) {
@@ -61,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupCoreFunctions() {
         binding.apply {
+            setContentView(root)
             btnProfile.setOnClickListener {
                 startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
             }
