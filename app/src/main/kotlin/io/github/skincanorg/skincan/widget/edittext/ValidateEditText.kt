@@ -125,6 +125,6 @@ class ValidateEditText @JvmOverloads constructor(
                 listOf(editText.hint ?: "Input"),
                 false,
             )
-        return onValidateListener?.onValidate(this) ?: ValidationResult("No validation rules", false)
+        return onValidateListener?.onValidate(this) ?: ValidationResult("No validation rules", true)
     }
 }

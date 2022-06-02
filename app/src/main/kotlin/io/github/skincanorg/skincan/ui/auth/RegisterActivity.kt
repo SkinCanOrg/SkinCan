@@ -15,9 +15,11 @@ import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.data.model.AppResult
 import io.github.skincanorg.skincan.databinding.ActivityRegisterBinding
 import io.github.skincanorg.skincan.widget.dialog.LoginAlertDialog
+import io.github.skincanorg.skincan.widget.edittext.ValidateEditText
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
@@ -33,6 +35,22 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setupCoreFunctions() {
         binding.apply {
+            val validateList = listOf(etName, etEmail, etPassword)
+            etEmail.setOnValidateListener {
+                ValidateEditText.ValidationResult(
+                    applicationContext,
+                    R.string.invalid_email,
+                    android.util.Patterns.EMAIL_ADDRESS.matcher(it.text.toString()).matches(),
+                )
+            }
+            etPassword.setOnValidateListener {
+                ValidateEditText.ValidationResult(
+                    applicationContext,
+                    R.string.password_length,
+                    it.text!!.length >= 8,
+                )
+            }
+
             viewModel.registerState.observe(this@RegisterActivity) { state ->
                 when (state) {
                     is AppResult.Error -> {
@@ -53,9 +71,18 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             btnRegister.setOnClickListener {
-                // TODO: Validate input
                 // TODO: Username or Display name input
-                viewModel.register(etEmail.text.toString(), etPassword.text.toString())
+                var isValid = true
+
+                validateList.forEach {
+                    val res = it.validateInput()
+                    isValid = isValid and res.isValid
+                    if (!res.isValid)
+                        it.error = res.errorString
+                }
+
+                if (isValid)
+                    viewModel.register(etEmail.text.toString(), etPassword.text.toString())
             }
 
             btnGotoLoginContainer.setOnClickListener {
