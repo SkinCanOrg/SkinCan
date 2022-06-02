@@ -13,8 +13,8 @@ import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.text.Editable
 import android.util.AttributeSet
-import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
@@ -40,7 +40,17 @@ class ValidateEditText @JvmOverloads constructor(
         }
 
     fun interface OnValidateListener {
-        fun onValidate(v: View): Boolean
+        fun onValidate(v: ValidateEditText): ValidationResult
+    }
+
+    data class ValidationResult(
+        val errorString: String,
+        val isValid: Boolean,
+    ) {
+        constructor(context: Context, @StringRes errorRes: Int, isValid: Boolean) : this(
+            context.getString(errorRes),
+            isValid,
+        )
     }
 
     private var onValidateListener: OnValidateListener? = null
@@ -96,7 +106,7 @@ class ValidateEditText @JvmOverloads constructor(
         isErrorEnabled = false
     }
 
-    fun validateInput(): Boolean {
-        return onValidateListener?.onValidate(this) ?: false
+    fun validateInput(): ValidationResult {
+        return onValidateListener?.onValidate(this) ?: ValidationResult("No validation rules", false)
     }
 }
