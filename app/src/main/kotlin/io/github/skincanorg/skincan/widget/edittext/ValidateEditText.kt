@@ -13,7 +13,6 @@ import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.text.Editable
 import android.util.AttributeSet
-import android.view.inputmethod.EditorInfo
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
@@ -98,8 +97,11 @@ class ValidateEditText @JvmOverloads constructor(
 
             addTextChangedListener { if (error != null || isErrorEnabled) clearError() }
 
-            inputType =
-                attr.getInt(R.styleable.ValidateEditText_android_inputType, EditorInfo.TYPE_TEXT_VARIATION_NORMAL)
+            attr.getInt(R.styleable.ValidateEditText_android_inputType, 0).also {
+                if (it != 0)
+                    inputType = it
+            }
+
             typeface = Typeface.SANS_SERIF
         }
         this.addView(_editText)
