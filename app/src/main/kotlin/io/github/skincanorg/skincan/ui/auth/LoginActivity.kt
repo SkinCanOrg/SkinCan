@@ -38,34 +38,18 @@ class LoginActivity : AppCompatActivity() {
         binding.apply {
             val validateList = listOf(etEmail, etPassword)
             etEmail.setOnValidateListener {
-                if (it.text.isNullOrEmpty())
-                    ValidateEditText.ValidationResult(
-                        applicationContext,
-                        R.string.input_cant_be_empty,
-                        listOf(it.hint ?: "Email"),
-                        false,
-                    )
-                else
-                    ValidateEditText.ValidationResult(
-                        applicationContext,
-                        R.string.invalid_email,
-                        android.util.Patterns.EMAIL_ADDRESS.matcher(it.text.toString()).matches(),
-                    )
+                ValidateEditText.ValidationResult(
+                    applicationContext,
+                    R.string.invalid_email,
+                    android.util.Patterns.EMAIL_ADDRESS.matcher(it.text.toString()).matches(),
+                )
             }
             etPassword.setOnValidateListener {
-                if (it.text.isNullOrEmpty())
-                    ValidateEditText.ValidationResult(
-                        applicationContext,
-                        R.string.input_cant_be_empty,
-                        listOf(it.hint ?: "Password"),
-                        false,
-                    )
-                else
-                    ValidateEditText.ValidationResult(
-                        applicationContext,
-                        R.string.password_length,
-                        it.text!!.length >= 8,
-                    )
+                ValidateEditText.ValidationResult(
+                    applicationContext,
+                    R.string.password_length,
+                    it.text!!.length >= 8,
+                )
             }
 
             viewModel.loginState.observe(this@LoginActivity) { state ->

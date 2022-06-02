@@ -31,6 +31,7 @@ class ValidateEditText @JvmOverloads constructor(
 ) : TextInputLayout(context, attrs, defStyleAttr ?: com.google.android.material.R.attr.textInputStyle) {
     private val _editText: AppCompatEditText
     val editText get() = _editText
+    var isInputRequired: Boolean
 
     var text: Editable?
         get() = _editText.text
@@ -65,9 +66,12 @@ class ValidateEditText @JvmOverloads constructor(
 
     init {
         errorIconDrawable = null // overlapping other icon
+
         boxStrokeWidth = 0
         boxStrokeWidthFocused = 0
         val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.ValidateEditText, 0, 0)
+
+        isInputRequired = attr.getBoolean(R.styleable.ValidateEditText_inputRequired, false)
 
         this.setWillNotDraw(false)
         _editText = TextInputEditText(context)
@@ -114,6 +118,13 @@ class ValidateEditText @JvmOverloads constructor(
     }
 
     fun validateInput(): ValidationResult {
+        if (isInputRequired && text.isNullOrEmpty())
+            return ValidationResult(
+                context,
+                R.string.input_cant_be_empty,
+                listOf(editText.hint ?: "Input"),
+                false,
+            )
         return onValidateListener?.onValidate(this) ?: ValidationResult("No validation rules", false)
     }
 }
