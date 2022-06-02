@@ -29,9 +29,6 @@ class LoginActivity : AppCompatActivity() {
     private val binding: ActivityLoginBinding by viewBinding(CreateMethod.INFLATE)
     private val viewModel: AuthViewModel by viewModels()
 
-    @Inject
-    lateinit var prefs: PreferencesHelper
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
