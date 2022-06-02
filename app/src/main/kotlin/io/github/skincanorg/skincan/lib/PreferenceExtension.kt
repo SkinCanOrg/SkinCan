@@ -1,5 +1,8 @@
 package io.github.skincanorg.skincan.lib
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.preference.*
 
 object PreferenceExtension {
@@ -28,7 +31,13 @@ object PreferenceExtension {
 
     var Preference.titleRes: Int
         get() = 0
-        set(newValue) {
+        set(@StringRes newValue) {
             this.title = context.getString(newValue)
+        }
+
+    var Preference.iconRes: Int
+        get() = 0
+        set(@DrawableRes newValue) {
+            this.icon = ContextCompat.getDrawable(context, newValue)
         }
 }
