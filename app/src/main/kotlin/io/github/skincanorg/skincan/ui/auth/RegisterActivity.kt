@@ -35,7 +35,9 @@ class RegisterActivity : AppCompatActivity() {
         binding.apply {
             viewModel.registerState.observe(this@RegisterActivity) { state ->
                 when (state) {
-                    is AppResult.Loading -> {}
+                    is AppResult.Error -> {
+                        // TODO: Tell user that registration failed
+                    }
                     is AppResult.Success -> {
                         viewModel.logout() // Our user-flow is to redirect them to login page after register
                         val alert = LoginAlertDialog(this@RegisterActivity)
@@ -44,9 +46,7 @@ class RegisterActivity : AppCompatActivity() {
                             finish()
                         }.show()
                     }
-                    else -> {
-                        // TODO: Tell user that registration failed
-                    }
+                    else -> {}
                 }
                 btnRegister.isLoading = state is AppResult.Loading
                 btnGotoLoginContainer.isEnabled = state !is AppResult.Loading

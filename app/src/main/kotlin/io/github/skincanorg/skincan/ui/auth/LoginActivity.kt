@@ -18,11 +18,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.data.model.AppResult
-import io.github.skincanorg.skincan.data.preference.PreferencesHelper
 import io.github.skincanorg.skincan.databinding.ActivityLoginBinding
 import io.github.skincanorg.skincan.ui.main.MainActivity
 import io.github.skincanorg.skincan.widget.edittext.ValidateEditText
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -72,15 +70,15 @@ class LoginActivity : AppCompatActivity() {
 
             viewModel.loginState.observe(this@LoginActivity) { state ->
                 when (state) {
-                    is AppResult.Loading -> {}
+                    is AppResult.Error -> {
+                        // TODO: Inform the user why login is unsuccessful
+                        Toast.makeText(this@LoginActivity, "Error", Toast.LENGTH_LONG).show()
+                    }
                     is AppResult.Success -> {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finishAffinity()
                     }
-                    else -> {
-                        // TODO: Inform the user why login is unsuccessful
-                        Toast.makeText(this@LoginActivity, "Error", Toast.LENGTH_LONG).show()
-                    }
+                    else -> {}
                 }
                 btnLogin.isLoading = state is AppResult.Loading
                 btnGotoRegisterContainer.isEnabled = state !is AppResult.Loading
