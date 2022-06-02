@@ -125,11 +125,12 @@ object Extension {
         }
     }
 
+    // [01 Jun 2022]: https://stackoverflow.com/a/59269370.
     private fun Class<*>.getFieldByName(vararg name: String): Field? {
         name.forEach {
             try {
                 return this.getDeclaredField(it).apply { isAccessible = true }
-            } catch (t: Throwable) {
+            } catch (_: Throwable) {
             }
         }
         return null
