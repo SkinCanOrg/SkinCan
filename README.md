@@ -24,8 +24,8 @@
 
 ### TODO
 - [ ] Fix ML
-- [ ] Polishing Auth
-   - [ ] Add alert for registration fail
+- [x] Polishing Auth
+   - [x] Add alert for registration fail
    - [x] Add input validation
    - [x] Add loading into button
 - [ ] Landscape/Desktop support (Low priority)
