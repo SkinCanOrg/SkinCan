@@ -54,13 +54,19 @@ class RegisterActivity : AppCompatActivity() {
             viewModel.registerState.observe(this@RegisterActivity) { state ->
                 when (state) {
                     is AppResult.Error -> {
-                        // TODO: Tell user that registration failed
+                        LoginAlertDialog(this@RegisterActivity).apply {
+                            illustrationRes = R.drawable.dialog_illustration_fail
+                            titleRes = R.string.register_fail
+                            descriptionRes = R.string.register_fail_desc  // TODO: Specify the error?
+                            buttonTextRes = R.string.try_again
+                        }.show()
                     }
                     is AppResult.Success -> {
-                        val alert = LoginAlertDialog(this@RegisterActivity)
-                        alert.setOnLoginListener {
-                            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-                            finish()
+                        LoginAlertDialog(this@RegisterActivity).apply {
+                            setOnLoginListener {
+                                startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                                finish()
+                            }
                         }.show()
                     }
                     else -> {}

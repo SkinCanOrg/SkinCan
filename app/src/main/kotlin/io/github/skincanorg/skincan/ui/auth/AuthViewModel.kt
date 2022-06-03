@@ -11,6 +11,7 @@ package io.github.skincanorg.skincan.ui.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.UserProfileChangeRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.skincanorg.skincan.data.model.AppResult
@@ -44,19 +45,21 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
 
     fun register(name: String, email: String, password: String) {
         _registerState.postValue(AppResult.Loading)
-        repo.register(email, password).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                getUser().updateProfile(
-                    UserProfileChangeRequest.Builder()
-                        .setDisplayName(name)
-                        .build(),
-                ).addOnSuccessListener {
-                    logout() // Our user-flow is to redirect them to login page after register
-                    _registerState.postValue(AppResult.Success(true))
-                }
-            } else {
-                _registerState.postValue(AppResult.Error("RIP", null))
+        repo.register(email, password).addOnSuccessListener { result ->
+            getUser().updateProfile(
+                UserProfileChangeRequest.Builder()
+                    .setDisplayName(name)
+                    .build(),
+            ).addOnSuccessListener {
+                logout() // Our user-flow is to redirect them to login page after register
+                _registerState.postValue(AppResult.Success(true))
             }
+        }.addOnFailureListener { exc ->
+            val reason = if (exc is FirebaseAuthException)
+                "ERR-" + exc.errorCode
+            else
+                exc.localizedMessage
+            _registerState.postValue(AppResult.Error(reason, false))
         }
     }
 }

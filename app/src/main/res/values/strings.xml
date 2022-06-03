@@ -53,6 +53,9 @@
     <string name="dialog_illustration">Dialog Illustration</string>
     <string name="login_instruction">Now you can log in to your new account and start exploring the app</string>
     <string name="account_created">Account has been created</string>
+    <string name="register_fail_desc">We’re sorry, something went wrong, please try again.</string>
+    <string name="register_fail">Failed to create account</string>
+    <string name="try_again">Try Again</string>
 
     <!-- Dashboard -->
     <string name="greeting">Hello</string>
