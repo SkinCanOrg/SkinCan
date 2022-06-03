@@ -17,15 +17,18 @@
 - [x] Onboarding
 - [x] Auth
 - [x] Camera
-- [ ] Detection Result (Waiting for API)
+- [ ] Scan Result (Waiting for API)
 - [ ] Result List (Waiting for API)
+- [x] News List (Placeholder)
+- [ ] News Detail
 
 ### TODO
 - [ ] Fix ML
 - [ ] Polishing Auth
-  - [ ] Add alert for registration fail
-  - [x] Add input validation
-  - [x] Add loading into button
+   - [ ] Add alert for registration fail
+   - [x] Add input validation
+   - [x] Add loading into button
+- [ ] Landscape/Desktop support (Low priority)
 
 ### Mobile Team
 - Ahmad Ansori Palembani (a2191f1821 - [@null2264](https://github.com/null2264))

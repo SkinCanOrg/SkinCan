@@ -10,9 +10,7 @@ package io.github.skincanorg.skincan.ui.preference
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.mikepenz.aboutlibraries.LibsBuilder
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.lib.PreferenceExtension.iconRes
 import io.github.skincanorg.skincan.lib.PreferenceExtension.newScreen
@@ -36,12 +34,9 @@ class ProfileFragment : PreferenceFragmentCompat() {
                 key = "about"
                 title = "About"
                 iconRes = R.drawable.ic_info
-                onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                    LibsBuilder()
-                        .withActivityTitle(getString(R.string.licenses))
-                        .start(requireContext())
-                    true
-                }
+                // TODO: Add about page
+                // TODO: Move Licenses button to About page
+                intent = Intent(requireActivity(), LicensesActivity::class.java)
             }
         }
     }
