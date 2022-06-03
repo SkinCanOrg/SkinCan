@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
                 finishAffinity()
             } else {
+                setupLayout()
                 setupCoreFunctions()
                 setupNews()
                 setupBottomNavigation()
@@ -57,9 +58,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupCoreFunctions() {
+    private fun setupLayout() {
         binding.apply {
             setContentView(root)
+            userName.text = viewModel.getUser().displayName
+        }
+    }
+
+    private fun setupCoreFunctions() {
+        binding.apply {
             btnProfile.setOnClickListener {
                 startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
             }
