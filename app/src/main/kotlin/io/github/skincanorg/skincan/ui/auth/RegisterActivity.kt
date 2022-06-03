@@ -10,6 +10,7 @@ package io.github.skincanorg.skincan.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.CreateMethod
@@ -54,6 +55,7 @@ class RegisterActivity : AppCompatActivity() {
             viewModel.registerState.observe(this@RegisterActivity) { state ->
                 when (state) {
                     is AppResult.Error -> {
+                        Log.d("ziRegisterFail", state.message)
                         LoginAlertDialog(this@RegisterActivity).apply {
                             illustrationRes = R.drawable.dialog_illustration_fail
                             titleRes = R.string.register_fail
@@ -76,7 +78,6 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             btnRegister.setOnClickListener {
-                // TODO: Username or Display name input
                 var isValid = true
 
                 validateList.forEach {

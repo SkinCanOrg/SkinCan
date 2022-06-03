@@ -62,4 +62,15 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
             _registerState.postValue(AppResult.Error(reason, false))
         }
     }
+
+    private var _reloadState = MutableLiveData<AppResult<Boolean>>()
+    val reloadState: LiveData<AppResult<Boolean>> = _reloadState
+
+    fun reload() {
+        _reloadState.postValue(AppResult.Loading)
+        getUser().reload().addOnFailureListener {
+            logout()
+            _reloadState.postValue(AppResult.Error("", false))
+        }
+    }
 }
