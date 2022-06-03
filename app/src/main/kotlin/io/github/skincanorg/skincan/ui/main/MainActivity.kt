@@ -10,7 +10,6 @@ package io.github.skincanorg.skincan.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,14 +25,12 @@ import io.github.skincanorg.skincan.ui.OnboardingActivity
 import io.github.skincanorg.skincan.ui.auth.AuthViewModel
 import io.github.skincanorg.skincan.ui.camera.CameraActivity
 import io.github.skincanorg.skincan.ui.preference.ProfileActivity
-import java.io.File
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
     private val binding: ActivityMainBinding by viewBinding(CreateMethod.INFLATE)
-    private var file: File? = null
     private val newsAdapter: NewsAdapter by lazy {
         NewsAdapter(applicationContext.assets.readJson("news.json").getJSONArray("news"))
     }
@@ -89,34 +86,11 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.camera -> {
-                    launcherIntentCameraX.launch(Intent(this@MainActivity, CameraActivity::class.java))
+                    startActivity(Intent(this@MainActivity, CameraActivity::class.java))
                     false // Do not highlight
                 }
                 else -> false
             }
         }
-    }
-
-    private val launcherIntentCameraX = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult(),
-    ) {
-        // TODO: I don't know if this is needed just yet.
-        if (it.resultCode == RESULT_SUCCESS) {
-            val myFile = it.data?.getSerializableExtra("picture") as File
-            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
-
-            file = myFile
-//
-//            val result = Util.rotateCapturedImage(
-//                BitmapFactory.decodeFile(myFile.path),
-//                isBackCamera
-//            )
-
-            // binding.ivPreview.setImageBitmap(result)
-        }
-    }
-
-    companion object {
-        const val RESULT_SUCCESS = 200
     }
 }
