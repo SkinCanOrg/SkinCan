@@ -29,12 +29,14 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
 
     fun login(email: String, password: String) {
         _loginState.postValue(AppResult.Loading)
-        repo.login(email, password).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                _loginState.postValue(AppResult.Success(true))
-            } else {
-                _loginState.postValue(AppResult.Error("RIP", null))
-            }
+        repo.login(email, password).addOnSuccessListener { result ->
+            _loginState.postValue(AppResult.Success(true))
+        }.addOnFailureListener { exc ->
+            val reason = if (exc is FirebaseAuthException)
+                "ERR-" + exc.errorCode
+            else
+                exc.localizedMessage
+            _loginState.postValue(AppResult.Error(reason, null))
         }
     }
 

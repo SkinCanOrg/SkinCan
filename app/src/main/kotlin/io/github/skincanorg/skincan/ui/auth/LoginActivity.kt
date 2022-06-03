@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 when (state) {
                     is AppResult.Error -> {
                         // TODO: Inform the user why login is unsuccessful
-                        Toast.makeText(this@LoginActivity, "Error", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@LoginActivity, "Error: ${state.message}", Toast.LENGTH_LONG).show()
                     }
                     is AppResult.Success -> {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
