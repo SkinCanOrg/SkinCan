@@ -76,4 +76,7 @@
 
     <!-- Unsorted -->
     <string name="licenses">Open Source Licenses</string>
+    <string name="result_pict">Result Pict</string>
+    <string name="result">Result</string>
+    <string name="clear">Clear</string>
 </resources>

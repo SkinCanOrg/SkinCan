@@ -17,6 +17,9 @@
         tools:ignore="LockedOrientationActivity">
         <activity
             android:exported="true"
+            android:name=".ui.result.ResultActivity" />
+        <activity
+            android:exported="true"
             android:name=".ui.preference.LicensesActivity" />
         <activity
             android:exported="true"
