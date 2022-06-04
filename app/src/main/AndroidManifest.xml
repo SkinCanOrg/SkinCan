@@ -57,6 +57,7 @@
         <activity
             android:configChanges="orientation"
             android:exported="true"
+            android:launchMode="singleTask"
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.SkinCan.Starting">

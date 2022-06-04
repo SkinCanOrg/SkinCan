@@ -8,6 +8,7 @@
 
 package io.github.skincanorg.skincan.ui.camera
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -17,6 +18,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
@@ -26,6 +28,11 @@ import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.databinding.ActivityScannerBinding
 import io.github.skincanorg.skincan.lib.Util
+import io.github.skincanorg.skincan.ui.result.ResultActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.support.common.TensorProcessor
@@ -155,10 +162,13 @@ class ScannerActivity : AppCompatActivity() {
 
         val resultMap = labels.mapWithFloatValue
 
-        var result = "No cancer"
+        var result = "Clear"
+        var lastHighest = .50f
         resultMap.keys.forEach {
             val value = resultMap[it] as Float
-            if (value >= .50f) {
+            if (value >= lastHighest) {
+                if (value != lastHighest)
+                    lastHighest = value
                 result = StringBuilder().apply {
                     append("$it ")
                     append(String.format("%.2f", value))
@@ -172,8 +182,22 @@ class ScannerActivity : AppCompatActivity() {
                 }.toString(),
             )
         }
-        // TODO: Result page
-        Toast.makeText(this@ScannerActivity, "ML Result: $result", Toast.LENGTH_LONG).show()
-        shouldLoop = false
+
+        Log.d("ziML", result)
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            delay(5000L)
+            withContext(Dispatchers.Main) {
+                Toast.makeText(this@ScannerActivity, "ML Result: $result", Toast.LENGTH_LONG).show()
+                startActivity(
+                    Intent(this@ScannerActivity, ResultActivity::class.java).apply {
+                        putExtra(ResultActivity.RESULT, result)
+                        putExtra(ResultActivity.FROM, 0)
+                    },
+                )
+                shouldLoop = false
+                finish()
+            }
+        }
     }
 }
