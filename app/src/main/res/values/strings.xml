@@ -79,4 +79,6 @@
     <string name="result_pict">Result Pict</string>
     <string name="result">Result</string>
     <string name="clear">Clear</string>
+    <string name="home">Home</string>
+    <string name="scan_again">Scan Again</string>
 </resources>
