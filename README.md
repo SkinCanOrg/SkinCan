@@ -20,7 +20,6 @@
 - [ ] Scan Result (Waiting for API)
 - [ ] Result List (Waiting for API)
 - [x] News List (Placeholder)
-- [ ] News Detail
 
 ### TODO
 - [ ] Fix ML
