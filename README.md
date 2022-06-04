@@ -17,8 +17,8 @@
 - [x] Onboarding
 - [x] Auth
 - [x] Camera
-- [ ] Scan Result (Waiting for API)
-- [ ] Result List (Waiting for API)
+- [ ] Scan Result
+- [ ] Result List
 - [x] News List (Placeholder)
 
 ### TODO
@@ -27,6 +27,11 @@
    - [x] Add alert for registration fail
    - [x] Add input validation
    - [x] Add loading into button
+- [ ] Result List (using Room)
+   <!-- Reference: https://github.com/tachiyomiorg/tachiyomi/blob/master/app/src/main/java/eu/kanade/tachiyomi/data/cache/CoverCache.kt -->
+   - [ ] Move photo automatically to data/Files/photos
+   - [ ] Delete data when photo no longer exists
+   - [ ] Delete photo when data being deleted
 - [ ] Landscape/Desktop support (Low priority)
 
 ### Mobile Team
