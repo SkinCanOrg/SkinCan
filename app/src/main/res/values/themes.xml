@@ -3,6 +3,7 @@
     <color name="editTextFocusedBackgroundColor">@color/blue_600</color>
     <color name="editTextColor">#888888</color>
     <color name="editTextFocusedColor">@color/white</color>
+    <color name="colorSubtitle">#8D8D8D</color>
 
     <style name="Theme.SkinCan.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/blue_800</item>

@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.util.Size
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
@@ -154,7 +155,7 @@ class ScannerActivity : AppCompatActivity() {
 
         val resultMap = labels.mapWithFloatValue
 
-        var result = "huh?"
+        var result = "No cancer"
         resultMap.keys.forEach {
             val value = resultMap[it] as Float
             if (value >= .50f) {
@@ -171,7 +172,8 @@ class ScannerActivity : AppCompatActivity() {
                 }.toString(),
             )
         }
-        Log.d("ziML", result)
+        // TODO: Result page
+        Toast.makeText(this@ScannerActivity, "ML Result: $result", Toast.LENGTH_LONG).show()
         shouldLoop = false
     }
 }
