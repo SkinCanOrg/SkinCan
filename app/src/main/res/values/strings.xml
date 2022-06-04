@@ -35,12 +35,15 @@
     <string name="invalid_email">The email address you\'ve entered is invalid!</string>
     <string name="password_length">Password must be longer than 8 characters!</string>
     <string name="input_cant_be_empty">%s can\'t be empty!</string>
+    <string name="auth_fail_desc">We’re sorry, something went wrong, please try again.</string>
 
     <!-- Auth (Login) -->
     <string name="welcome_back">Welcome Back</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="no_account">Didn\'t have an account?</string>
     <string name="register_now">Register Now</string>
+    <string name="login_fail">Failed to log in</string>
+    <string name="login_fail_desc">The email address or password you\'ve entered is invalid!</string>
 
     <!-- Auth (Register) -->
     <string name="register">Register</string>
@@ -53,9 +56,9 @@
     <string name="dialog_illustration">Dialog Illustration</string>
     <string name="login_instruction">Now you can log in to your new account and start exploring the app</string>
     <string name="account_created">Account has been created</string>
-    <string name="register_fail_desc">We’re sorry, something went wrong, please try again.</string>
     <string name="register_fail">Failed to create account</string>
     <string name="try_again">Try Again</string>
+    <string name="register_fail_email_desc">The email address you\'ve entered is already in use!</string>
 
     <!-- Dashboard -->
     <string name="greeting">Hello</string>

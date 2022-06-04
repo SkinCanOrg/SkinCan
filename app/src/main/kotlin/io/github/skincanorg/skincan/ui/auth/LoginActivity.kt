@@ -20,6 +20,7 @@ import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.data.model.AppResult
 import io.github.skincanorg.skincan.databinding.ActivityLoginBinding
 import io.github.skincanorg.skincan.ui.main.MainActivity
+import io.github.skincanorg.skincan.widget.dialog.LoginAlertDialog
 import io.github.skincanorg.skincan.widget.edittext.ValidateEditText
 
 @AndroidEntryPoint
@@ -55,8 +56,19 @@ class LoginActivity : AppCompatActivity() {
             viewModel.loginState.observe(this@LoginActivity) { state ->
                 when (state) {
                     is AppResult.Error -> {
-                        // TODO: Inform the user why login is unsuccessful
-                        Toast.makeText(this@LoginActivity, "Error: ${state.message}", Toast.LENGTH_LONG).show()
+                        if (state.message.startsWith("ERROR_"))
+                            LoginAlertDialog(this@LoginActivity).apply {
+                                illustrationRes = R.drawable.dialog_illustration_fail
+                                titleRes = R.string.login_fail
+                                descriptionRes = when (state.message) {
+                                    "ERROR_USER_NOT_FOUND" -> R.string.login_fail_desc
+                                    "ERROR_WRONG_PASSWORD" -> R.string.login_fail_desc
+                                    else -> R.string.auth_fail_desc
+                                }
+                                buttonTextRes = R.string.try_again
+                            }.show()
+                        else
+                            Toast.makeText(this@LoginActivity, "Error: ${state.message}", Toast.LENGTH_LONG).show()
                     }
                     is AppResult.Success -> {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))

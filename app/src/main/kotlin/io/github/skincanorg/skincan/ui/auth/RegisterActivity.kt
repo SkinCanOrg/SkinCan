@@ -10,7 +10,7 @@ package io.github.skincanorg.skincan.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.CreateMethod
@@ -55,13 +55,19 @@ class RegisterActivity : AppCompatActivity() {
             viewModel.registerState.observe(this@RegisterActivity) { state ->
                 when (state) {
                     is AppResult.Error -> {
-                        Log.d("ziRegisterFail", state.message)
-                        LoginAlertDialog(this@RegisterActivity).apply {
-                            illustrationRes = R.drawable.dialog_illustration_fail
-                            titleRes = R.string.register_fail
-                            descriptionRes = R.string.register_fail_desc  // TODO: Specify the error?
-                            buttonTextRes = R.string.try_again
-                        }.show()
+                        if (state.message.startsWith("ERROR_"))
+                            LoginAlertDialog(this@RegisterActivity).apply {
+                                illustrationRes = R.drawable.dialog_illustration_fail
+                                titleRes = R.string.register_fail
+                                descriptionRes = when (state.message) {
+                                    // Probably not a good idea, but for MVP I'll keep this for now.
+                                    "ERROR_EMAIL_ALREADY_IN_USE" -> R.string.register_fail_email_desc
+                                    else -> R.string.auth_fail_desc
+                                }
+                                buttonTextRes = R.string.try_again
+                            }.show()
+                        else
+                            Toast.makeText(this@RegisterActivity, "Error: ${state.message}", Toast.LENGTH_LONG).show()
                     }
                     is AppResult.Success -> {
                         LoginAlertDialog(this@RegisterActivity).apply {

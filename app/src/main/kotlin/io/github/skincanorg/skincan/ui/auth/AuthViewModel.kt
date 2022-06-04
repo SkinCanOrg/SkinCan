@@ -33,7 +33,7 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
             _loginState.postValue(AppResult.Success(true))
         }.addOnFailureListener { exc ->
             val reason = if (exc is FirebaseAuthException)
-                "ERR-" + exc.errorCode
+                exc.errorCode
             else
                 exc.localizedMessage
             _loginState.postValue(AppResult.Error(reason, null))
@@ -58,7 +58,7 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
             }
         }.addOnFailureListener { exc ->
             val reason = if (exc is FirebaseAuthException)
-                "ERR-" + exc.errorCode
+                exc.errorCode
             else
                 exc.localizedMessage
             _registerState.postValue(AppResult.Error(reason, false))
