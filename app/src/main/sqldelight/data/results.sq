@@ -1,0 +1,23 @@
+CREATE TABLE result (
+    _id INTEGER NOT NULL PRIMARY KEY,
+    imgPath TEXT NOT NULL,
+    result TEXT NOT NULL,
+    scannedAt INTEGER AS Long NOT NULL
+);
+
+countResults:
+SELECT count(*) FROM result;
+
+getResultById:
+SELECT *
+FROM result
+WHERE _id = :id;
+
+results:
+SELECT *
+FROM result
+LIMIT :limit OFFSET :offset;
+
+insert:
+INSERT INTO result(imgPath, result, scannedAt)
+VALUES (?, ?, ?);

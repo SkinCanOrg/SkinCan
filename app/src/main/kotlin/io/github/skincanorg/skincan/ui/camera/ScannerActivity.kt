@@ -25,6 +25,8 @@ import com.bumptech.glide.Glide
 import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions
 import com.google.firebase.ml.modeldownloader.DownloadType
 import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader
+import dagger.hilt.android.AndroidEntryPoint
+import io.github.skincanorg.skincan.Database
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.databinding.ActivityScannerBinding
 import io.github.skincanorg.skincan.lib.Util
@@ -45,15 +47,20 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class ScannerActivity : AppCompatActivity() {
-    private val binding: ActivityScannerBinding by viewBinding(CreateMethod.INFLATE)
+    private var photoFile: File? = null
     private var shouldLoop = false
     private var looped = true
-    private val imageSize = 28
     private lateinit var interpreter: Interpreter
     private lateinit var image: Bitmap
+
+    @Inject
+    lateinit var database: Database
+
+    private val binding: ActivityScannerBinding by viewBinding(CreateMethod.INFLATE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,11 +78,11 @@ class ScannerActivity : AppCompatActivity() {
             }
 
         binding.apply {
-            val photoFile = intent.extras?.get("IMG_FILE") as File?
+            photoFile = intent.extras?.get("IMG_FILE") as File?
             if (photoFile != null) {
                 image = Util.processBitmap(
-                    BitmapFactory.decodeFile(photoFile.path),
-                    photoFile,
+                    BitmapFactory.decodeFile(photoFile!!.path),
+                    photoFile!!,
                 )
 
                 Glide.with(ivImagePreview)
@@ -186,11 +193,16 @@ class ScannerActivity : AppCompatActivity() {
         Log.d("ziML", result)
 
         lifecycleScope.launch(Dispatchers.IO) {
-            delay(5000L)
+            delay(3000L)
             withContext(Dispatchers.Main) {
+                val q = database.resultsQueries
+                // TODO: Move file to its own dir (./Files/results/...)
+                val path = photoFile!!.path
+                q.insert(path, result, System.currentTimeMillis() / 1000)
                 Toast.makeText(this@ScannerActivity, "ML Result: $result", Toast.LENGTH_LONG).show()
                 startActivity(
                     Intent(this@ScannerActivity, ResultActivity::class.java).apply {
+                        putExtra(ResultActivity.PHOTO_PATH, path)
                         putExtra(ResultActivity.RESULT, result)
                         putExtra(ResultActivity.FROM, 0)
                     },

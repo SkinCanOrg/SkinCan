@@ -7,6 +7,7 @@ object Library {
         const val retrofit = "2.9.0"
         const val okhttp = "4.9.3"
         const val aboutLibraries = "10.3.0"
+        const val sqlDelight = "1.5.3"
     }
 
     object Root {
@@ -52,13 +53,10 @@ object Library {
         const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
         const val glideCompiler = "com.github.bumptech.glide:compiler:${Version.glide}"
         const val flowPreferences = "com.fredporciuncula:flow-preferences:1.7.0"
-        const val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
-        const val retrofitScalars = "com.squareup.retrofit2:converter-scalars:${Version.retrofit}"
-        const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
-        const val okhttp = "com.squareup.okhttp3:okhttp:${Version.okhttp}"
-        const val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Version.okhttp}"
         const val aboutLibrariesCore = "com.mikepenz:aboutlibraries-core:${Version.aboutLibraries}"
         const val aboutLibrariesUI = "com.mikepenz:aboutlibraries:${Version.aboutLibraries}"
+        const val sqlDelightAndroid = "com.squareup.sqldelight:android-driver:${Version.sqlDelight}"
+        const val sqlDelightPaging = "com.squareup.sqldelight:android-paging3-extensions:${Version.sqlDelight}"
 
         object Testing {
             const val junit = "junit:junit:4.13.2"

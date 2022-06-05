@@ -13,6 +13,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.os.Environment
 import android.util.Log
@@ -101,6 +102,8 @@ object Util {
         FILENAME_FORMAT,
         Locale.US,
     ).format(System.currentTimeMillis())
+
+    fun processBitmap(path: String): Bitmap = processBitmap(BitmapFactory.decodeFile(path), File(path))
 
     fun processBitmap(bitmap: Bitmap, file: File): Bitmap {
         val exif = FileInputStream(file).use { ExifInterface(it) }

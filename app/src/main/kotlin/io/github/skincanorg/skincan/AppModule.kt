@@ -9,6 +9,7 @@
 package io.github.skincanorg.skincan
 
 import android.content.Context
+import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,4 +33,9 @@ object AppModule {
     @Singleton
     @Provides
     fun providesRepository(): UserRepository = UserRepository()
+
+    @Singleton
+    @Provides
+    fun providesDatabase(@ApplicationContext context: Context): Database =
+        Database(AndroidSqliteDriver(Database.Schema, context, "database.db"))
 }

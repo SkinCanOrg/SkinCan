@@ -13,6 +13,7 @@
         app:subtitleCentered="true"
         app:titleCentered="true"
         tools:title="test"
+        tools:visibility="gone"
         android:id="@+id/appbar" />
 
     <androidx.cardview.widget.CardView
@@ -32,6 +33,7 @@
             android:contentDescription="@string/result_pict"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
+            android:scaleType="centerCrop"
             android:src="@drawable/illustration"
             android:id="@+id/iv_result_pict" />
     </androidx.cardview.widget.CardView>
@@ -125,5 +127,6 @@
         android:layout_width="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="btn_home,btn_scan_again"
+        tools:visibility="visible"
         android:id="@+id/btn_group" />
 </androidx.constraintlayout.widget.ConstraintLayout>

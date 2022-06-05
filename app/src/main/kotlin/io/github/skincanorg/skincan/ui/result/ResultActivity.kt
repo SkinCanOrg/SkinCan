@@ -14,8 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.databinding.ActivityResultBinding
+import io.github.skincanorg.skincan.lib.Util
 import io.github.skincanorg.skincan.ui.main.MainActivity
 
 @AndroidEntryPoint
@@ -43,6 +45,13 @@ class ResultActivity : AppCompatActivity() {
             btnGroup.isVisible = from == 0
 
             btnHome.setOnClickListener { onBackPressed() }
+
+            val imagePath = intent.extras?.getString(PHOTO_PATH)
+            if (imagePath != null)
+                Glide.with(ivResultPict)
+                    .load(Util.processBitmap(imagePath))
+                    .into(ivResultPict)
+
             tvResultStatus.text = when (intent.extras?.getString(RESULT)) {
                 "Clear" -> "Clear"
                 null -> "ERROR"
@@ -60,6 +69,7 @@ class ResultActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val PHOTO_PATH = "PHOTO_PATH"
         const val RESULT = "IS_CANCER"
         const val FROM = "FROM" // 0 = Scanner, 1 = List
     }

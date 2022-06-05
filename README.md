@@ -27,7 +27,7 @@
    - [x] Add alert for registration fail
    - [x] Add input validation
    - [x] Add loading into button
-- [ ] Result List (using Room)
+- [ ] Result List (using SQLDelight)
    <!-- Reference: https://github.com/tachiyomiorg/tachiyomi/blob/master/app/src/main/java/eu/kanade/tachiyomi/data/cache/CoverCache.kt -->
    - [ ] Move photo automatically to data/Files/photos
    - [ ] Delete data when photo no longer exists
