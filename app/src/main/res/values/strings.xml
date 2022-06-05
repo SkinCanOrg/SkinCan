@@ -5,10 +5,10 @@
 
     <!-- Onboarding -->
     <string name="onboarding_image">Onboarding Image</string>
-    <string name="onboard_title1">Check a potentional cancer through camera</string>
-    <string name="onboard_subtitle1">You can use camera to check a potentional risk cancer on your skin.</string>
+    <string name="onboard_title1">Check a potential cancer through camera</string>
+    <string name="onboard_subtitle1">You can use camera to check a potential risk cancer on your skin.</string>
     <string name="onboard_title2">Get some tips</string>
-    <string name="onboard_subtitle2">You’ll get some tips for avoiding a cancer skin  this can help you to minimalize potentional skin cancer risk</string>
+    <string name="onboard_subtitle2">You’ll get some tips for avoiding a cancer skin  this can help you to minimize potential skin cancer risk</string>
     <string name="onboard_continue">Start Now</string>
     <string name="onboarding_page_indicator">Onboarding Page Indicator</string>
 
@@ -32,12 +32,18 @@
     <string name="password">Password</string>
     <string name="login">Log in</string>
     <string name="continue_with_google">Continue with Google</string>
+    <string name="invalid_email">The email address you\'ve entered is invalid!</string>
+    <string name="password_length">Password must be longer than 8 characters!</string>
+    <string name="input_cant_be_empty">%s can\'t be empty!</string>
+    <string name="auth_fail_desc">We’re sorry, something went wrong, please try again.</string>
 
     <!-- Auth (Login) -->
     <string name="welcome_back">Welcome Back</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="no_account">Didn\'t have an account?</string>
     <string name="register_now">Register Now</string>
+    <string name="login_fail">Failed to log in</string>
+    <string name="login_fail_desc">The email address or password you\'ve entered is invalid!</string>
 
     <!-- Auth (Register) -->
     <string name="register">Register</string>
@@ -48,8 +54,11 @@
 
     <!-- Auth (Dialog) -->
     <string name="dialog_illustration">Dialog Illustration</string>
-    <string name="login_instruction">Now you can login to your new account and start exploring the app</string>
+    <string name="login_instruction">Now you can log in to your new account and start exploring the app</string>
     <string name="account_created">Account has been created</string>
+    <string name="register_fail">Failed to create account</string>
+    <string name="try_again">Try Again</string>
+    <string name="register_fail_email_desc">The email address you\'ve entered is already in use!</string>
 
     <!-- Dashboard -->
     <string name="greeting">Hello</string>
@@ -66,5 +75,11 @@
     <string name="logout">Log Out</string>
 
     <!-- Unsorted -->
-
+    <string name="licenses">Open Source Licenses</string>
+    <string name="result_pict">Result Pict</string>
+    <string name="result">Result</string>
+    <string name="clear">Clear</string>
+    <string name="home">Home</string>
+    <string name="scan_again">Scan Again</string>
+    <string name="last_result">Last Result</string>
 </resources>

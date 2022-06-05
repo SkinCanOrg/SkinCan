@@ -13,7 +13,10 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View.OnClickListener
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import io.github.skincanorg.skincan.databinding.AlertDialogBinding
 
 class LoginAlertDialog(context: Context) : AlertDialog(context) {
@@ -22,6 +25,18 @@ class LoginAlertDialog(context: Context) : AlertDialog(context) {
 
     private var onClickListener: OnClickListener? = null
 
+    @DrawableRes
+    var illustrationRes = 0
+
+    @StringRes
+    var titleRes = 0
+
+    @StringRes
+    var descriptionRes = 0
+
+    @StringRes
+    var buttonTextRes = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = AlertDialogBinding.inflate(layoutInflater)
@@ -29,6 +44,14 @@ class LoginAlertDialog(context: Context) : AlertDialog(context) {
 
         this.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         binding.apply {
+            if (illustrationRes != 0)
+                ivIllustration.setImageDrawable(ContextCompat.getDrawable(context, illustrationRes))
+            if (titleRes != 0)
+                tvDialogTitle.text = context.getString(titleRes)
+            if (descriptionRes != 0)
+                tvDialogDescription.text = context.getString(descriptionRes)
+            if (buttonTextRes != 0)
+                btnLogin.text = context.getString(buttonTextRes)
             btnLogin.setOnClickListener {
                 if (onClickListener != null)
                     onClickListener!!.onClick(it)

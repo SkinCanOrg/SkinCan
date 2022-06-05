@@ -3,4 +3,13 @@
     <declare-styleable name="OneFourthCircleView">
         <attr name="circleColor" format="color" />
     </declare-styleable>
+    <declare-styleable name="LoadingButton">
+        <attr name="android:text" format="string" />
+        <attr name="buttonColor" format="color" />
+        <attr name="android:textColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="ValidateEditText">
+        <attr name="android:inputType" format="enum" />
+        <attr name="inputRequired" format="boolean" />
+    </declare-styleable>
 </resources>

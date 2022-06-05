@@ -3,6 +3,7 @@
     <color name="editTextFocusedBackgroundColor">@color/blue_600</color>
     <color name="editTextColor">#888888</color>
     <color name="editTextFocusedColor">@color/white</color>
+    <color name="colorSubtitle">#8D8D8D</color>
 
     <style name="Theme.SkinCan.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/blue_800</item>
@@ -41,6 +42,7 @@
         <item name="android:navigationBarColor">?android:attr/colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="O_MR1">true</item>
 
+        <item name="switchStyle">@style/Widget.App.Switch</item>
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
     </style>
 
@@ -54,5 +56,14 @@
     <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
         <item name="elevationOverlayEnabled">false</item>
         <item name="elevation">0dp</item>
+    </style>
+
+    <!-- https://github.com/patzly/doodle-android. Google needs to step up their game on updating their UI lib -->
+    <!-- FIXME: Fix width issue -->
+    <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="track">@drawable/ui_m3_switch_track</item>
+        <item name="trackTint">@color/sel_m3_switch_track</item>
+        <item name="android:thumb">@drawable/ui_m3_switch_thumb</item>
+        <item name="thumbTint">@color/sel_m3_switch_thumb</item>
     </style>
 </resources>

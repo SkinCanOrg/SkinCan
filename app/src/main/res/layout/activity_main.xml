@@ -36,11 +36,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_width="wrap_content"
-                android:text="@string/user_name"
                 android:textColor="@color/primary"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/greetings"
+                tools:text="@string/user_name"
                 android:id="@+id/user_name" />
 
             <TextView
@@ -54,13 +54,15 @@
                 app:layout_constraintStart_toEndOf="@+id/user_name"
                 tools:ignore="HardcodedText" />
 
-            <ImageView
-                android:background="@drawable/ic_pfp_user_placeholder"
+            <ImageButton
+                android:background="@drawable/bg_oval_ripple"
                 android:contentDescription="@string/placeholder_user_profile"
                 android:layout_height="60dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_width="60dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_avatar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/btn_profile" />
@@ -72,7 +74,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_width="match_parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_profile"
-                android:id="@+id/include" />
+                android:id="@+id/result_card" />
 
             <TextView
                 android:layout_height="wrap_content"
@@ -83,7 +85,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.068"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include"
+                app:layout_constraintTop_toBottomOf="@+id/result_card"
                 android:id="@+id/textView" />
 
             <!-- TODO: Replace with RecyclerView -->

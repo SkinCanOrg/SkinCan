@@ -6,6 +6,8 @@ object Library {
         const val cameraX = "1.1.0-rc01"
         const val retrofit = "2.9.0"
         const val okhttp = "4.9.3"
+        const val aboutLibraries = "10.3.0"
+        const val sqlDelight = "1.5.3"
     }
 
     object Root {
@@ -19,9 +21,9 @@ object Library {
 
     object App {
         object AndroidX {
-            const val core = "androidx.core:core-ktx:1.7.0"
+            const val core = "androidx.core:core-ktx:1.8.0"
             const val splashScreen = "androidx.core:core-splashscreen:1.0.0-rc01"
-            const val appCompat = "androidx.appcompat:appcompat:1.4.1"
+            const val appCompat = "androidx.appcompat:appcompat:1.6.0-alpha04"
             const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
             const val preference = "androidx.preference:preference-ktx:1.2.0"
             const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
@@ -30,9 +32,10 @@ object Library {
             const val camera = "androidx.camera:camera-camera2:${Version.cameraX}"
             const val cameraLifecycle = "androidx.camera:camera-lifecycle:${Version.cameraX}"
             const val cameraView = "androidx.camera:camera-view:${Version.cameraX}"
+            const val paging = "androidx.paging:paging-runtime-ktx:3.1.1"
         }
 
-        const val material = "com.google.android.material:material:1.6.0"
+        const val material = "com.google.android.material:material:1.6.1"
         const val hilt = "com.google.dagger:hilt-android:${Version.hilt}"
         const val hiltCompiler = "com.google.dagger:hilt-compiler:${Version.hilt}"
 
@@ -51,11 +54,10 @@ object Library {
         const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
         const val glideCompiler = "com.github.bumptech.glide:compiler:${Version.glide}"
         const val flowPreferences = "com.fredporciuncula:flow-preferences:1.7.0"
-        const val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
-        const val retrofitScalars = "com.squareup.retrofit2:converter-scalars:${Version.retrofit}"
-        const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
-        const val okhttp = "com.squareup.okhttp3:okhttp:${Version.okhttp}"
-        const val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Version.okhttp}"
+        const val aboutLibrariesCore = "com.mikepenz:aboutlibraries-core:${Version.aboutLibraries}"
+        const val aboutLibrariesUI = "com.mikepenz:aboutlibraries:${Version.aboutLibraries}"
+        const val sqlDelightAndroid = "com.squareup.sqldelight:android-driver:${Version.sqlDelight}"
+        const val sqlDelightPaging = "com.squareup.sqldelight:android-paging3-extensions:${Version.sqlDelight}"
 
         object Testing {
             const val junit = "junit:junit:4.13.2"

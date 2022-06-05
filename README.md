@@ -17,15 +17,22 @@
 - [x] Onboarding
 - [x] Auth
 - [x] Camera
-- [ ] Detection Result (Waiting for API)
-- [ ] Result List (Waiting for API)
+- [x] Scan Result
+- [x] Result List
+- [x] News List (Placeholder)
 
 ### TODO
 - [ ] Fix ML
-- [ ] Polishing Auth
-  - [ ] Add alert for registration fail
-  - [ ] Add input validation
-  - [ ] Add loading into button
+- [x] Polishing Auth
+   - [x] Add alert for registration fail
+   - [x] Add input validation
+   - [x] Add loading into button
+- [x] Result List (using SQLDelight)
+   <!-- Reference: https://github.com/tachiyomiorg/tachiyomi/blob/master/app/src/main/java/eu/kanade/tachiyomi/data/cache/CoverCache.kt -->
+   - [x] Move photo automatically to data/Files/results
+   - [ ] Delete data when photo no longer exists
+   - [ ] Delete photo when data being deleted
+- [ ] Landscape/Desktop support (Low priority)
 
 ### Mobile Team
 - Ahmad Ansori Palembani (a2191f1821 - [@null2264](https://github.com/null2264))

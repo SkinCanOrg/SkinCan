@@ -1,5 +1,8 @@
 package io.github.skincanorg.skincan.lib
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.preference.*
 
 object PreferenceExtension {
@@ -11,15 +14,15 @@ object PreferenceExtension {
         return initThenAdd(Preference(context), block)
     }
 
-    inline fun PreferenceGroup.switchPreference(block: SwitchPreference.() -> Unit): SwitchPreference {
-        return initThenAdd(SwitchPreference(context), block)
+    inline fun PreferenceGroup.switchPreference(block: SwitchPreferenceCompat.() -> Unit): SwitchPreferenceCompat {
+        return initThenAdd(SwitchPreferenceCompat(context), block)
     }
 
     inline fun PreferenceGroup.preferenceCategory(block: PreferenceCategory.() -> Unit): PreferenceCategory {
         return initThenAdd(PreferenceCategory(context), block)
     }
 
-    inline fun <P: Preference> PreferenceGroup.initThenAdd(preference: P, block: P.() -> Unit): P {
+    inline fun <P : Preference> PreferenceGroup.initThenAdd(preference: P, block: P.() -> Unit): P {
         return preference.apply {
             block()
             addPreference(this)
@@ -28,5 +31,13 @@ object PreferenceExtension {
 
     var Preference.titleRes: Int
         get() = 0
-        set(newValue) { this.title = context.getString(newValue) }
+        set(@StringRes newValue) {
+            this.title = context.getString(newValue)
+        }
+
+    var Preference.iconRes: Int
+        get() = 0
+        set(@DrawableRes newValue) {
+            this.icon = ContextCompat.getDrawable(context, newValue)
+        }
 }

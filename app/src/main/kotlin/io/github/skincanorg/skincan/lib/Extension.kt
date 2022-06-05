@@ -13,13 +13,18 @@ import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Bitmap
 import android.graphics.Matrix
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
+import android.os.Build
 import android.util.TypedValue
+import android.widget.TextView
+import androidx.annotation.ColorInt
 import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
+import java.lang.reflect.Field
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -88,4 +93,46 @@ object Extension {
         return formatter.format(this)
     }
 
+    // [01 Jun 2022]: https://stackoverflow.com/a/59269370, yet another pain from Google.
+    fun TextView.setCursorDrawableColor(@ColorInt color: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            textCursorDrawable = GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, intArrayOf(color, color))
+                .apply { setSize(2.sp(context).toInt(), textSize.toInt()) }
+            return
+        }
+
+        try {
+            val editorField = TextView::class.java.getFieldByName("mEditor")
+            val editor = editorField?.get(this) ?: this
+            val editorClass: Class<*> = if (editorField != null) editor.javaClass else TextView::class.java
+            val cursorRes = TextView::class.java.getFieldByName("mCursorDrawableRes")?.get(this) as? Int ?: return
+
+            val tintedCursorDrawable = Util.getDrawableWithTint(context, cursorRes, color) ?: return
+
+            val cursorField = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                editorClass.getFieldByName("mDrawableForCursor")
+            } else {
+                null
+            }
+            if (cursorField != null) {
+                cursorField.set(editor, tintedCursorDrawable)
+            } else {
+                editorClass.getFieldByName("mCursorDrawable", "mDrawableForCursor")
+                    ?.set(editor, arrayOf(tintedCursorDrawable, tintedCursorDrawable))
+            }
+        } catch (t: Throwable) {
+            t.printStackTrace()
+        }
+    }
+
+    // [01 Jun 2022]: https://stackoverflow.com/a/59269370.
+    private fun Class<*>.getFieldByName(vararg name: String): Field? {
+        name.forEach {
+            try {
+                return this.getDeclaredField(it).apply { isAccessible = true }
+            } catch (_: Throwable) {
+            }
+        }
+        return null
+    }
 }

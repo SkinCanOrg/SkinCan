@@ -8,24 +8,33 @@
 
 package io.github.skincanorg.skincan.ui.camera
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.util.Size
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions
 import com.google.firebase.ml.modeldownloader.DownloadType
 import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader
+import dagger.hilt.android.AndroidEntryPoint
+import io.github.skincanorg.skincan.Database
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.databinding.ActivityScannerBinding
 import io.github.skincanorg.skincan.lib.Util
+import io.github.skincanorg.skincan.ui.result.ResultActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.support.common.TensorProcessor
@@ -35,21 +44,22 @@ import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.label.TensorLabel
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
-import java.io.BufferedReader
-import java.io.File
-import java.io.InputStreamReader
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
-import java.util.*
+import java.io.*
+import java.nio.channels.FileChannel
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class ScannerActivity : AppCompatActivity() {
-    private val binding: ActivityScannerBinding by viewBinding(CreateMethod.INFLATE)
+    private var photoFile: File? = null
     private var shouldLoop = false
     private var looped = true
-    private val imageSize = 28
     private lateinit var interpreter: Interpreter
     private lateinit var image: Bitmap
+
+    @Inject
+    lateinit var database: Database
+
+    private val binding: ActivityScannerBinding by viewBinding(CreateMethod.INFLATE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,11 +77,11 @@ class ScannerActivity : AppCompatActivity() {
             }
 
         binding.apply {
-            val photoFile = intent.extras?.get("IMG_FILE") as File?
+            photoFile = intent.extras?.get("IMG_FILE") as File?
             if (photoFile != null) {
                 image = Util.processBitmap(
-                    BitmapFactory.decodeFile(photoFile.path),
-                    photoFile,
+                    BitmapFactory.decodeFile(photoFile!!.path),
+                    photoFile!!,
                 )
 
                 Glide.with(ivImagePreview)
@@ -151,17 +161,20 @@ class ScannerActivity : AppCompatActivity() {
 
         val labels = TensorLabel(
             BufferedReader(
-                InputStreamReader(assets.open("model_labels.txt"))
+                InputStreamReader(assets.open("model_labels.txt")),
             ).readLines(),
-            probProcessor.process(modelOutput)
+            probProcessor.process(modelOutput),
         )
 
         val resultMap = labels.mapWithFloatValue
 
-        var result = "huh?"
+        var result = "Clear"
+        var lastHighest = .50f
         resultMap.keys.forEach {
             val value = resultMap[it] as Float
-            if (value >= .50f) {
+            if (value >= lastHighest) {
+                if (value != lastHighest)
+                    lastHighest = value
                 result = StringBuilder().apply {
                     append("$it ")
                     append(String.format("%.2f", value))
@@ -172,10 +185,48 @@ class ScannerActivity : AppCompatActivity() {
                 StringBuilder().apply {
                     append("$it ")
                     append(String.format("%.2f", value))
-                }.toString()
+                }.toString(),
             )
         }
+
         Log.d("ziML", result)
-        shouldLoop = false
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            delay(3000L)
+            val q = database.resultsQueries
+
+            val currentTime = System.currentTimeMillis() / 1000
+            val cacheDir = Util.getCacheDir(applicationContext, "results")
+
+            var outChan: FileChannel? = null
+            var inChan: FileChannel? = null
+            val newFile = File(cacheDir, currentTime.toString())
+            try {
+                outChan = FileOutputStream(newFile).channel
+                inChan = FileInputStream(photoFile).channel
+                inChan.transferTo(0, inChan.size(), outChan)
+                inChan.close()
+                photoFile!!.delete()
+            } finally {
+                inChan?.close()
+                outChan?.close()
+            }
+
+            val path = newFile.path
+            q.insert(path, result, currentTime)
+
+            withContext(Dispatchers.Main) {
+                Toast.makeText(this@ScannerActivity, "ML Result: $result", Toast.LENGTH_LONG).show()
+                startActivity(
+                    Intent(this@ScannerActivity, ResultActivity::class.java).apply {
+                        putExtra(ResultActivity.PHOTO_PATH, path)
+                        putExtra(ResultActivity.RESULT, result)
+                        putExtra(ResultActivity.FROM, 0)
+                    },
+                )
+                shouldLoop = false
+                finish()
+            }
+        }
     }
 }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    android:layout_width="match_parent"
+    app:cardBackgroundColor="?attr/colorSurfaceVariant"
+    app:cardCornerRadius="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            android:layout_width="90dp"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/illustration"
+            android:id="@+id/result_pict_wrapper">
+
+            <ImageView
+                android:contentDescription="@string/result_pict"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/illustration"
+                android:id="@+id/iv_result_pict" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/colorSubtitle"
+            app:layout_constraintStart_toEndOf="@id/result_pict_wrapper"
+            app:layout_constraintTop_toTopOf="@id/result_pict_wrapper"
+            tools:text="6 May 2022, 13:30"
+            android:id="@+id/tv_datetime" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            app:layout_constraintEnd_toStartOf="@id/tv_result_status"
+            app:layout_constraintStart_toStartOf="@id/tv_datetime"
+            app:layout_constraintTop_toBottomOf="@id/tv_datetime"
+            tools:text="No cancer found"
+            android:id="@+id/tv_status" />
+
+        <TextView
+            android:background="@drawable/bg_full_round"
+            android:backgroundTint="?attr/colorSecondaryContainer"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_width="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="6dp"
+            android:text="@string/clear"
+            android:textColor="?attr/colorOnSecondaryContainer"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/tv_result_status" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

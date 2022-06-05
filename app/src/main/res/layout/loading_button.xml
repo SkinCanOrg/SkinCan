@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <io.github.skincanorg.skincan.widget.button.RoundedButton
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/button" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:elevation="8dp"
+        android:indeterminateTint="?attr/colorOnPrimary"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:maxHeight="24dp"
+        android:maxWidth="24dp"
+        android:minHeight="24dp"
+        android:minWidth="24dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:id="@+id/loading" />
+</FrameLayout>

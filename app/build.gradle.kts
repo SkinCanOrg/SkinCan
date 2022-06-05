@@ -1,11 +1,11 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("com.mikepenz.aboutlibraries.plugin") version Library.Version.aboutLibraries
+    id("com.squareup.sqldelight") version Library.Version.sqlDelight
 }
 
 @Suppress("UnstableApiUsage")
@@ -61,6 +61,7 @@ dependencies {
     implementation(Library.App.AndroidX.camera)
     implementation(Library.App.AndroidX.cameraLifecycle)
     implementation(Library.App.AndroidX.cameraView)
+    implementation(Library.App.AndroidX.paging)
 
     // com.google.* libraries
     implementation(Library.App.material)
@@ -79,11 +80,10 @@ dependencies {
     implementation(Library.App.glide)
     kapt(Library.App.glideCompiler)
     implementation(Library.App.flowPreferences)
-    implementation(Library.App.retrofit)
-    implementation(Library.App.retrofitScalars)
-    implementation(Library.App.retrofitGson)
-    implementation(Library.App.okhttp)
-    implementation(Library.App.okhttpLoggingInterceptor)
+    implementation(Library.App.aboutLibrariesCore)
+    implementation(Library.App.aboutLibrariesUI)
+    implementation(Library.App.sqlDelightAndroid)
+    implementation(Library.App.sqlDelightPaging)
 
     // --- Testing libraries ---
     testImplementation(Library.App.Testing.junit)
