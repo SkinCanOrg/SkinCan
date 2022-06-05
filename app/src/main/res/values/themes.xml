@@ -59,6 +59,7 @@
     </style>
 
     <!-- https://github.com/patzly/doodle-android. Google needs to step up their game on updating their UI lib -->
+    <!-- FIXME: Fix width issue -->
     <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.Switch">
         <item name="track">@drawable/ui_m3_switch_track</item>
         <item name="trackTint">@color/sel_m3_switch_track</item>

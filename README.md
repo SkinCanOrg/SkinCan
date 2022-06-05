@@ -17,7 +17,7 @@
 - [x] Onboarding
 - [x] Auth
 - [x] Camera
-- [ ] Scan Result
+- [x] Scan Result
 - [ ] Result List
 - [x] News List (Placeholder)
 
