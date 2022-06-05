@@ -123,4 +123,9 @@ object Util {
             }
         }
     }
+
+    fun getCacheDir(context: Context, dir: String): File {
+        return context.getExternalFilesDir(dir)
+            ?: File(context.filesDir, dir).also { it.mkdirs() }
+    }
 }

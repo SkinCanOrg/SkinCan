@@ -44,9 +44,8 @@ import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.label.TensorLabel
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
-import java.io.BufferedReader
-import java.io.File
-import java.io.InputStreamReader
+import java.io.*
+import java.nio.channels.FileChannel
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -194,11 +193,29 @@ class ScannerActivity : AppCompatActivity() {
 
         lifecycleScope.launch(Dispatchers.IO) {
             delay(3000L)
+            val q = database.resultsQueries
+
+            val currentTime = System.currentTimeMillis() / 1000
+            val cacheDir = Util.getCacheDir(applicationContext, "results")
+
+            var outChan: FileChannel? = null
+            var inChan: FileChannel? = null
+            val newFile = File(cacheDir, currentTime.toString())
+            try {
+                outChan = FileOutputStream(newFile).channel
+                inChan = FileInputStream(photoFile).channel
+                inChan.transferTo(0, inChan.size(), outChan)
+                inChan.close()
+                photoFile!!.delete()
+            } finally {
+                inChan?.close()
+                outChan?.close()
+            }
+
+            val path = newFile.path
+            q.insert(path, result, currentTime)
+
             withContext(Dispatchers.Main) {
-                val q = database.resultsQueries
-                // TODO: Move file to its own dir (./Files/results/...)
-                val path = photoFile!!.path
-                q.insert(path, result, System.currentTimeMillis() / 1000)
                 Toast.makeText(this@ScannerActivity, "ML Result: $result", Toast.LENGTH_LONG).show()
                 startActivity(
                     Intent(this@ScannerActivity, ResultActivity::class.java).apply {

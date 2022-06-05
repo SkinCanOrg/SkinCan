@@ -29,7 +29,7 @@
    - [x] Add loading into button
 - [ ] Result List (using SQLDelight)
    <!-- Reference: https://github.com/tachiyomiorg/tachiyomi/blob/master/app/src/main/java/eu/kanade/tachiyomi/data/cache/CoverCache.kt -->
-   - [ ] Move photo automatically to data/Files/photos
+   - [x] Move photo automatically to data/Files/results
    - [ ] Delete data when photo no longer exists
    - [ ] Delete photo when data being deleted
 - [ ] Landscape/Desktop support (Low priority)
