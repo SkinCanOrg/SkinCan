@@ -14,8 +14,8 @@ object PreferenceExtension {
         return initThenAdd(Preference(context), block)
     }
 
-    inline fun PreferenceGroup.switchPreference(block: SwitchPreference.() -> Unit): SwitchPreference {
-        return initThenAdd(SwitchPreference(context), block)
+    inline fun PreferenceGroup.switchPreference(block: SwitchPreferenceCompat.() -> Unit): SwitchPreferenceCompat {
+        return initThenAdd(SwitchPreferenceCompat(context), block)
     }
 
     inline fun PreferenceGroup.preferenceCategory(block: PreferenceCategory.() -> Unit): PreferenceCategory {

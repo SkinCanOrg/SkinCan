@@ -32,6 +32,7 @@
         <item name="android:navigationBarColor">?android:attr/colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="O_MR1">false</item>
 
+        <item name="switchStyle">@style/Widget.App.Switch</item>
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
     </style>
 </resources>

@@ -22,7 +22,7 @@ object Library {
         object AndroidX {
             const val core = "androidx.core:core-ktx:1.8.0"
             const val splashScreen = "androidx.core:core-splashscreen:1.0.0-rc01"
-            const val appCompat = "androidx.appcompat:appcompat:1.4.2"
+            const val appCompat = "androidx.appcompat:appcompat:1.6.0-alpha04"
             const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
             const val preference = "androidx.preference:preference-ktx:1.2.0"
             const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
@@ -33,7 +33,7 @@ object Library {
             const val cameraView = "androidx.camera:camera-view:${Version.cameraX}"
         }
 
-        const val material = "com.google.android.material:material:1.6.0"
+        const val material = "com.google.android.material:material:1.6.1"
         const val hilt = "com.google.dagger:hilt-android:${Version.hilt}"
         const val hiltCompiler = "com.google.dagger:hilt-compiler:${Version.hilt}"
 
