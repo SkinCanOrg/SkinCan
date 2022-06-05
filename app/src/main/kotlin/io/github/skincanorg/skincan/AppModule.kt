@@ -16,6 +16,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.skincanorg.skincan.data.preference.PreferencesHelper
+import io.github.skincanorg.skincan.data.repository.ResultRepository
 import io.github.skincanorg.skincan.data.repository.UserRepository
 import javax.inject.Singleton
 
@@ -38,4 +39,8 @@ object AppModule {
     @Provides
     fun providesDatabase(@ApplicationContext context: Context): Database =
         Database(AndroidSqliteDriver(Database.Schema, context, "database.db"))
+
+    @Singleton
+    @Provides
+    fun providesResultRepository(database: Database): ResultRepository = ResultRepository(database)
 }

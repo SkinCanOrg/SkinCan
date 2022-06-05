@@ -74,7 +74,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_width="match_parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_profile"
-                android:id="@+id/include" />
+                android:id="@+id/result_card" />
 
             <TextView
                 android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.068"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include"
+                app:layout_constraintTop_toBottomOf="@+id/result_card"
                 android:id="@+id/textView" />
 
             <!-- TODO: Replace with RecyclerView -->

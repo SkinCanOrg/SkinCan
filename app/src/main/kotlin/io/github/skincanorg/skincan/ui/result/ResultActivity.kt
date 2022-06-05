@@ -23,15 +23,16 @@ import io.github.skincanorg.skincan.ui.main.MainActivity
 @AndroidEntryPoint
 class ResultActivity : AppCompatActivity() {
     private val binding: ActivityResultBinding by viewBinding(CreateMethod.INFLATE)
+    private val from by lazy { intent.extras?.getInt(FROM) ?: 0 }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupCoreFunctions(intent.extras?.getInt(FROM) ?: 1)
+        setupCoreFunctions()
     }
 
-    private fun setupCoreFunctions(from: Int) {
+    private fun setupCoreFunctions() {
         binding.apply {
             appbar.isVisible = from == 1
             if (from == 1) {
@@ -61,11 +62,14 @@ class ResultActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        startActivity(
-            Intent(this@ResultActivity, MainActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            },
-        )
+        if (from == 0)
+            startActivity(
+                Intent(this@ResultActivity, MainActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                },
+            )
+        else
+            finish()
     }
 
     companion object {

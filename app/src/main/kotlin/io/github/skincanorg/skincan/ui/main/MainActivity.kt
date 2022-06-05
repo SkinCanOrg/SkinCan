@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.skincanorg.skincan.Database
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.data.main.NewsAdapter
 import io.github.skincanorg.skincan.data.preference.PreferencesHelper
@@ -25,6 +26,7 @@ import io.github.skincanorg.skincan.ui.OnboardingActivity
 import io.github.skincanorg.skincan.ui.auth.AuthViewModel
 import io.github.skincanorg.skincan.ui.camera.CameraActivity
 import io.github.skincanorg.skincan.ui.preference.ProfileActivity
+import io.github.skincanorg.skincan.ui.result.ResultListActivity
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -37,6 +39,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var prefs: PreferencesHelper
+
+    @Inject
+    lateinit var database: Database
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +71,18 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             btnProfile.setOnClickListener {
                 startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
+            }
+            resultCard.apply {
+                root.setOnClickListener {
+                    startActivity(Intent(this@MainActivity, ResultListActivity::class.java))
+                }
+                val results = database.resultsQueries.lastResult().executeAsList()
+                if (results.isNotEmpty())
+                    tvResultStatus.text = when (results[0].result) {
+                        "Clear" -> "Clear"
+                        null -> "ERROR"
+                        else -> "Cancer"
+                    }
             }
         }
     }

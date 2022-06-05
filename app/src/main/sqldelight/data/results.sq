@@ -1,7 +1,7 @@
 CREATE TABLE result (
     _id INTEGER NOT NULL PRIMARY KEY,
     imgPath TEXT NOT NULL,
-    result TEXT NOT NULL,
+    result TEXT,
     scannedAt INTEGER AS Long NOT NULL
 );
 
@@ -12,6 +12,9 @@ getResultById:
 SELECT *
 FROM result
 WHERE _id = :id;
+
+lastResult:
+SELECT result FROM result;
 
 results:
 SELECT *

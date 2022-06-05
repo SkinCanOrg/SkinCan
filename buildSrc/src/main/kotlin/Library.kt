@@ -32,6 +32,7 @@ object Library {
             const val camera = "androidx.camera:camera-camera2:${Version.cameraX}"
             const val cameraLifecycle = "androidx.camera:camera-lifecycle:${Version.cameraX}"
             const val cameraView = "androidx.camera:camera-view:${Version.cameraX}"
+            const val paging = "androidx.paging:paging-runtime-ktx:3.1.1"
         }
 
         const val material = "com.google.android.material:material:1.6.1"

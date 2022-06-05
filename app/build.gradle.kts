@@ -61,6 +61,7 @@ dependencies {
     implementation(Library.App.AndroidX.camera)
     implementation(Library.App.AndroidX.cameraLifecycle)
     implementation(Library.App.AndroidX.cameraView)
+    implementation(Library.App.AndroidX.paging)
 
     // com.google.* libraries
     implementation(Library.App.material)

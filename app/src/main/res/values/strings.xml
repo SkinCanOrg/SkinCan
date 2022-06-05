@@ -81,4 +81,5 @@
     <string name="clear">Clear</string>
     <string name="home">Home</string>
     <string name="scan_again">Scan Again</string>
+    <string name="last_result">Last Result</string>
 </resources>
