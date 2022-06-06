@@ -24,7 +24,7 @@
 
 ### TODO
 - [ ] Fix ML
-   - [ ] Wait for ML model to download on scan
+   - [x] Wait for ML model to download on scan
 - [x] Polishing Auth
    - [x] Add alert for registration fail
    - [x] Add input validation
