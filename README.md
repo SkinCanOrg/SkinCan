@@ -7,8 +7,9 @@
 <h3 align="center">A <b>libre</b> skin cancer detection android app.</h3>
 
 <p id="badges" align="center">
-    <a href="/LICENSE"><img alt="License: MPL-2.0" src="https://img.shields.io/badge/license-MPL--2.0-blue.svg"></a>
     <a href="https://github.com/SkinCanOrg/SkinCan/actions/workflows/build_push.yml"><img alt="CI" src="https://github.com/SkinCanOrg/SkinCan/actions/workflows/build_push.yml/badge.svg"></a>
+    <a href="https://github.com/SkinCanOrg/SkinCan/releases"><img alt="GitHub Releases" src="https://img.shields.io/github/v/release/SkinCanOrg/SkinCan?include_prereleases"></a>
+    <a href="/LICENSE"><img alt="License: MPL-2.0" src="https://img.shields.io/badge/license-MPL--2.0-blue.svg"></a>
 </p>
 
 ## About
