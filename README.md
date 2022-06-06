@@ -33,6 +33,7 @@
    - [x] Move photo automatically to data/Files/results
    - [ ] Delete data when photo no longer exists
    - [ ] Delete photo when data being deleted
+   - [ ] Reverse current list (scannedAt DESC)
 - [ ] Landscape/Desktop support (Low priority)
 
 ### Mobile Team
