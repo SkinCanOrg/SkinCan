@@ -8,6 +8,8 @@ plugins {
     id("com.squareup.sqldelight") version Library.Version.sqlDelight
 }
 
+val SUPPORTED_ABIS = setOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+
 @Suppress("UnstableApiUsage")
 android {
     compileSdk = Android.compileSdk
@@ -19,7 +21,20 @@ android {
         versionCode = Android.versionCode
         versionName = Android.versionName
 
+        ndk {
+            abiFilters += SUPPORTED_ABIS
+        }
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include(*SUPPORTED_ABIS.toTypedArray())
+            isUniversalApk = true
+        }
     }
 
     buildTypes {
