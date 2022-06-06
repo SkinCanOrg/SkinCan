@@ -47,15 +47,17 @@
             android:id="@+id/tv_datetime" />
 
         <TextView
+            android:ellipsize="end"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
             android:layout_width="0dp"
+            android:maxLines="2"
             android:textColor="?attr/colorOnSurfaceVariant"
             app:layout_constraintEnd_toStartOf="@id/tv_result_status"
             app:layout_constraintStart_toStartOf="@id/tv_datetime"
             app:layout_constraintTop_toBottomOf="@id/tv_datetime"
-            tools:text="No cancer found"
+            tools:text="No cancer found\nlol\nlol"
             android:id="@+id/tv_status" />
 
         <TextView

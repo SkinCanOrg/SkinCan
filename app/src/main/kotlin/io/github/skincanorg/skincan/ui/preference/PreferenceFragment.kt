@@ -24,6 +24,7 @@ class PreferenceFragment : PreferenceFragmentCompat() {
                 key = PreferenceKeys.NIGHT_MODE
                 titleRes = R.string.dark_mode
                 isChecked = Util.isNightModeOn(context)
+                widgetLayoutResource = R.layout.preference_material_switch
             }
         }
     }

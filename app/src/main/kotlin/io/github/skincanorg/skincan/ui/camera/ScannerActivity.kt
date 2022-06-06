@@ -53,7 +53,6 @@ class ScannerActivity : AppCompatActivity() {
     private var photoFile: File? = null
     private var shouldLoop = false
     private var looped = true
-    private lateinit var interpreter: Interpreter
     private lateinit var image: Bitmap
 
     @Inject
@@ -64,17 +63,6 @@ class ScannerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        val conditions = CustomModelDownloadConditions.Builder()
-            .requireWifi()
-            .build()
-        FirebaseModelDownloader.getInstance()
-            .getModel("CancerDetector", DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND, conditions)
-            .addOnSuccessListener { model ->
-                val modelFile = model?.file
-                if (modelFile != null)
-                    interpreter = Interpreter(modelFile)
-            }
 
         binding.apply {
             photoFile = intent.extras?.get("IMG_FILE") as File?
@@ -138,95 +126,102 @@ class ScannerActivity : AppCompatActivity() {
     }
 
     private fun doPrediction(bitmap: Bitmap) {
-        val inputShape = interpreter.getInputTensor(0).shape()
-        val inputSize = Size(inputShape[2], inputShape[1])
+        FirebaseModelDownloader.getInstance()
+            .getModel("CancerDetector", DownloadType.LATEST_MODEL, CustomModelDownloadConditions.Builder().build())
+            .addOnSuccessListener { model ->
+                val modelFile = model?.file ?: return@addOnSuccessListener
+                val interpreter = Interpreter(modelFile)
 
-        val imgProcessor = ImageProcessor.Builder()
-            .add(
-                ResizeOp(
-                    inputSize.height, inputSize.width, ResizeOp.ResizeMethod.BILINEAR,
-                ),
-            )
-            .add(NormalizeOp(0f, 1f))
-            .build()
-        val tensorImage = imgProcessor.process(TensorImage(DataType.FLOAT32).apply { load(bitmap) })
+                val inputShape = interpreter.getInputTensor(0).shape()
+                val inputSize = Size(inputShape[2], inputShape[1])
 
-        val modelOutput = TensorBuffer.createFixedSize(interpreter.getOutputTensor(0).shape(), DataType.FLOAT32)
+                val imgProcessor = ImageProcessor.Builder()
+                    .add(
+                        ResizeOp(
+                            inputSize.height, inputSize.width, ResizeOp.ResizeMethod.BILINEAR,
+                        ),
+                    )
+                    .add(NormalizeOp(0f, 1f))
+                    .build()
+                val tensorImage = imgProcessor.process(TensorImage(DataType.FLOAT32).apply { load(bitmap) })
 
-        interpreter.run(tensorImage.buffer, modelOutput.buffer.rewind())
+                val modelOutput = TensorBuffer.createFixedSize(interpreter.getOutputTensor(0).shape(), DataType.FLOAT32)
 
-        val probProcessor = TensorProcessor.Builder()
-            .add(NormalizeOp(0f, 1f))
-            .build()
+                interpreter.run(tensorImage.buffer, modelOutput.buffer.rewind())
 
-        val labels = TensorLabel(
-            BufferedReader(
-                InputStreamReader(assets.open("model_labels.txt")),
-            ).readLines(),
-            probProcessor.process(modelOutput),
-        )
+                val probProcessor = TensorProcessor.Builder()
+                    .add(NormalizeOp(0f, 1f))
+                    .build()
 
-        val resultMap = labels.mapWithFloatValue
-
-        var result = "Clear"
-        var lastHighest = .50f
-        resultMap.keys.forEach {
-            val value = resultMap[it] as Float
-            if (value >= lastHighest) {
-                if (value != lastHighest)
-                    lastHighest = value
-                result = StringBuilder().apply {
-                    append("$it ")
-                    append(String.format("%.2f", value))
-                }.toString()
-            }
-            Log.d(
-                "ziML",
-                StringBuilder().apply {
-                    append("$it ")
-                    append(String.format("%.2f", value))
-                }.toString(),
-            )
-        }
-
-        Log.d("ziML", result)
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            delay(3000L)
-            val q = database.resultsQueries
-
-            val currentTime = System.currentTimeMillis() / 1000
-            val cacheDir = Util.getCacheDir(applicationContext, "results")
-
-            var outChan: FileChannel? = null
-            var inChan: FileChannel? = null
-            val newFile = File(cacheDir, currentTime.toString())
-            try {
-                outChan = FileOutputStream(newFile).channel
-                inChan = FileInputStream(photoFile).channel
-                inChan.transferTo(0, inChan.size(), outChan)
-                inChan.close()
-                photoFile!!.delete()
-            } finally {
-                inChan?.close()
-                outChan?.close()
-            }
-
-            val path = newFile.path
-            q.insert(path, result, currentTime)
-
-            withContext(Dispatchers.Main) {
-                Toast.makeText(this@ScannerActivity, "ML Result: $result", Toast.LENGTH_LONG).show()
-                startActivity(
-                    Intent(this@ScannerActivity, ResultActivity::class.java).apply {
-                        putExtra(ResultActivity.PHOTO_PATH, path)
-                        putExtra(ResultActivity.RESULT, result)
-                        putExtra(ResultActivity.FROM, 0)
-                    },
+                val labels = TensorLabel(
+                    BufferedReader(
+                        InputStreamReader(assets.open("model_labels.txt")),
+                    ).readLines(),
+                    probProcessor.process(modelOutput),
                 )
-                shouldLoop = false
-                finish()
-            }
-        }
+
+                val resultMap = labels.mapWithFloatValue
+
+                var result = "Clear"
+                var lastHighest = .50f
+                resultMap.keys.forEach {
+                    val value = resultMap[it] as Float
+                    if (value >= lastHighest) {
+                        if (value != lastHighest)
+                            lastHighest = value
+                        result = StringBuilder().apply {
+                            append("$it ")
+                            append(String.format("%.2f", value))
+                        }.toString()
+                    }
+                    Log.d(
+                        "ziML",
+                        StringBuilder().apply {
+                            append("$it ")
+                            append(String.format("%.2f", value))
+                        }.toString(),
+                    )
+                }
+
+                Log.d("ziML", result)
+
+                lifecycleScope.launch(Dispatchers.IO) {
+                    delay(3000L)
+                    val q = database.resultsQueries
+
+                    val currentTime = System.currentTimeMillis() / 1000
+                    val cacheDir = Util.getCacheDir(applicationContext, "results")
+
+                    var outChan: FileChannel? = null
+                    var inChan: FileChannel? = null
+                    val newFile = File(cacheDir, currentTime.toString())
+                    try {
+                        outChan = FileOutputStream(newFile).channel
+                        inChan = FileInputStream(photoFile).channel
+                        inChan.transferTo(0, inChan.size(), outChan)
+                        inChan.close()
+                        photoFile!!.delete()
+                    } finally {
+                        inChan?.close()
+                        outChan?.close()
+                    }
+
+                    val path = newFile.path
+                    q.insert(path, result, currentTime)
+
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@ScannerActivity, "ML Result: $result", Toast.LENGTH_LONG).show()
+                        startActivity(
+                            Intent(this@ScannerActivity, ResultActivity::class.java).apply {
+                                putExtra(ResultActivity.PHOTO_PATH, path)
+                                putExtra(ResultActivity.RESULT, result)
+                                putExtra(ResultActivity.FROM, 0)
+                            },
+                        )
+                        shouldLoop = false
+                        finish()
+                    }
+                }
+            }.addOnFailureListener { finish() }
     }
 }

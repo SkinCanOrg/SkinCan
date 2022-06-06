@@ -32,7 +32,8 @@
         <item name="android:navigationBarColor">?android:attr/colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="O_MR1">false</item>
 
-        <item name="switchStyle">@style/Widget.App.Switch</item>
+        <!-- Use MaterialSwitch to fix width issue -->
+        <item name="materialSwitchStyle">@style/Widget.Material3.CompoundButton.MaterialSwitch</item>
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
     </style>
 </resources>

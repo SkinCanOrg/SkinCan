@@ -19,6 +19,9 @@ import data.Result
 import io.github.skincanorg.skincan.databinding.ItemRowResultBinding
 import io.github.skincanorg.skincan.lib.Util
 import io.github.skincanorg.skincan.ui.result.ResultActivity
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class ResultRecyclerAdapter :
     PagingDataAdapter<Result, ResultRecyclerAdapter.ListViewHolder>(DIFF_CALLBACK) {
@@ -40,16 +43,22 @@ class ResultRecyclerAdapter :
                     .load(Util.processBitmap(result.imgPath))
                     .into(ivResultPict)
 
-                tvDatetime.text = result.scannedAt.toString()
+
+                tvDatetime.text =
+                    DateTimeFormatter.ofPattern("d MMM YYYY, HH:mm")
+                        .format(Instant.ofEpochSecond(result.scannedAt).atZone(ZoneId.systemDefault()))
+
                 when (result.result) {
                     "Clear" -> {
                         tvResultStatus.text = "Clear"
                         tvStatus.text = "No cancer found"
                     }
+
                     null -> {
                         tvResultStatus.text = "ERROR"
                         tvStatus.text = "Error: Failed to retrieve data"
                     }
+
                     else -> {
                         tvResultStatus.text = "Cancer"
                         tvStatus.text = "Potientional risk cancer found"

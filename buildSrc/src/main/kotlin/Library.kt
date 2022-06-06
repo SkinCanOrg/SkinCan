@@ -39,7 +39,7 @@ object Library {
             const val paging = "androidx.paging:paging-runtime-ktx:3.1.1"
         }
 
-        const val material = "com.google.android.material:material:1.6.1"
+        const val material = "com.google.android.material:material:1.7.0-alpha02"
         const val hilt = "com.google.dagger:hilt-android:${Version.hilt}"
         const val hiltCompiler = "com.google.dagger:hilt-compiler:${Version.hilt}"
 

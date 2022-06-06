@@ -24,7 +24,7 @@
 
 ### TODO
 - [ ] Fix ML
-   - [ ] Wait for ML model to download on scan
+   - [x] Wait for ML model to download on scan
 - [x] Polishing Auth
    - [x] Add alert for registration fail
    - [x] Add input validation
@@ -34,7 +34,7 @@
    - [x] Move photo automatically to data/Files/results
    - [ ] Delete data when photo no longer exists
    - [ ] Delete photo when data being deleted
-   - [ ] Reverse current list (scannedAt DESC)
+   - [x] Reverse current list (scannedAt DESC)
 - [ ] Landscape/Desktop support (Low priority)
 
 ### Mobile Team

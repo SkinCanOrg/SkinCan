@@ -76,6 +76,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                     else -> {}
                 }
+                validateList.forEach { it.isEnabled = state !is AppResult.Loading }
                 btnLogin.isLoading = state is AppResult.Loading
                 btnGotoRegisterContainer.isEnabled = state !is AppResult.Loading
             }

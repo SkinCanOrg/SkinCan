@@ -14,11 +14,13 @@ FROM result
 WHERE _id = :id;
 
 lastResult:
-SELECT result FROM result;
+SELECT result FROM result
+ORDER BY scannedAt DESC;
 
 results:
 SELECT *
 FROM result
+ORDER BY scannedAt DESC
 LIMIT :limit OFFSET :offset;
 
 insert:
