@@ -8,6 +8,7 @@
 
 <p id="badges" align="center">
     <a href="/LICENSE"><img alt="License: MPL-2.0" src="https://img.shields.io/badge/license-MPL--2.0-blue.svg"></a>
+    <a href="https://github.com/SkinCanOrg/SkinCan/actions/workflows/build_push.yml"><img alt="CI" src="https://github.com/SkinCanOrg/SkinCan/actions/workflows/build_push.yml/badge.svg"></a>
 </p>
 
 ## About
