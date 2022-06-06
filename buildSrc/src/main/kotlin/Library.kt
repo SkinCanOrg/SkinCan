@@ -8,14 +8,16 @@ object Library {
         const val okhttp = "4.9.3"
         const val aboutLibraries = "10.3.0"
         const val sqlDelight = "1.5.3"
+        const val adt = "7.2.0"
+        const val kotlinAndroid = "1.6.21"
     }
 
     object Root {
-        // Gradle Plugin 7.1+ doesn't work on IDEA yet.
-        // This will probably fixed on IDEA 2022.2.1 EAP 3.
-        const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.4"
-        const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"
-        const val hiltGradlePlugin= "com.google.dagger:hilt-android-gradle-plugin:${Version.hilt}"
+        // Gradle Plugin 7.1+ doesn't work on IDEA 2022.1.x.
+        // This issue has been fixed on IDEA 2022.2.1 EAP 3 (build 222.2889).
+        const val androidGradlePlugin = "com.android.tools.build:gradle:${Version.adt}"
+        const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlinAndroid}"
+        const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Version.hilt}"
         const val googleServices = "com.google.gms:google-services:4.3.10"
     }
 
