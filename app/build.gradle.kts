@@ -82,6 +82,7 @@ dependencies {
     implementation(Library.App.material)
     implementation(Library.App.hilt)
     kapt(Library.App.hiltCompiler)
+    implementation(Library.App.googleAuth)
     implementation(platform(Library.App.Firebase.bom))
     implementation(Library.App.Firebase.auth)
     implementation(Library.App.Firebase.firestore)

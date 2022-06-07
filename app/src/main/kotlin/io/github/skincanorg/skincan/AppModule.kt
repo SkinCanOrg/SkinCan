@@ -9,6 +9,7 @@
 package io.github.skincanorg.skincan
 
 import android.content.Context
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Module
 import dagger.Provides
@@ -23,10 +24,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    // --- [ Start of qualifier defines ]
-
-    // --- [ End of qualifier defines ]
-
     @Singleton
     @Provides
     fun providesPreferences(@ApplicationContext context: Context) = PreferencesHelper(context)
@@ -43,4 +40,12 @@ object AppModule {
     @Singleton
     @Provides
     fun providesResultRepository(database: Database): ResultRepository = ResultRepository(database)
+
+    @Singleton
+    @Provides
+    fun provideGoogleSignInClient(@ApplicationContext context: Context): GoogleSignInOptions =
+        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(context.getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
 }

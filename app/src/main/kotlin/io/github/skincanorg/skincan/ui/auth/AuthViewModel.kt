@@ -11,6 +11,7 @@ package io.github.skincanorg.skincan.ui.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.UserProfileChangeRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,6 +21,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(private val repo: UserRepository) : ViewModel() {
+    @Inject
+    lateinit var googleSIO: GoogleSignInOptions // TODO: Login with Google
+
     val authState: LiveData<Boolean> = repo.getFirebaseAuthState()
 
     fun getUser() = repo.getUser()
