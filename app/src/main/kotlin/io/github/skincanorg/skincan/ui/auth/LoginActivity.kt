@@ -10,11 +10,15 @@ package io.github.skincanorg.skincan.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.data.model.AppResult
@@ -22,11 +26,15 @@ import io.github.skincanorg.skincan.databinding.ActivityLoginBinding
 import io.github.skincanorg.skincan.ui.main.MainActivity
 import io.github.skincanorg.skincan.widget.dialog.LoginAlertDialog
 import io.github.skincanorg.skincan.widget.edittext.ValidateEditText
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private val binding: ActivityLoginBinding by viewBinding(CreateMethod.INFLATE)
     private val viewModel: AuthViewModel by viewModels()
+
+    @Inject
+    lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,14 +78,17 @@ class LoginActivity : AppCompatActivity() {
                         else
                             Toast.makeText(this@LoginActivity, "Error: ${state.message}", Toast.LENGTH_LONG).show()
                     }
+
                     is AppResult.Success -> {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finishAffinity()
                     }
+
                     else -> {}
                 }
                 validateList.forEach { it.isEnabled = state !is AppResult.Loading }
-                btnLogin.isLoading = state is AppResult.Loading
+                btnLogin.isLoading = state is AppResult.Loading && state.data == 2
+                btnGoogleAuth.isLoading = state is AppResult.Loading && state.data == 1
                 btnGotoRegisterContainer.isEnabled = state !is AppResult.Loading
             }
 
@@ -95,12 +106,30 @@ class LoginActivity : AppCompatActivity() {
                     viewModel.login(etEmail.text.toString(), etPassword.text.toString())
             }
 
+            btnGoogleAuth.apply {
+                isStrokeMode = true
+                setOnClickListener {
+                    launcherIntentGoogle.launch(googleSignInClient.signInIntent)
+                }
+            }
+
             btnGotoRegisterContainer.setOnClickListener {
                 startActivity(
                     Intent(this@LoginActivity, RegisterActivity::class.java).apply {
                         addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
                     },
                 )
+            }
+        }
+    }
+
+    private val launcherIntentGoogle = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult(),
+    ) { result ->
+        Log.d("ziLogin", result.toString())
+        if (result.resultCode == RESULT_OK) {
+            GoogleSignIn.getSignedInAccountFromIntent(result.data).addOnSuccessListener {
+                viewModel.login(it.idToken!!)
             }
         }
     }

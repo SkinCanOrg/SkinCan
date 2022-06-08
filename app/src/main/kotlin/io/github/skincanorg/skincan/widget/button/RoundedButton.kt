@@ -17,7 +17,7 @@ import io.github.skincanorg.skincan.lib.Extension.dp
 import io.github.skincanorg.skincan.lib.Extension.sp
 import io.github.skincanorg.skincan.lib.Util.getDrawableWithAttrTint
 
-class RoundedButton @JvmOverloads constructor(
+open class RoundedButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int? = null,

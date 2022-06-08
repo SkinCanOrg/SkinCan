@@ -11,9 +11,11 @@ package io.github.skincanorg.skincan.widget.button
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.databinding.LoadingButtonBinding
@@ -31,6 +33,22 @@ class LoadingButton @JvmOverloads constructor(
 
     @ColorInt
     var textColor: Int = 0
+
+    var isStrokeMode: Boolean
+        get() = false
+        set(value) {
+            if (!value)
+                return
+            binding.apply {
+                button.apply {
+                    background = ContextCompat.getDrawable(context, R.drawable.bg_rounded_ripple_stroke)
+                    val typedValue = TypedValue()
+                    context.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
+                    setTextColor(typedValue.data)
+                    loading.indeterminateTintList = ColorStateList.valueOf(typedValue.data)
+                }
+            }
+        }
 
     init {
         binding = LoadingButtonBinding.inflate(LayoutInflater.from(context), this, true)
@@ -50,6 +68,9 @@ class LoadingButton @JvmOverloads constructor(
                 button.setTextColor(textColor)
                 loading.indeterminateTintList = ColorStateList.valueOf(textColor)
             }
+
+            if (buttonColor != 0)
+                button.backgroundTintList = ColorStateList.valueOf(buttonColor)
         }
     }
 

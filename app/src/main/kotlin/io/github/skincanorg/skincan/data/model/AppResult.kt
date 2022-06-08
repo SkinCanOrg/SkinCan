@@ -11,5 +11,5 @@ package io.github.skincanorg.skincan.data.model
 sealed class AppResult<out R> {
     data class Success<out T>(val data: T) : AppResult<T>()
     data class Error<T>(val message: String, val data: T? = null) : AppResult<T>()
-    object Loading : AppResult<Nothing>()
+    data class Loading<T>(val data: T? = null) : AppResult<T>()
 }

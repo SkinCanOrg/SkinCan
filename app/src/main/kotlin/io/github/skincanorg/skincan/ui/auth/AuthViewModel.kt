@@ -12,6 +12,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.UserProfileChangeRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.skincanorg.skincan.data.model.AppResult
@@ -24,13 +25,19 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
 
     fun getUser() = repo.getUser()
 
-    private var _loginState = MutableLiveData<AppResult<Boolean>>()
-    val loginState: LiveData<AppResult<Boolean>> = _loginState
+    /* LoginMethod:
+     * - null = Failed
+     * - 0 = Custom Token
+     * - 1 = GoogleAuth
+     * - 2 = Password Login
+     */
+    private var _loginState = MutableLiveData<AppResult<Int>>()
+    val loginState: LiveData<AppResult<Int>> = _loginState
 
     fun login(email: String, password: String) {
-        _loginState.postValue(AppResult.Loading)
-        repo.login(email, password).addOnSuccessListener { result ->
-            _loginState.postValue(AppResult.Success(true))
+        _loginState.postValue(AppResult.Loading(2))
+        repo.login(email, password).addOnSuccessListener {
+            _loginState.postValue(AppResult.Success(2))
         }.addOnFailureListener { exc ->
             val reason = if (exc is FirebaseAuthException)
                 exc.errorCode
@@ -40,14 +47,30 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
         }
     }
 
+    fun login(token: String, method: Int = 1) {
+        _loginState.postValue(AppResult.Loading(method))
+        when (method) {
+            1 -> {
+                repo.login(GoogleAuthProvider.getCredential(token, null))
+                    .addOnSuccessListener {
+                        _loginState.postValue(AppResult.Success(method))
+                    }.addOnFailureListener {
+                        _loginState.postValue(AppResult.Error("hmm", null))
+                    }
+            }
+
+            else -> {}
+        }
+    }
+
     fun logout() = repo.logout()
 
     private var _registerState = MutableLiveData<AppResult<Boolean>>()
     val registerState: LiveData<AppResult<Boolean>> = _registerState
 
     fun register(name: String, email: String, password: String) {
-        _registerState.postValue(AppResult.Loading)
-        repo.register(email, password).addOnSuccessListener { result ->
+        _registerState.postValue(AppResult.Loading())
+        repo.register(email, password).addOnSuccessListener {
             getUser().updateProfile(
                 UserProfileChangeRequest.Builder()
                     .setDisplayName(name)
@@ -61,7 +84,7 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
                 exc.errorCode
             else
                 exc.localizedMessage
-            _registerState.postValue(AppResult.Error(reason, false))
+            _registerState.postValue(AppResult.Error(reason, null))
         }
     }
 
@@ -69,10 +92,10 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
     val reloadState: LiveData<AppResult<Boolean>> = _reloadState
 
     fun reload() {
-        _reloadState.postValue(AppResult.Loading)
+        _reloadState.postValue(AppResult.Loading())
         getUser().reload().addOnFailureListener {
             logout()
-            _reloadState.postValue(AppResult.Error("", false))
+            _reloadState.postValue(AppResult.Error("", null))
         }
     }
 }

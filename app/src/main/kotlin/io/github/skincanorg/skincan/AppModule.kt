@@ -9,6 +9,8 @@
 package io.github.skincanorg.skincan
 
 import android.content.Context
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -37,8 +39,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesRepository(googleSIO: GoogleSignInOptions, auth: FirebaseAuth): UserRepository =
-        UserRepository(googleSIO, auth)
+    fun providesRepository(auth: FirebaseAuth): UserRepository = UserRepository(auth)
 
     @Singleton
     @Provides
@@ -56,4 +57,12 @@ object AppModule {
             .requestIdToken(context.getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
+
+    @Singleton
+    @Provides
+    fun provideGoogleSignInClient(
+        @ApplicationContext context: Context,
+        googleSignInOptions: GoogleSignInOptions,
+    ): GoogleSignInClient =
+        GoogleSignIn.getClient(context, googleSignInOptions)
 }

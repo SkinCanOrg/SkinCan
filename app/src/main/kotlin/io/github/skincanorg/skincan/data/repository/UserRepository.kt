@@ -8,18 +8,20 @@
 
 package io.github.skincanorg.skincan.data.repository
 
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import io.github.skincanorg.skincan.data.auth.AuthLiveData
 
-class UserRepository(private val googleSIO: GoogleSignInOptions, private val auth: FirebaseAuth) {
+class UserRepository(private val auth: FirebaseAuth) {
 
     fun getFirebaseAuthState(): AuthLiveData = AuthLiveData(auth)
 
     fun getUser() = auth.currentUser as FirebaseUser
 
     fun login(email: String, password: String) = auth.signInWithEmailAndPassword(email, password)
+
+    fun login(credential: AuthCredential) = auth.signInWithCredential(credential)
 
     fun logout() = auth.signOut()
 
