@@ -24,7 +24,8 @@
 - [x] News List (Placeholder)
 
 ### TODO
-- [ ] Fix ML
+- [ ] Machine Learning
+   - [ ] Fix ML scan result
    - [x] Wait for ML model to download on scan
 - [x] Polishing Auth
    - [x] Add alert for registration fail
