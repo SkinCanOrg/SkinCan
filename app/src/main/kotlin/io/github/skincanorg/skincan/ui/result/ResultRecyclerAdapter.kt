@@ -6,7 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package io.github.skincanorg.skincan.data.result
+package io.github.skincanorg.skincan.ui.result
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide
 import data.Result
 import io.github.skincanorg.skincan.databinding.ItemRowResultBinding
 import io.github.skincanorg.skincan.lib.Util
-import io.github.skincanorg.skincan.ui.result.ResultActivity
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter

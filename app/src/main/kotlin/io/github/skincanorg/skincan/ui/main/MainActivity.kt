@@ -18,7 +18,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.Database
 import io.github.skincanorg.skincan.R
-import io.github.skincanorg.skincan.data.main.NewsAdapter
 import io.github.skincanorg.skincan.data.preference.PreferencesHelper
 import io.github.skincanorg.skincan.databinding.ActivityMainBinding
 import io.github.skincanorg.skincan.lib.Extension.readJson

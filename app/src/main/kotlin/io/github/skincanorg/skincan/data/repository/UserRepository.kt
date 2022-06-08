@@ -8,13 +8,12 @@
 
 package io.github.skincanorg.skincan.data.repository
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import io.github.skincanorg.skincan.data.auth.AuthLiveData
 
-class UserRepository {
-    private val auth = Firebase.auth
+class UserRepository(private val googleSIO: GoogleSignInOptions, private val auth: FirebaseAuth) {
 
     fun getFirebaseAuthState(): AuthLiveData = AuthLiveData(auth)
 

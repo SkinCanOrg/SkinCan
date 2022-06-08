@@ -10,6 +10,9 @@ package io.github.skincanorg.skincan
 
 import android.content.Context
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Module
 import dagger.Provides
@@ -30,7 +33,12 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesRepository(): UserRepository = UserRepository()
+    fun providesFirebaseAuth(): FirebaseAuth = Firebase.auth
+
+    @Singleton
+    @Provides
+    fun providesRepository(googleSIO: GoogleSignInOptions, auth: FirebaseAuth): UserRepository =
+        UserRepository(googleSIO, auth)
 
     @Singleton
     @Provides
@@ -43,7 +51,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideGoogleSignInClient(@ApplicationContext context: Context): GoogleSignInOptions =
+    fun provideGoogleSignInOptions(@ApplicationContext context: Context): GoogleSignInOptions =
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(context.getString(R.string.default_web_client_id))
             .requestEmail()
