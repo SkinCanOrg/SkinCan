@@ -11,21 +11,29 @@ package io.github.skincanorg.skincan.ui.auth
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.data.model.AppResult
 import io.github.skincanorg.skincan.databinding.ActivityRegisterBinding
+import io.github.skincanorg.skincan.ui.main.MainActivity
 import io.github.skincanorg.skincan.widget.dialog.LoginAlertDialog
 import io.github.skincanorg.skincan.widget.edittext.ValidateEditText
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
     private val binding: ActivityRegisterBinding by viewBinding(CreateMethod.INFLATE)
     private val viewModel: AuthViewModel by viewModels()
+
+    @Inject
+    lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,18 +77,32 @@ class RegisterActivity : AppCompatActivity() {
                         else
                             Toast.makeText(this@RegisterActivity, "Error: ${state.message}", Toast.LENGTH_LONG).show()
                     }
+
                     is AppResult.Success -> {
-                        LoginAlertDialog(this@RegisterActivity).apply {
-                            setOnLoginListener {
-                                startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-                                finish()
-                            }
-                        }.show()
+                        if (state.data == 2)
+                            LoginAlertDialog(this@RegisterActivity).apply {
+                                setOnLoginListener {
+                                    startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                                    finish()
+                                }
+                            }.show()
+                        else {
+                            startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+                            finishAffinity()
+                        }
                     }
+
                     else -> {}
                 }
                 validateList.forEach { it.isEnabled = state !is AppResult.Loading }
-                btnRegister.isLoading = state is AppResult.Loading
+                btnRegister.apply {
+                    isEnabled = state !is AppResult.Loading
+                    isLoading = state is AppResult.Loading && state.data == 2
+                }
+                btnGoogleAuth.apply {
+                    isEnabled = state !is AppResult.Loading
+                    isLoading = state is AppResult.Loading && state.data == 1
+                }
                 btnGotoLoginContainer.isEnabled = state !is AppResult.Loading
             }
 
@@ -98,12 +120,27 @@ class RegisterActivity : AppCompatActivity() {
                     viewModel.register(etName.text.toString(), etEmail.text.toString(), etPassword.text.toString())
             }
 
+            btnGoogleAuth.apply {
+                isStrokeMode = true
+                setOnClickListener { launcherIntentGoogle.launch(googleSignInClient.signInIntent) }
+            }
+
             btnGotoLoginContainer.setOnClickListener {
                 startActivity(
                     Intent(this@RegisterActivity, LoginActivity::class.java).apply {
                         addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
                     },
                 )
+            }
+        }
+    }
+
+    private val launcherIntentGoogle = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult(),
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            GoogleSignIn.getSignedInAccountFromIntent(result.data).addOnSuccessListener {
+                viewModel.register(it.idToken!!)
             }
         }
     }

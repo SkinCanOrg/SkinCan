@@ -30,6 +30,7 @@
    - [x] Add alert for registration fail
    - [x] Add input validation
    - [x] Add loading into button
+   - [ ] Link/Unlink account
 - [x] Result List (using SQLDelight)
    <!-- Reference: https://github.com/tachiyomiorg/tachiyomi/blob/master/app/src/main/java/eu/kanade/tachiyomi/data/cache/CoverCache.kt -->
    - [x] Move photo automatically to data/Files/results

@@ -26,4 +26,6 @@ class UserRepository(private val auth: FirebaseAuth) {
     fun logout() = auth.signOut()
 
     fun register(email: String, password: String) = auth.createUserWithEmailAndPassword(email, password)
+
+    fun register(credential: AuthCredential) = login(credential)
 }

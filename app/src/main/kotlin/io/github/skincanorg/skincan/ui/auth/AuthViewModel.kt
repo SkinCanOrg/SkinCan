@@ -65,8 +65,8 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
 
     fun logout() = repo.logout()
 
-    private var _registerState = MutableLiveData<AppResult<Boolean>>()
-    val registerState: LiveData<AppResult<Boolean>> = _registerState
+    private var _registerState = MutableLiveData<AppResult<Int>>()
+    val registerState: LiveData<AppResult<Int>> = _registerState
 
     fun register(name: String, email: String, password: String) {
         _registerState.postValue(AppResult.Loading())
@@ -77,7 +77,7 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
                     .build(),
             ).addOnSuccessListener {
                 logout() // Our user-flow is to redirect them to login page after register
-                _registerState.postValue(AppResult.Success(true))
+                _registerState.postValue(AppResult.Success(2))
             }
         }.addOnFailureListener { exc ->
             val reason = if (exc is FirebaseAuthException)
@@ -85,6 +85,22 @@ class AuthViewModel @Inject constructor(private val repo: UserRepository) : View
             else
                 exc.localizedMessage
             _registerState.postValue(AppResult.Error(reason, null))
+        }
+    }
+
+    fun register(token: String, method: Int = 1) {
+        _registerState.postValue(AppResult.Loading(method))
+        when (method) {
+            1 -> {
+                repo.login(GoogleAuthProvider.getCredential(token, null))
+                    .addOnSuccessListener {
+                        _registerState.postValue(AppResult.Success(method))
+                    }.addOnFailureListener {
+                        _registerState.postValue(AppResult.Error("hmm", null))
+                    }
+            }
+
+            else -> {}
         }
     }
 

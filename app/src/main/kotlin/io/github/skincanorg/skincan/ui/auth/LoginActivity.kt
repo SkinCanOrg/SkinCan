@@ -10,7 +10,6 @@ package io.github.skincanorg.skincan.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -87,8 +86,14 @@ class LoginActivity : AppCompatActivity() {
                     else -> {}
                 }
                 validateList.forEach { it.isEnabled = state !is AppResult.Loading }
-                btnLogin.isLoading = state is AppResult.Loading && state.data == 2
-                btnGoogleAuth.isLoading = state is AppResult.Loading && state.data == 1
+                btnLogin.apply {
+                    isEnabled = state !is AppResult.Loading
+                    isLoading = state is AppResult.Loading && state.data == 2
+                }
+                btnGoogleAuth.apply {
+                    isEnabled = state !is AppResult.Loading
+                    isLoading = state is AppResult.Loading && state.data == 1
+                }
                 btnGotoRegisterContainer.isEnabled = state !is AppResult.Loading
             }
 
@@ -108,9 +113,7 @@ class LoginActivity : AppCompatActivity() {
 
             btnGoogleAuth.apply {
                 isStrokeMode = true
-                setOnClickListener {
-                    launcherIntentGoogle.launch(googleSignInClient.signInIntent)
-                }
+                setOnClickListener { launcherIntentGoogle.launch(googleSignInClient.signInIntent) }
             }
 
             btnGotoRegisterContainer.setOnClickListener {
@@ -126,7 +129,6 @@ class LoginActivity : AppCompatActivity() {
     private val launcherIntentGoogle = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult(),
     ) { result ->
-        Log.d("ziLogin", result.toString())
         if (result.resultCode == RESULT_OK) {
             GoogleSignIn.getSignedInAccountFromIntent(result.data).addOnSuccessListener {
                 viewModel.login(it.idToken!!)
