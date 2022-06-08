@@ -37,7 +37,7 @@ jobs:
           mkdir -p ~/.gradle
           cp .github/runner-files/ci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: Create google_services.json
+      - name: Create google-services.json
         run: |
           echo '${{ secrets.GOOGLE_SERVICES }}' > app/google-services.json
 
