@@ -9,6 +9,12 @@
 package io.github.skincanorg.skincan
 
 import android.content.Context
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Module
 import dagger.Provides
@@ -23,17 +29,17 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    // --- [ Start of qualifier defines ]
-
-    // --- [ End of qualifier defines ]
-
     @Singleton
     @Provides
     fun providesPreferences(@ApplicationContext context: Context) = PreferencesHelper(context)
 
     @Singleton
     @Provides
-    fun providesRepository(): UserRepository = UserRepository()
+    fun providesFirebaseAuth(): FirebaseAuth = Firebase.auth
+
+    @Singleton
+    @Provides
+    fun providesRepository(auth: FirebaseAuth): UserRepository = UserRepository(auth)
 
     @Singleton
     @Provides
@@ -43,4 +49,20 @@ object AppModule {
     @Singleton
     @Provides
     fun providesResultRepository(database: Database): ResultRepository = ResultRepository(database)
+
+    @Singleton
+    @Provides
+    fun provideGoogleSignInOptions(@ApplicationContext context: Context): GoogleSignInOptions =
+        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(context.getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+    @Singleton
+    @Provides
+    fun provideGoogleSignInClient(
+        @ApplicationContext context: Context,
+        googleSignInOptions: GoogleSignInOptions,
+    ): GoogleSignInClient =
+        GoogleSignIn.getClient(context, googleSignInOptions)
 }

@@ -6,7 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package io.github.skincanorg.skincan.data.main
+package io.github.skincanorg.skincan.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

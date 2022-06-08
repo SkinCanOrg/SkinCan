@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.skincanorg.skincan.data.result.ResultRecyclerAdapter
 import io.github.skincanorg.skincan.databinding.ActivityResultListBinding
 
 @AndroidEntryPoint

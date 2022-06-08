@@ -42,6 +42,7 @@ object Library {
         const val material = "com.google.android.material:material:1.7.0-alpha02"
         const val hilt = "com.google.dagger:hilt-android:${Version.hilt}"
         const val hiltCompiler = "com.google.dagger:hilt-compiler:${Version.hilt}"
+        const val googleAuth = "com.google.android.gms:play-services-auth:20.2.0"
 
         object Firebase {
             const val bom = "com.google.firebase:firebase-bom:30.1.0"
