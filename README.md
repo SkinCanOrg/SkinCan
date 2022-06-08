@@ -24,7 +24,7 @@
 - [x] News List (Placeholder)
 
 ### TODO
-- [ ] Machine Learning
+- [x] Machine Learning
    - [ ] Fix ML scan result
    - [x] Wait for ML model to download on scan
 - [x] Polishing Auth
