@@ -13,7 +13,7 @@
 </p>
 
 ## About
-**SkinCan** is a **libre** skin cancer detection android app, created for Bangkit Product-based Capstone Project.
+**SkinCan** is a **libre** skin cancer detection android app, created for **Bangkit Product-based Capstone Project**.
 
 ### MVP (Minimum Viable Product)
 - [x] Onboarding
@@ -31,6 +31,7 @@
    - [x] Add input validation
    - [x] Add loading into button
    - [ ] Link/Unlink account
+   - [ ] Password changer (especially for account registered with Google)
 - [x] Result List (using SQLDelight)
    <!-- Reference: https://github.com/tachiyomiorg/tachiyomi/blob/master/app/src/main/java/eu/kanade/tachiyomi/data/cache/CoverCache.kt -->
    - [x] Move photo automatically to data/Files/results
