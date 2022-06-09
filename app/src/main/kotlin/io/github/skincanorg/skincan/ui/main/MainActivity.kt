@@ -77,10 +77,21 @@ class MainActivity : AppCompatActivity() {
                 }
                 val results = database.resultsQueries.lastResult().executeAsList()
                 if (results.isNotEmpty())
-                    tvResultStatus.text = when (results[0].result) {
-                        "Clear" -> "Clear"
-                        null -> "ERROR"
-                        else -> "Cancer"
+                    when (results[0].result) {
+                        "Clear" -> {
+                            tvResultStatus.isEnabled = true
+                            tvResultStatus.text = "Clear"
+                        }
+
+                        null -> {
+                            tvResultStatus.isEnabled = false
+                            tvResultStatus.text = "ERROR"
+                        }
+
+                        else -> {
+                            tvResultStatus.isEnabled = false
+                            tvResultStatus.text = "Cancer"
+                        }
                     }
             }
         }

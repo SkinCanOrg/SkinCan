@@ -52,7 +52,7 @@
 
     <TextView
         android:background="@drawable/bg_full_round"
-        android:backgroundTint="?attr/colorSecondaryContainer"
+        android:backgroundTint="@color/sel_result_status"
         android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -60,7 +60,7 @@
         android:paddingHorizontal="28dp"
         android:paddingVertical="6dp"
         android:text="@string/clear"
-        android:textColor="?attr/colorOnSecondaryContainer"
+        android:textColor="@color/sel_result_text_status"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

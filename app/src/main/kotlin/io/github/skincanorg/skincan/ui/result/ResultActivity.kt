@@ -93,16 +93,19 @@ class ResultActivity : AppCompatActivity() {
 
             when (intent.extras?.getString(RESULT)) {
                 "Clear" -> {
+                    tvResultStatus.isEnabled = true
                     tvResultStatus.text = "Clear"
                     tvResultDesc.text = "Great!\nYou’re clear from skin cancer\n\nStay safe from cancer risk potential"
                 }
 
                 null -> {
+                    tvResultStatus.isEnabled = false
                     tvResultStatus.text = "ERROR"
                     tvResultDesc.text = "Uh oh! Something went wrong!"
                 }
 
                 else -> {
+                    tvResultStatus.isEnabled = false
                     tvResultStatus.text = "Cancer"
                     tvResultDesc.text =
                         "We found potential risk cancer on your body\n\n" +
@@ -114,6 +117,7 @@ class ResultActivity : AppCompatActivity() {
                 R.string.result_scanned_at,
                 (intent.extras?.getLong(TIMESTAMP) ?: 0L).toDateTime("d MMM YYYY, HH:mm"),
             )
+
         }
     }
 

@@ -55,16 +55,19 @@ class ResultRecyclerAdapter :
 
                 when (result.result) {
                     "Clear" -> {
+                        tvResultStatus.isEnabled = true
                         tvResultStatus.text = "Clear"
                         tvStatus.text = "No cancer found"
                     }
 
                     null -> {
+                        tvResultStatus.isEnabled = false
                         tvResultStatus.text = "ERROR"
                         tvStatus.text = "Error: Failed to retrieve data"
                     }
 
                     else -> {
+                        tvResultStatus.isEnabled = false
                         tvResultStatus.text = "Cancer"
                         tvStatus.text = "Potential risk cancer found"
                     }

@@ -20,6 +20,9 @@
     <color name="green_200">#FFB3FFD1</color>
     <color name="green_800">#FF276C1C</color>
 
+    <color name="red_200">#FFFFC5B3</color>
+    <color name="red_800">#FFB80000</color>
+
     <color name="white">#FFFFFFFF</color>
     <color name="gray_100">#FFE9EFF5</color>
     <color name="gray_200">#FFDDE4E9</color>
