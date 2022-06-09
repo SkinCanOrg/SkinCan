@@ -127,7 +127,11 @@ class ScannerActivity : AppCompatActivity() {
 
     private fun doPrediction(bitmap: Bitmap) {
         FirebaseModelDownloader.getInstance()
-            .getModel("CancerDetector", DownloadType.LATEST_MODEL, CustomModelDownloadConditions.Builder().build())
+            .getModel(
+                "CancerDetector",
+                DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND,
+                CustomModelDownloadConditions.Builder().build(),
+            )
             .addOnSuccessListener { model ->
                 val modelFile = model?.file ?: return@addOnSuccessListener
                 val interpreter = Interpreter(modelFile)
