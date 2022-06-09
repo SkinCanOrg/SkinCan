@@ -82,4 +82,8 @@
     <string name="home">Home</string>
     <string name="scan_again">Scan Again</string>
     <string name="last_result">Last Result</string>
+    <string name="error_general">Something went wrong.</string>
+    <string name="result_scanned_at">Scanned at: %s</string>
+    <string name="last_scan">Last checked: %s</string>
+    <string name="see_more">See more</string>
 </resources>

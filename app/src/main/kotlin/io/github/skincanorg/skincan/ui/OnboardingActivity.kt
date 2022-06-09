@@ -56,9 +56,11 @@ class OnboardingActivity : AppCompatActivity() {
                                 0 -> {
                                     setIndicator(onboardAdapter.itemCount - 2)
                                 }
+
                                 onboardAdapter.itemCount - 1 -> {
                                     setIndicator(0)
                                 }
+
                                 else -> {
                                     setIndicator(currentPosition - 1)
                                 }

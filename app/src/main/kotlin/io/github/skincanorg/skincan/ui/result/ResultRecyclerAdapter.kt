@@ -8,19 +8,19 @@
 
 package io.github.skincanorg.skincan.ui.result
 
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import data.Result
 import io.github.skincanorg.skincan.databinding.ItemRowResultBinding
+import io.github.skincanorg.skincan.lib.Extension.toDateTime
 import io.github.skincanorg.skincan.lib.Util
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 
 class ResultRecyclerAdapter :
     PagingDataAdapter<Result, ResultRecyclerAdapter.ListViewHolder>(DIFF_CALLBACK) {
@@ -28,13 +28,22 @@ class ResultRecyclerAdapter :
         fun bind(result: Result) {
             binding.apply {
                 root.setOnClickListener {
+                    val stringId = result._id.toString()
                     val ctx = itemView.context
+
                     ctx.startActivity(
                         Intent(ctx, ResultActivity::class.java).apply {
+                            putExtra(ResultActivity.ID, stringId)
                             putExtra(ResultActivity.PHOTO_PATH, result.imgPath)
                             putExtra(ResultActivity.RESULT, result.result)
+                            putExtra(ResultActivity.TIMESTAMP, result.scannedAt)
                             putExtra(ResultActivity.FROM, 1)
                         },
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            ctx as Activity,
+                            resultPictWrapper,
+                            stringId,
+                        ).toBundle(),
                     )
                 }
 
@@ -42,25 +51,25 @@ class ResultRecyclerAdapter :
                     .load(Util.processBitmap(result.imgPath))
                     .into(ivResultPict)
 
-
-                tvDatetime.text =
-                    DateTimeFormatter.ofPattern("d MMM YYYY, HH:mm")
-                        .format(Instant.ofEpochSecond(result.scannedAt).atZone(ZoneId.systemDefault()))
+                tvDatetime.text = result.scannedAt.toDateTime("d MMM YYYY, HH:mm")
 
                 when (result.result) {
                     "Clear" -> {
+                        tvResultStatus.isEnabled = true
                         tvResultStatus.text = "Clear"
                         tvStatus.text = "No cancer found"
                     }
 
                     null -> {
+                        tvResultStatus.isEnabled = false
                         tvResultStatus.text = "ERROR"
                         tvStatus.text = "Error: Failed to retrieve data"
                     }
 
                     else -> {
+                        tvResultStatus.isEnabled = false
                         tvResultStatus.text = "Cancer"
-                        tvStatus.text = "Potientional risk cancer found"
+                        tvStatus.text = "Potential risk cancer found"
                     }
                 }
             }

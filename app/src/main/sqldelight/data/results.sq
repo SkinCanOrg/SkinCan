@@ -8,13 +8,9 @@ CREATE TABLE result (
 countResults:
 SELECT count(*) FROM result;
 
-getResultById:
-SELECT *
-FROM result
-WHERE _id = :id;
-
 lastResult:
-SELECT result FROM result
+SELECT result, scannedAt
+FROM result
 ORDER BY scannedAt DESC;
 
 results:

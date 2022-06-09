@@ -21,8 +21,9 @@
         android:layout_marginHorizontal="72dp"
         android:layout_marginTop="16dp"
         android:layout_width="0dp"
-        app:cardBackgroundColor="?attr/colorSurfaceVariant"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +52,7 @@
 
     <TextView
         android:background="@drawable/bg_full_round"
-        android:backgroundTint="?attr/colorSecondaryContainer"
+        android:backgroundTint="@color/sel_result_status"
         android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -59,7 +60,7 @@
         android:paddingHorizontal="28dp"
         android:paddingVertical="6dp"
         android:text="@string/clear"
-        android:textColor="?attr/colorOnSecondaryContainer"
+        android:textColor="@color/sel_result_text_status"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,9 +99,9 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginHorizontal="26dp"
                 android:layout_width="match_parent"
+                android:text="@string/result_scanned_at"
                 android:textColor="@color/colorSubtitle"
                 android:textSize="12sp"
-                tools:text="Scanned at: 6 May 2022, 13:30"
                 android:id="@+id/tv_result_time" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
