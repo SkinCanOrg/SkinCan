@@ -21,6 +21,7 @@ import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.data.preference.PreferencesHelper
 import io.github.skincanorg.skincan.databinding.ActivityMainBinding
 import io.github.skincanorg.skincan.lib.Extension.readJson
+import io.github.skincanorg.skincan.lib.Extension.toDateTime
 import io.github.skincanorg.skincan.ui.OnboardingActivity
 import io.github.skincanorg.skincan.ui.auth.AuthViewModel
 import io.github.skincanorg.skincan.ui.camera.CameraActivity
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this@MainActivity, ResultListActivity::class.java))
                 }
                 val results = database.resultsQueries.lastResult().executeAsList()
-                if (results.isNotEmpty())
+                if (results.isNotEmpty()) {
                     when (results[0].result) {
                         "Clear" -> {
                             tvResultStatus.isEnabled = true
@@ -93,6 +94,12 @@ class MainActivity : AppCompatActivity() {
                             tvResultStatus.text = "Cancer"
                         }
                     }
+
+                    tvLastResultDate.text = getString(
+                        R.string.last_scan,
+                        results[0].scannedAt.toDateTime("d MMM YYYY"),
+                    )
+                }
             }
         }
     }
