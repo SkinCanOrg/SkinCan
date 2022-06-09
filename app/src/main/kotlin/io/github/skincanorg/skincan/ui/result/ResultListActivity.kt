@@ -11,6 +11,8 @@ package io.github.skincanorg.skincan.ui.result
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -27,16 +29,22 @@ class ResultListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.appbar)
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setHomeButtonEnabled(true)
-        }
-        binding.appbar.setNavigationOnClickListener { finish() }
-
         binding.apply {
+            setSupportActionBar(appbar)
+            supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(true)
+                setHomeButtonEnabled(true)
+            }
+            appbar.setNavigationOnClickListener { finish() }
+
             rvResults.apply {
-                adapter = resultsAdapter
+                adapter = resultsAdapter.apply {
+                    addLoadStateListener { state ->
+                        rvResults.isVisible = state.refresh !is LoadState.Error
+                        tvError.isVisible = state.refresh is LoadState.Error
+                        pbLoading.isVisible = state.refresh is LoadState.Loading
+                    }
+                }
                 layoutManager = LinearLayoutManager(this@ResultListActivity)
                 setHasFixedSize(true)
             }
