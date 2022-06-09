@@ -99,9 +99,9 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginHorizontal="26dp"
                 android:layout_width="match_parent"
+                android:text="@string/result_scanned_at"
                 android:textColor="@color/colorSubtitle"
                 android:textSize="12sp"
-                android:text="@string/result_scanned_at"
                 android:id="@+id/tv_result_time" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

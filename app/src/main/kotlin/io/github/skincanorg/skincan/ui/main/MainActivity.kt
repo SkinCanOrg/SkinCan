@@ -101,10 +101,12 @@ class MainActivity : AppCompatActivity() {
                     binding.contentWrapper.smoothScrollTo(0, 0)
                     true
                 }
+
                 R.id.camera -> {
                     startActivity(Intent(this@MainActivity, CameraActivity::class.java))
                     false // Do not highlight
                 }
+
                 else -> false
             }
         }
