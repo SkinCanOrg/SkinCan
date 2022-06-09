@@ -26,6 +26,9 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.lang.reflect.Field
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 object Extension {
@@ -135,4 +138,8 @@ object Extension {
         }
         return null
     }
+
+    fun Long.toDateTime(pattern: String): String =
+        DateTimeFormatter.ofPattern(pattern)
+            .format(Instant.ofEpochSecond(this).atZone(ZoneId.systemDefault()))
 }

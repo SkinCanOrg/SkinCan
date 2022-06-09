@@ -19,10 +19,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import data.Result
 import io.github.skincanorg.skincan.databinding.ItemRowResultBinding
+import io.github.skincanorg.skincan.lib.Extension.toDateTime
 import io.github.skincanorg.skincan.lib.Util
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 
 class ResultRecyclerAdapter :
     PagingDataAdapter<Result, ResultRecyclerAdapter.ListViewHolder>(DIFF_CALLBACK) {
@@ -38,6 +36,7 @@ class ResultRecyclerAdapter :
                             putExtra(ResultActivity.ID, stringId)
                             putExtra(ResultActivity.PHOTO_PATH, result.imgPath)
                             putExtra(ResultActivity.RESULT, result.result)
+                            putExtra(ResultActivity.TIMESTAMP, result.scannedAt)
                             putExtra(ResultActivity.FROM, 1)
                         },
                         ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -52,9 +51,7 @@ class ResultRecyclerAdapter :
                     .load(Util.processBitmap(result.imgPath))
                     .into(ivResultPict)
 
-                tvDatetime.text =
-                    DateTimeFormatter.ofPattern("d MMM YYYY, HH:mm")
-                        .format(Instant.ofEpochSecond(result.scannedAt).atZone(ZoneId.systemDefault()))
+                tvDatetime.text = result.scannedAt.toDateTime("d MMM YYYY, HH:mm")
 
                 when (result.result) {
                     "Clear" -> {

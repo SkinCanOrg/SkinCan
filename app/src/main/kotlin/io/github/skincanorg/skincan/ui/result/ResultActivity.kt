@@ -26,6 +26,7 @@ import com.bumptech.glide.request.RequestOptions
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.databinding.ActivityResultBinding
+import io.github.skincanorg.skincan.lib.Extension.toDateTime
 import io.github.skincanorg.skincan.lib.Util
 import io.github.skincanorg.skincan.ui.main.MainActivity
 import com.bumptech.glide.request.target.Target as GlideTarget
@@ -90,11 +91,29 @@ class ResultActivity : AppCompatActivity() {
                 }
             }
 
-            tvResultStatus.text = when (intent.extras?.getString(RESULT)) {
-                "Clear" -> "Clear"
-                null -> "ERROR"
-                else -> "Cancer"
+            when (intent.extras?.getString(RESULT)) {
+                "Clear" -> {
+                    tvResultStatus.text = "Clear"
+                    tvResultDesc.text = "Great!\nYou’re clear from skin cancer\n\nStay safe from cancer risk potential"
+                }
+
+                null -> {
+                    tvResultStatus.text = "ERROR"
+                    tvResultDesc.text = "Uh oh! Something went wrong!"
+                }
+
+                else -> {
+                    tvResultStatus.text = "Cancer"
+                    tvResultDesc.text =
+                        "We found potential risk cancer on your body\n\n" +
+                            "You can check some tips here or\nconsult to the doctor"
+                }
             }
+
+            tvResultTime.text = getString(
+                R.string.result_scanned_at,
+                (intent.extras?.getLong(TIMESTAMP) ?: 0L).toDateTime("d MMM YYYY, HH:mm"),
+            )
         }
     }
 
@@ -147,6 +166,7 @@ class ResultActivity : AppCompatActivity() {
         const val ID = "ID"
         const val PHOTO_PATH = "PHOTO_PATH"
         const val RESULT = "IS_CANCER"
+        const val TIMESTAMP = "TIMESTAMP"
         const val FROM = "FROM" // 0 = Scanner, 1 = List
     }
 }

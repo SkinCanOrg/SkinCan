@@ -215,6 +215,7 @@ class ScannerActivity : AppCompatActivity() {
                             Intent(this@ScannerActivity, ResultActivity::class.java).apply {
                                 putExtra(ResultActivity.PHOTO_PATH, path)
                                 putExtra(ResultActivity.RESULT, result)
+                                putExtra(ResultActivity.TIMESTAMP, currentTime)
                                 putExtra(ResultActivity.FROM, 0)
                             },
                         )

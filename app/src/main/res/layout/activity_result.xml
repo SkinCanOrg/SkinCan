@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:textColor="@color/colorSubtitle"
                 android:textSize="12sp"
-                tools:text="Scanned at: 6 May 2022, 13:30"
+                android:text="@string/result_scanned_at"
                 android:id="@+id/tv_result_time" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
