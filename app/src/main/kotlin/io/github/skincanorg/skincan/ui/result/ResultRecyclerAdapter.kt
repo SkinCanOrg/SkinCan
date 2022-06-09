@@ -8,9 +8,11 @@
 
 package io.github.skincanorg.skincan.ui.result
 
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -28,20 +30,27 @@ class ResultRecyclerAdapter :
         fun bind(result: Result) {
             binding.apply {
                 root.setOnClickListener {
+                    val stringId = result._id.toString()
                     val ctx = itemView.context
+
                     ctx.startActivity(
                         Intent(ctx, ResultActivity::class.java).apply {
+                            putExtra(ResultActivity.ID, stringId)
                             putExtra(ResultActivity.PHOTO_PATH, result.imgPath)
                             putExtra(ResultActivity.RESULT, result.result)
                             putExtra(ResultActivity.FROM, 1)
                         },
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            ctx as Activity,
+                            resultPictWrapper,
+                            stringId,
+                        ).toBundle(),
                     )
                 }
 
                 Glide.with(ivResultPict)
                     .load(Util.processBitmap(result.imgPath))
                     .into(ivResultPict)
-
 
                 tvDatetime.text =
                     DateTimeFormatter.ofPattern("d MMM YYYY, HH:mm")
@@ -60,7 +69,7 @@ class ResultRecyclerAdapter :
 
                     else -> {
                         tvResultStatus.text = "Cancer"
-                        tvStatus.text = "Potientional risk cancer found"
+                        tvStatus.text = "Potential risk cancer found"
                     }
                 }
             }
