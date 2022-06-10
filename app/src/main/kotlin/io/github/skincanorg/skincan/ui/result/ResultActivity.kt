@@ -28,6 +28,7 @@ import io.github.skincanorg.skincan.R
 import io.github.skincanorg.skincan.databinding.ActivityResultBinding
 import io.github.skincanorg.skincan.lib.Extension.toDateTime
 import io.github.skincanorg.skincan.lib.Util
+import io.github.skincanorg.skincan.ui.camera.CameraActivity
 import io.github.skincanorg.skincan.ui.main.MainActivity
 import com.bumptech.glide.request.target.Target as GlideTarget
 
@@ -57,6 +58,13 @@ class ResultActivity : AppCompatActivity() {
             btnGroup.isVisible = from == 0
 
             btnHome.setOnClickListener { onBackPressed() }
+            btnScanAgain.setOnClickListener {
+                startActivity(
+                    Intent(this@ResultActivity, CameraActivity::class.java).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    },
+                )
+            }
 
             val imagePath = intent.extras?.getString(PHOTO_PATH)
             if (imagePath != null) {
@@ -91,7 +99,7 @@ class ResultActivity : AppCompatActivity() {
                 }
             }
 
-            when (intent.extras?.getString(RESULT)) {
+            when (val result = intent.extras?.getString(RESULT)) {
                 "Clear" -> {
                     tvResultStatus.isEnabled = true
                     tvResultStatus.text = "Clear"
@@ -108,7 +116,7 @@ class ResultActivity : AppCompatActivity() {
                     tvResultStatus.isEnabled = false
                     tvResultStatus.text = "Cancer"
                     tvResultDesc.text =
-                        "We found potential risk cancer on your body\n\n" +
+                        "We found potential risk cancer on your body. ($result)\n\n" +
                             "You can check some tips here or\nconsult to the doctor"
                 }
             }
