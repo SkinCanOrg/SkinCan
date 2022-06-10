@@ -11,6 +11,7 @@ package io.github.skincanorg.skincan.ui.result
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,5 +54,10 @@ class ResultListActivity : AppCompatActivity() {
         viewModel.results.observe(this) {
             resultsAdapter.submitData(lifecycle, it)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.rvResults.children.forEach { it.isEnabled = true }
     }
 }

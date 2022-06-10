@@ -13,6 +13,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.children
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -24,12 +25,15 @@ import io.github.skincanorg.skincan.lib.Util
 
 class ResultRecyclerAdapter :
     PagingDataAdapter<Result, ResultRecyclerAdapter.ListViewHolder>(DIFF_CALLBACK) {
-    inner class ListViewHolder(private val binding: ItemRowResultBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ListViewHolder(private val binding: ItemRowResultBinding, private val parent: ViewGroup) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(result: Result) {
             binding.apply {
                 root.setOnClickListener {
                     val stringId = result._id.toString()
                     val ctx = itemView.context
+
+                    parent.children.forEach { it.isEnabled = false }
 
                     ctx.startActivity(
                         Intent(ctx, ResultActivity::class.java).apply {
@@ -78,6 +82,7 @@ class ResultRecyclerAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder = ListViewHolder(
         ItemRowResultBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+        parent,
     )
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
