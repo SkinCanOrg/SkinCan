@@ -26,7 +26,7 @@
 
 ### TODO
 - [x] Machine Learning
-   - [ ] Fix ML scan result
+   - [ ] Fix ML scan result (Sometime gives random result)
    - [x] Wait for ML model to download on scan
 - [x] Polishing Auth
    - [x] Add alert for registration fail
@@ -34,17 +34,29 @@
    - [x] Add loading into button
    - [ ] Link/Unlink account
    - [ ] Password changer (especially for account registered with Google)
+- [x] News List
+   - [ ] News Detail
 - [x] Result List (using SQLDelight)
-   <!-- Reference: https://github.com/tachiyomiorg/tachiyomi/blob/master/app/src/main/java/eu/kanade/tachiyomi/data/cache/CoverCache.kt -->
    - [x] Move photo automatically to data/Files/results
    - [ ] Delete data when photo no longer exists
    - [ ] Delete photo when data being deleted
    - [x] Reverse current list (scannedAt DESC)
 - [ ] Landscape/Desktop support (Low priority)
+- [ ] Migrate to Compose (Low priority)
+- [ ] Migrate to DataStore (Low priority)
+- [ ] Update checker (Low priority)
+
+### After Bangkit 2022
+What are we (MD team) going to do with the app after graduating from Bangkit 2022?
+
+- [@null2264](https://github.com/null2264): I'm planning to at some point in the future complete all the TODO list that we unfortunately don't have enough time to complete during Bangkit 2022, and continue maintaining the app as long as I could.
+- [@FATx64](https://github.com/FATx64): I’m planning too make a new design to make another feature, such as Consultation doctor,Hospital search, and another feature that can be useful for user.
 
 ### Mobile Team
 - Ahmad Ansori Palembani (a2191f1821 - [@null2264](https://github.com/null2264))
 - Muhammad Fharid Akbar (a7191f1820 - [@FATx64](https://github.com/FATx64))
+
+Check out our [organization profile page](https://github.com/SkinCanOrg) to see our full team list.
 
 ## License
 ```
