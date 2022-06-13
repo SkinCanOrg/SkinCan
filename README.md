@@ -16,15 +16,16 @@
 ## About
 **SkinCan** is a **libre** skin cancer detection android app, created for **Bangkit Product-based Capstone Project**.
 
-### MVP (Minimum Viable Product)
-- [x] Onboarding
-- [x] Auth
-- [x] Camera
-- [x] Scan Result
-- [x] Result List
-- [x] News List (Placeholder)
+## Features
+- Check your skin for signs of skin cancer anytime, anywhere.
+- Diagnose the type of skin cancer easily.
+- Receive a risk indication of your skin spot within 60 seconds.
+- Learn about your skin and get advice based on your skin risk profile.
 
-### TODO
+## Download
+Download our app from our [releases page](https://github.com/SkinCanOrg/SkinCan/releases).
+
+## TODO
 - [x] Machine Learning
    - [ ] Fix ML scan result (Sometime gives random result)
    - [x] Wait for ML model to download on scan
@@ -46,13 +47,13 @@
 - [ ] Migrate to DataStore (Low priority)
 - [ ] Update checker (Low priority)
 
-### After Bangkit 2022
+## After Bangkit 2022
 What are we (MD team) going to do with the app after graduating from Bangkit 2022?
 
 - [@null2264](https://github.com/null2264): I'm planning to at some point in the future complete all the TODO list that we unfortunately don't have enough time to complete during Bangkit 2022, and continue maintaining the app as long as I could.
 - [@FATx64](https://github.com/FATx64): I’m planning too make a new design to make another feature, such as Consultation doctor,Hospital search, and another feature that can be useful for user.
 
-### Mobile Team
+## Mobile Team
 - Ahmad Ansori Palembani (a2191f1821 - [@null2264](https://github.com/null2264))
 - Muhammad Fharid Akbar (a7191f1820 - [@FATx64](https://github.com/FATx64))
 
