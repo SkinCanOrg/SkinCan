@@ -14,7 +14,7 @@
 </p>
 
 ## About
-**SkinCan** is a **libre** skin cancer detection android app, created for **Bangkit Product-based Capstone Project**.
+**SkinCan** is a **libre** skin cancer detection android app, was created for **Bangkit Product-based Capstone Project**.
 
 ## Features
 - Check your skin for signs of skin cancer anytime, anywhere.
@@ -46,6 +46,7 @@ Download our app from our [releases page](https://github.com/SkinCanOrg/SkinCan/
 - [ ] Migrate to Compose (Low priority)
 - [ ] Migrate to DataStore (Low priority)
 - [ ] Update checker (Low priority)
+- [ ] Migrate out of Firebase (to Supabase maybe?)
 
 ## After Bangkit 2022
 What are we (MD team) going to do with the app after graduating from Bangkit 2022?
