@@ -125,7 +125,6 @@ class CameraActivity : AppCompatActivity() {
             }
 
             torchCamera.setOnClickListener {
-                // TODO: untested
                 isTorchOn = !isTorchOn
                 invalidateTorchState()
                 camera.cameraControl.enableTorch(isTorchOn)

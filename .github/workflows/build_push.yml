@@ -5,7 +5,7 @@ on:
       - master
     tags:
       - v*
-        
+
 jobs:
   build:
     name: Build app
@@ -88,7 +88,7 @@ jobs:
           cp app/build/outputs/apk/release/app-x86_64-release-unsigned-signed.apk skincan-x86_64-${{ env.VERSION_TAG }}.apk
           sha=`sha256sum skincan-x86_64-${{ env.VERSION_TAG }}.apk | awk '{ print $1 }'`
           echo "APK_X86_64_SHA=$sha" >> $GITHUB_ENV
-  
+
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/') && github.repository == 'skincanorg/skincan'
         uses: softprops/action-gh-release@v1
