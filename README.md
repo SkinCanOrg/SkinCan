@@ -26,6 +26,7 @@
 Download our app from our [releases page](https://github.com/SkinCanOrg/SkinCan/releases).
 
 ## TODO
+- [ ] New logo (Current logo is a placeholder)
 - [x] Machine Learning
    - [ ] Fix ML scan result (Sometime gives random result)
    - [x] Wait for ML model to download on scan
